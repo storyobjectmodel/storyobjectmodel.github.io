@@ -8,4 +8,4 @@ To swap the sign-up form for the Tally embed: in `index.html`, replace the `<for
 
 `assets/` holds the two figures as standalone SVG (used by the page) and 2x PNG exports (for reuse in Claude Design or slides): `bus` (the story bus diagram) and `chat` (the newsroom group chat).
 
-`emulator/index.html` is Morag McIntosh's SOM dashboard, the single-file build (`dist/som-dashboard.html`) from `storyobjectmodel/somdashboard`, with two skill-card labels changed from "playbook" to "declares". `scenarios/` at the site root holds the three scenario files it fetches. To update: rebuild in that repo, copy the new `dist/som-dashboard.html` here as `emulator/index.html`, and reapply the label change.
+`emulator/index.html` is Morag McIntosh's SOM dashboard, the single-file build (`dist/som-dashboard.html`) from `storyobjectmodel/somdashboard`, with two skill-card labels changed to "declares" to match the Skills doctrine. `scenarios/` at the site root holds the three scenario files it fetches. To update: rebuild in that repo, copy the new `dist/som-dashboard.html` here as `emulator/index.html`, and reapply the label change.

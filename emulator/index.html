@@ -2182,10 +2182,8 @@ const SCENARIO_LIST = SOURCES.map(o=>o.value);
 // TWO type vocabularies, and they are not the same list.
 //   system_type  the schema's originating_system enum, stamped on every message.
 //                Only AP Storytelling's is stated in a source (manifest, beat 1)
-//                and only MomentsLab's is settled on the wire: their own payloads
-//                said skill_worker, and John Boucklos corrected it on 10 August,
-//                "a skill worker reports outputs, it doesn't own stories. custom
-//                with your system_name is more accurate". The rest are marked
+//                and only MomentsLab's is settled on the wire, as custom with a
+//                system_name, following schema review on 10 August. The rest are marked
 //                unconfirmed and should be checked with the vendor.
 //   declares     the library's targeting vocabulary, which is what a tool matches
 //                its own type against to recall a skill. A vendor is not one type:
@@ -2196,7 +2194,7 @@ const SCENARIO_LIST = SOURCES.map(o=>o.value);
 const SYSTEMS = {
   // Demo 1, the Hurricane. Seven vendors; AP Storytelling owns the record throughout.
   ap:          {system_id:"ap-storytelling-01", system_type:"ncs",     type_source:"manifest v5, beat 1", system_name:"AP Storytelling",     color:"#0E3A5C", vendor:"AP",                 version:"0.3.2", demos:["hurricane"],             declares:["ingest","rundown"],                            subscribes:["story context","sources","compliance","media availability"]},
-  momentslab:  {system_id:"momentslab-platform",system_type:"custom",  type_source:"John Boucklos, 10 Aug, correcting their own payload", system_name:"MomentsLab", color:"#8A5A0C", vendor:"MomentsLab", version:"0.3.2", demos:["hurricane"], declares:["discovery","mam","multimodal","verification"], subscribes:["story context","media availability"]},
+  momentslab:  {system_id:"momentslab-platform",system_type:"custom",  type_source:"schema review, 10 Aug", system_name:"MomentsLab", color:"#8A5A0C", vendor:"MomentsLab", version:"0.3.2", demos:["hurricane"], declares:["discovery","mam","multimodal","verification"], subscribes:["story context","media availability"]},
   cuez:        {system_id:"cuez-01",            system_type:"mos_device", type_source:"unconfirmed", system_name:"Cuez",                color:"#2B3238", vendor:"Cuez",               version:"0.3.2", demos:["hurricane"],             declares:["rundown"],                                     subscribes:["story context","compliance","lifecycle"]},
   twc:         {system_id:"twc-severe-feed",    system_type:"custom",  type_source:"unconfirmed", system_name:"The Weather Company", color:"#175E75", vendor:"The Weather Company", version:"0.3.2", demos:["hurricane"],             declares:["markets_data"],                                subscribes:["story context"]},
   vizrt:       {system_id:"vizrt-graphics-01",  system_type:"graphics",type_source:"unconfirmed", system_name:"Vizrt",               color:"#93630D", vendor:"Vizrt",              version:"0.3.2", demos:["hurricane"],             declares:["graphics"],                                    subscribes:["story context","compliance"]},
