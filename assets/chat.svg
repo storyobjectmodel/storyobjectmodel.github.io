@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 330" width="420" height="330" role="img" aria-label="A newsroom group chat: a hold on a casualty figure is issued, one desk marks it seen, another asks which script version is current, and graphics misses it and the strap goes out with the number">
+<style>
+.who{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;fill:#5B6670}
+.t{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:13px;fill:#111517}
+.b{fill:#ECEFF1}
+</style>
+<rect width="420" height="330" fill="#FFFFFF" stroke="#DFE4E7"/>
+<text class="who" x="18" y="26">22:41 · output editor</text>
+<rect class="b" x="18" y="32" width="236" height="26"/><text class="t" x="28" y="49">Wire is in. Are we running the number?</text>
+<text class="who" x="18" y="80">22:47 · standards desk</text>
+<rect x="18" y="86" width="384" height="62" fill="#E3EAF1"/><rect x="18" y="86" width="3" height="62" fill="#0E3A5C"/>
+<text class="t" x="30" y="105" fill="#0E3A5C">HOLD the casualty figure. Two sources say 40,000,</text>
+<text class="t" x="30" y="122" fill="#0E3A5C">agency says unconfirmed. Do not run until I</text>
+<text class="t" x="30" y="139" fill="#0E3A5C">clear it.</text>
+<text class="who" x="18" y="170">22:48 · gallery</text>
+<rect class="b" x="18" y="176" width="52" height="26"/><text class="t" x="28" y="193">seen</text>
+<text class="who" x="18" y="224">22:52 · social</text>
+<rect class="b" x="18" y="230" width="210" height="26"/><text class="t" x="28" y="247">Which version is FINAL_FINAL?</text>
+<text class="who" x="18" y="278">23:04 · graphics</text>
+<rect class="b" x="18" y="284" width="290" height="40"/><text class="t" x="28" y="301">Sorry, missed this. Strap already went out</text><text class="t" x="28" y="317">with the number.</text>
+</svg>

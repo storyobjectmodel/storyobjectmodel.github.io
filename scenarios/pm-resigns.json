@@ -1,0 +1,1198 @@
+[
+  {
+    "t": 1.8,
+    "topic": "som.story.pm-statement-2026-0622.context",
+    "originating_system": {
+      "system_id": "reuters-01",
+      "system_type": "wire_service",
+      "system_name": "Reuters",
+      "vendor": "Reuters",
+      "version": "0.3.2"
+    },
+    "summary": "Reuters moves the alert. A statement is called for 1600 with no subject given, so the story exists knowing almost nothing.",
+    "payload": {
+      "story_id": "pm-statement-2026-0622",
+      "slug": "PM-STATEMENT",
+      "headline": "Prime Minister to make a statement at 1600, no subject given",
+      "story_type": "ACTIVE",
+      "sequence_number": 1,
+      "updated_at": "2026-09-11T13:40:00Z",
+      "story_owner": "reuters-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "DEVELOPING",
+        "phase_entered_at": "2026-09-11T13:40:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "11000000",
+          "label": "politics"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "westminster"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-reuters-wire",
+          "source_type": "WIRE",
+          "provider": "Reuters",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:40:00Z"
+        }
+      ],
+      "assertions": [],
+      "assets": [],
+      "compliance": [],
+      "editorial_gates": [],
+      "relations": []
+    }
+  },
+  {
+    "t": 3.6,
+    "topic": "som.story.pm-statement-2026-0622.context",
+    "originating_system": {
+      "system_id": "octopus-nrcs-lon-01",
+      "system_type": "ncs",
+      "system_name": "Octopus",
+      "vendor": "Octopus",
+      "version": "0.3.2"
+    },
+    "summary": "The newsroom takes ownership and writes down what it thinks this is, at medium confidence. Two script sets begin, one per branch. Ownership moving from the wire to the newsroom is recorded, not assumed.",
+    "payload": {
+      "story_id": "pm-statement-2026-0622",
+      "slug": "PM-STATEMENT",
+      "headline": "Prime Minister to make a statement at 1600, no subject given",
+      "story_type": "ACTIVE",
+      "sequence_number": 2,
+      "updated_at": "2026-09-11T13:52:00Z",
+      "story_owner": "octopus-nrcs-lon-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "DEVELOPING",
+        "phase_entered_at": "2026-09-11T13:40:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "11000000",
+          "label": "politics"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "westminster"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-reuters-wire",
+          "source_type": "WIRE",
+          "provider": "Reuters",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:40:00Z"
+        }
+      ],
+      "assertions": [],
+      "assets": [
+        {
+          "asset_id": "script-resign",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "script-no-resign",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        }
+      ],
+      "compliance": [],
+      "editorial_gates": [],
+      "relations": [],
+      "priority": {
+        "level": "HIGH",
+        "reason": "unscheduled statement from Downing Street"
+      },
+      "premise": {
+        "expected_outcome": "Resignation",
+        "confidence": "MEDIUM",
+        "premise_changed": false
+      }
+    }
+  },
+  {
+    "t": 5.4,
+    "topic": "som.story.pm-statement-2026-0622.context",
+    "originating_system": {
+      "system_id": "octopus-nrcs-lon-01",
+      "system_type": "ncs",
+      "system_name": "Octopus",
+      "vendor": "Octopus",
+      "version": "0.3.2"
+    },
+    "summary": "No lobby briefing has been given. An absence is a fact: something that did not happen moves the story up.",
+    "payload": {
+      "story_id": "pm-statement-2026-0622",
+      "slug": "PM-STATEMENT",
+      "headline": "Prime Minister to make a statement at 1600, no subject given",
+      "story_type": "ACTIVE",
+      "sequence_number": 3,
+      "updated_at": "2026-09-11T14:10:00Z",
+      "story_owner": "octopus-nrcs-lon-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T14:10:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "11000000",
+          "label": "politics"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "westminster"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-reuters-wire",
+          "source_type": "WIRE",
+          "provider": "Reuters",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:40:00Z"
+        }
+      ],
+      "assertions": [],
+      "assets": [
+        {
+          "asset_id": "script-resign",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "script-no-resign",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        }
+      ],
+      "compliance": [],
+      "editorial_gates": [],
+      "relations": [],
+      "priority": {
+        "level": "URGENT",
+        "reason": "no lobby briefing has been given"
+      },
+      "premise": {
+        "expected_outcome": "Resignation",
+        "confidence": "MEDIUM",
+        "premise_changed": false
+      }
+    }
+  },
+  {
+    "t": 6.8,
+    "topic": "delivery.media_available",
+    "originating_system": {
+      "system_id": "liveu-01",
+      "system_type": "camera",
+      "system_name": "LiveU",
+      "vendor": "LiveU",
+      "version": "0.3.2"
+    },
+    "summary": "The Downing Street feed arrives and binds to the story while it is still recording. TAMS Source URI, acquisition_state CAPTURING.",
+    "payload": {
+      "asset_id": "asset-downing-feed",
+      "message_type": "delivery.media_available",
+      "delivery_id": "164038c7-48df-5138-a43a-3f2022b67729",
+      "source": "tams://tams-demo-store/1d4b9077",
+      "arrived_in": "tams-demo-store",
+      "arrived_at": "2026-09-11T15:00:00Z",
+      "extensions": {
+        "com.somdash.acquisition_state": "CAPTURING",
+        "com.somdash.label": "Downing Street feed"
+      }
+    }
+  },
+  {
+    "t": 8.6,
+    "topic": "som.story.pm-statement-2026-0622.context",
+    "originating_system": {
+      "system_id": "octopus-nrcs-lon-01",
+      "system_type": "ncs",
+      "system_name": "Octopus",
+      "vendor": "Octopus",
+      "version": "0.3.2"
+    },
+    "summary": "Pictures bind to the story at the moment of capture, not afterwards.",
+    "payload": {
+      "story_id": "pm-statement-2026-0622",
+      "slug": "PM-STATEMENT",
+      "headline": "Prime Minister to make a statement at 1600, no subject given",
+      "story_type": "ACTIVE",
+      "sequence_number": 4,
+      "updated_at": "2026-09-11T14:24:00Z",
+      "story_owner": "octopus-nrcs-lon-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T14:10:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "11000000",
+          "label": "politics"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "westminster"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-reuters-wire",
+          "source_type": "WIRE",
+          "provider": "Reuters",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:40:00Z"
+        }
+      ],
+      "assertions": [],
+      "assets": [
+        {
+          "asset_id": "script-resign",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "script-no-resign",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "asset-downing-feed",
+          "asset_type": "VIDEO",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURING",
+          "provenance": {
+            "author": "HUMAN"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/1d4b9077",
+              "label": "Downing Street feed"
+            }
+          ]
+        }
+      ],
+      "compliance": [],
+      "editorial_gates": [],
+      "relations": [],
+      "priority": {
+        "level": "URGENT",
+        "reason": "no lobby briefing has been given"
+      },
+      "premise": {
+        "expected_outcome": "Resignation",
+        "confidence": "MEDIUM",
+        "premise_changed": false
+      }
+    }
+  },
+  {
+    "t": 10,
+    "topic": "delivery.media_available",
+    "originating_system": {
+      "system_id": "mimir-01",
+      "system_type": "archive",
+      "system_name": "Mimir",
+      "vendor": "Fonn Group",
+      "version": "0.3.2"
+    },
+    "summary": "Mimir checks the authenticity credential as the feed arrives and validates it, then adds a growing proxy to media_refs.",
+    "payload": {
+      "asset_id": "asset-downing-feed",
+      "message_type": "delivery.media_available",
+      "delivery_id": "164038c7-48df-5138-a43a-3f2022b67729",
+      "source": "tams://tams-demo-store/1d4b9077",
+      "arrived_in": "tams-demo-store",
+      "arrived_at": "2026-09-11T15:00:00Z",
+      "extensions": {
+        "com.somdash.acquisition_state": "CAPTURING",
+        "com.somdash.label": "Downing Street feed"
+      }
+    }
+  },
+  {
+    "t": 10.1,
+    "topic": "delivery.media_available",
+    "originating_system": {
+      "system_id": "mimir-01",
+      "system_type": "archive",
+      "system_name": "Mimir",
+      "vendor": "Fonn Group",
+      "version": "0.3.2"
+    },
+    "payload": {
+      "asset_id": "asset-downing-feed",
+      "message_type": "delivery.media_available",
+      "delivery_id": "82eb4d80-6609-5460-b37c-6dc0d67c35c0",
+      "locator": {
+        "store": "mimir-proxy",
+        "ref": "downing-1600/growing.m3u8"
+      },
+      "arrived_in": "mimir-proxy",
+      "arrived_at": "2026-09-11T15:00:00Z",
+      "extensions": {
+        "com.somdash.acquisition_state": "CAPTURING",
+        "com.somdash.label": "growing proxy"
+      }
+    }
+  },
+  {
+    "t": 11.8,
+    "topic": "som.story.pm-statement-2026-0622.context",
+    "originating_system": {
+      "system_id": "octopus-nrcs-lon-01",
+      "system_type": "ncs",
+      "system_name": "Octopus",
+      "vendor": "Octopus",
+      "version": "0.3.2"
+    },
+    "summary": "Provenance is checked on arrival, on a live feed, and the proxy grows with it.",
+    "payload": {
+      "story_id": "pm-statement-2026-0622",
+      "slug": "PM-STATEMENT",
+      "headline": "Prime Minister to make a statement at 1600, no subject given",
+      "story_type": "ACTIVE",
+      "sequence_number": 5,
+      "updated_at": "2026-09-11T14:38:00Z",
+      "story_owner": "octopus-nrcs-lon-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T14:10:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "11000000",
+          "label": "politics"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "westminster"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-reuters-wire",
+          "source_type": "WIRE",
+          "provider": "Reuters",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:40:00Z"
+        }
+      ],
+      "assertions": [],
+      "assets": [
+        {
+          "asset_id": "script-resign",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "script-no-resign",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "asset-downing-feed",
+          "asset_type": "VIDEO",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURING",
+          "provenance": {
+            "author": "HUMAN"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/1d4b9077",
+              "label": "Downing Street feed"
+            },
+            {
+              "locator": {
+                "store": "mimir-proxy",
+                "ref": "downing-1600/growing.m3u8"
+              },
+              "label": "growing proxy"
+            }
+          ],
+          "authenticity_credential": {
+            "present": true,
+            "validated_by": "momentslab-c2pa-check",
+            "standard": "C2PA"
+          }
+        }
+      ],
+      "compliance": [],
+      "editorial_gates": [],
+      "relations": [],
+      "priority": {
+        "level": "URGENT",
+        "reason": "no lobby briefing has been given"
+      },
+      "premise": {
+        "expected_outcome": "Resignation",
+        "confidence": "MEDIUM",
+        "premise_changed": false
+      }
+    }
+  },
+  {
+    "t": 13.2,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "trint-executor",
+      "system_type": "custom",
+      "system_name": "Trint",
+      "vendor": "Trint",
+      "version": "0.3.2"
+    },
+    "summary": "Trint starts the transcript off the feed. The transcript records which feed it came from, which is the editorial lineage written down.",
+    "payload": {
+      "skill": "surface-on-context-match",
+      "instance": "trint-live-statement",
+      "declared_system_type": "transcription",
+      "woken_by": "source.item.observed",
+      "outcome": "DECLARED",
+      "severity": "inform",
+      "note": "statement transcript in production",
+      "evidence": "assets[] asset-statement-transcript, derived_from asset-downing-feed, provenance MODEL trint-asr"
+    }
+  },
+  {
+    "t": 15,
+    "topic": "som.story.pm-statement-2026-0622.context",
+    "originating_system": {
+      "system_id": "octopus-nrcs-lon-01",
+      "system_type": "ncs",
+      "system_name": "Octopus",
+      "vendor": "Octopus",
+      "version": "0.3.2"
+    },
+    "summary": "The transcript is an asset on the story, and it names the feed it came from.",
+    "payload": {
+      "story_id": "pm-statement-2026-0622",
+      "slug": "PM-STATEMENT",
+      "headline": "Prime Minister to make a statement at 1600, no subject given",
+      "story_type": "ACTIVE",
+      "sequence_number": 6,
+      "updated_at": "2026-09-11T14:52:00Z",
+      "story_owner": "octopus-nrcs-lon-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T14:10:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "11000000",
+          "label": "politics"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "westminster"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-reuters-wire",
+          "source_type": "WIRE",
+          "provider": "Reuters",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:40:00Z"
+        }
+      ],
+      "assertions": [],
+      "assets": [
+        {
+          "asset_id": "script-resign",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "script-no-resign",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "asset-downing-feed",
+          "asset_type": "VIDEO",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURING",
+          "provenance": {
+            "author": "HUMAN"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/1d4b9077",
+              "label": "Downing Street feed"
+            },
+            {
+              "locator": {
+                "store": "mimir-proxy",
+                "ref": "downing-1600/growing.m3u8"
+              },
+              "label": "growing proxy"
+            }
+          ],
+          "authenticity_credential": {
+            "present": true,
+            "validated_by": "momentslab-c2pa-check",
+            "standard": "C2PA"
+          }
+        },
+        {
+          "asset_id": "asset-statement-transcript",
+          "asset_type": "TRANSCRIPT",
+          "status": "IN_PRODUCTION",
+          "derived_from": [
+            "asset-downing-feed"
+          ],
+          "provenance": {
+            "author": "MODEL",
+            "model": "trint-asr",
+            "confidence": 0.94,
+            "generated_at": "2026-09-11T14:52:00Z",
+            "review": {
+              "state": "PENDING"
+            }
+          }
+        }
+      ],
+      "compliance": [],
+      "editorial_gates": [],
+      "relations": [],
+      "priority": {
+        "level": "URGENT",
+        "reason": "no lobby briefing has been given"
+      },
+      "premise": {
+        "expected_outcome": "Resignation",
+        "confidence": "MEDIUM",
+        "premise_changed": false
+      }
+    }
+  },
+  {
+    "t": 16.4,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "trint-executor",
+      "system_type": "custom",
+      "system_name": "Trint",
+      "vendor": "Trint",
+      "version": "0.3.2"
+    },
+    "summary": "Trint identifies the line and states a finding at 0.94, pointing back at the transcript it came from. Same shape as The Weather Company in the Hurricane, for the same reason.",
+    "payload": {
+      "skill": "surface-on-context-match",
+      "instance": "trint-live-statement",
+      "declared_system_type": "transcription",
+      "woken_by": "source.item.observed",
+      "outcome": "DECLARED",
+      "severity": "inform",
+      "note": "the words are said",
+      "evidence": "assertions[] FACT_CHECK pm_office_status, review PENDING"
+    }
+  },
+  {
+    "t": 18.2,
+    "topic": "som.story.pm-statement-2026-0622.context",
+    "originating_system": {
+      "system_id": "octopus-nrcs-lon-01",
+      "system_type": "ncs",
+      "system_name": "Octopus",
+      "vendor": "Octopus",
+      "version": "0.3.2"
+    },
+    "summary": "The room knows what has happened before the system does. The finding arrives unchecked and waits for a person.",
+    "payload": {
+      "story_id": "pm-statement-2026-0622",
+      "slug": "PM-STATEMENT",
+      "headline": "Prime Minister to make a statement at 1600, no subject given",
+      "story_type": "ACTIVE",
+      "sequence_number": 7,
+      "updated_at": "2026-09-11T15:04:00Z",
+      "story_owner": "octopus-nrcs-lon-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T14:10:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "11000000",
+          "label": "politics"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "westminster"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-reuters-wire",
+          "source_type": "WIRE",
+          "provider": "Reuters",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:40:00Z"
+        }
+      ],
+      "assertions": [
+        {
+          "assertion_id": "assn-pm-01",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "pm-statement-2026-0622"
+          },
+          "claim": {
+            "metric": "pm_office_status",
+            "value": "RESIGNED"
+          },
+          "attributed_to": "the Prime Minister",
+          "asserted_at": "2026-09-11T15:04:00Z",
+          "confidence": 0.94,
+          "originated_from": "asset-statement-transcript",
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "trint-asr"
+          }
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "script-resign",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "script-no-resign",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "asset-downing-feed",
+          "asset_type": "VIDEO",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURING",
+          "provenance": {
+            "author": "HUMAN"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/1d4b9077",
+              "label": "Downing Street feed"
+            },
+            {
+              "locator": {
+                "store": "mimir-proxy",
+                "ref": "downing-1600/growing.m3u8"
+              },
+              "label": "growing proxy"
+            }
+          ],
+          "authenticity_credential": {
+            "present": true,
+            "validated_by": "momentslab-c2pa-check",
+            "standard": "C2PA"
+          }
+        },
+        {
+          "asset_id": "asset-statement-transcript",
+          "asset_type": "TRANSCRIPT",
+          "status": "PREPARED",
+          "derived_from": [
+            "asset-downing-feed"
+          ],
+          "provenance": {
+            "author": "MODEL",
+            "model": "trint-asr",
+            "confidence": 0.94,
+            "generated_at": "2026-09-11T14:52:00Z",
+            "review": {
+              "state": "PENDING"
+            }
+          }
+        }
+      ],
+      "compliance": [],
+      "editorial_gates": [],
+      "relations": [],
+      "priority": {
+        "level": "URGENT",
+        "reason": "no lobby briefing has been given"
+      },
+      "premise": {
+        "expected_outcome": "Resignation",
+        "confidence": "MEDIUM",
+        "premise_changed": false
+      }
+    }
+  },
+  {
+    "t": 19.6,
+    "topic": "som.system.audit",
+    "originating_system": {
+      "system_id": "octopus-nrcs-lon-01",
+      "system_type": "ncs",
+      "system_name": "Octopus",
+      "vendor": "Octopus",
+      "version": "0.3.2"
+    },
+    "summary": "The approval is recorded as an audit entry, so the trail carries who did it. This is the act beat 9 looks back for.",
+    "payload": {
+      "audit_id": "29af7d0d-97e9-55eb-8087-135f93d773bd",
+      "action": "CLEARED",
+      "target": {
+        "kind": "ASSET",
+        "id": "asset-statement-transcript"
+      },
+      "reason": "statement confirmed against the feed",
+      "message_type": "system.audit",
+      "actor": {
+        "actor_id": "producer-lon-01",
+        "actor_type": "human"
+      },
+      "recorded_at": "2026-09-11T15:12:00Z"
+    }
+  },
+  {
+    "t": 21.4,
+    "topic": "som.story.pm-statement-2026-0622.context",
+    "originating_system": {
+      "system_id": "octopus-nrcs-lon-01",
+      "system_type": "ncs",
+      "system_name": "Octopus",
+      "vendor": "Octopus",
+      "version": "0.3.2"
+    },
+    "summary": "One approval, four consequences, none of them told to happen. The record says the story turned out exactly as the newsroom expected: premise_changed stays false.",
+    "payload": {
+      "story_id": "pm-statement-2026-0622",
+      "slug": "PM-STATEMENT",
+      "headline": "Prime Minister resigns",
+      "story_type": "ACTIVE",
+      "sequence_number": 8,
+      "updated_at": "2026-09-11T15:12:00Z",
+      "story_owner": "octopus-nrcs-lon-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T14:10:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "11000000",
+          "label": "politics"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "westminster"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-reuters-wire",
+          "source_type": "WIRE",
+          "provider": "Reuters",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:40:00Z"
+        }
+      ],
+      "assertions": [
+        {
+          "assertion_id": "assn-pm-01",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "pm-statement-2026-0622"
+          },
+          "claim": {
+            "metric": "pm_office_status",
+            "value": "RESIGNED"
+          },
+          "attributed_to": "the Prime Minister",
+          "asserted_at": "2026-09-11T15:04:00Z",
+          "confidence": 0.94,
+          "originated_from": "asset-statement-transcript",
+          "review": {
+            "state": "CONFIRMED",
+            "reviewer": "producer-lon-01",
+            "reviewed_at": "2026-09-11T15:12:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "trint-asr"
+          }
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "script-resign",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "script-no-resign",
+          "asset_type": "SCRIPT",
+          "status": "INVALIDATED",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "asset-downing-feed",
+          "asset_type": "VIDEO",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURING",
+          "provenance": {
+            "author": "HUMAN"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/1d4b9077",
+              "label": "Downing Street feed"
+            },
+            {
+              "locator": {
+                "store": "mimir-proxy",
+                "ref": "downing-1600/growing.m3u8"
+              },
+              "label": "growing proxy"
+            }
+          ],
+          "authenticity_credential": {
+            "present": true,
+            "validated_by": "momentslab-c2pa-check",
+            "standard": "C2PA"
+          }
+        },
+        {
+          "asset_id": "asset-statement-transcript",
+          "asset_type": "TRANSCRIPT",
+          "status": "READY",
+          "derived_from": [
+            "asset-downing-feed"
+          ],
+          "provenance": {
+            "author": "MODEL",
+            "model": "trint-asr",
+            "confidence": 0.94,
+            "generated_at": "2026-09-11T14:52:00Z",
+            "review": {
+              "state": "CONFIRMED",
+              "reviewer": "producer-lon-01",
+              "reviewed_at": "2026-09-11T15:12:00Z"
+            }
+          }
+        },
+        {
+          "asset_id": "alert-push-1600",
+          "asset_type": "SOCIAL_CARD",
+          "status": "PREPARED",
+          "evidential_position": "TERTIARY"
+        }
+      ],
+      "compliance": [],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-alert-standards",
+          "gate_type": "STANDARDS_APPROVAL",
+          "status": "PENDING",
+          "required_by_skill": "hold-while-flagged",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "alert-push-1600"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "priority": {
+        "level": "URGENT",
+        "reason": "no lobby briefing has been given"
+      },
+      "premise": {
+        "expected_outcome": "Resignation",
+        "confidence": "HIGH",
+        "premise_changed": false
+      }
+    }
+  },
+  {
+    "t": 23.2,
+    "topic": "som.story.pm-statement-2026-0622.context",
+    "originating_system": {
+      "system_id": "octopus-nrcs-lon-01",
+      "system_type": "ncs",
+      "system_name": "Octopus",
+      "vendor": "Octopus",
+      "version": "0.3.2"
+    },
+    "summary": "The owner's snapshot carries the social path gate, APPROVED with no human in this beat: it follows from the act audit-recorded at beat 8.",
+    "payload": {
+      "story_id": "pm-statement-2026-0622",
+      "slug": "PM-STATEMENT",
+      "headline": "Prime Minister resigns",
+      "story_type": "ACTIVE",
+      "sequence_number": 9,
+      "updated_at": "2026-09-11T15:20:00Z",
+      "story_owner": "octopus-nrcs-lon-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T14:10:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "11000000",
+          "label": "politics"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "westminster"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-reuters-wire",
+          "source_type": "WIRE",
+          "provider": "Reuters",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:40:00Z"
+        }
+      ],
+      "assertions": [
+        {
+          "assertion_id": "assn-pm-01",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "pm-statement-2026-0622"
+          },
+          "claim": {
+            "metric": "pm_office_status",
+            "value": "RESIGNED"
+          },
+          "attributed_to": "the Prime Minister",
+          "asserted_at": "2026-09-11T15:04:00Z",
+          "confidence": 0.94,
+          "originated_from": "asset-statement-transcript",
+          "review": {
+            "state": "CONFIRMED",
+            "reviewer": "producer-lon-01",
+            "reviewed_at": "2026-09-11T15:12:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "trint-asr"
+          }
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "script-resign",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY",
+          "usage": [
+            {
+              "link_id": "49093ed7-2347-52ae-9c7b-e0895839e4e3",
+              "destination_id": "dest-bulletin",
+              "state": "committed"
+            },
+            {
+              "link_id": "75b52e06-6d03-5405-8822-07490c32392a",
+              "destination_id": "dest-web",
+              "state": "committed"
+            }
+          ]
+        },
+        {
+          "asset_id": "script-no-resign",
+          "asset_type": "SCRIPT",
+          "status": "INVALIDATED",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "asset-downing-feed",
+          "asset_type": "VIDEO",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURING",
+          "provenance": {
+            "author": "HUMAN"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/1d4b9077",
+              "label": "Downing Street feed"
+            },
+            {
+              "locator": {
+                "store": "mimir-proxy",
+                "ref": "downing-1600/growing.m3u8"
+              },
+              "label": "growing proxy"
+            }
+          ],
+          "authenticity_credential": {
+            "present": true,
+            "validated_by": "momentslab-c2pa-check",
+            "standard": "C2PA"
+          }
+        },
+        {
+          "asset_id": "asset-statement-transcript",
+          "asset_type": "TRANSCRIPT",
+          "status": "READY",
+          "derived_from": [
+            "asset-downing-feed"
+          ],
+          "provenance": {
+            "author": "MODEL",
+            "model": "trint-asr",
+            "confidence": 0.94,
+            "generated_at": "2026-09-11T14:52:00Z",
+            "review": {
+              "state": "CONFIRMED",
+              "reviewer": "producer-lon-01",
+              "reviewed_at": "2026-09-11T15:12:00Z"
+            }
+          }
+        },
+        {
+          "asset_id": "asset-social-post",
+          "asset_type": "SOCIAL_POST",
+          "status": "PREPARED",
+          "evidential_position": "TERTIARY",
+          "usage": [
+            {
+              "link_id": "48a09be4-8278-5c2c-9e1a-7a70428b912f",
+              "destination_id": "dest-social",
+              "state": "committed"
+            }
+          ]
+        },
+        {
+          "asset_id": "alert-push-1600",
+          "asset_type": "SOCIAL_CARD",
+          "status": "PREPARED",
+          "evidential_position": "TERTIARY"
+        }
+      ],
+      "compliance": [],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-social-path",
+          "gate_type": "EDITORIAL_APPROVAL",
+          "status": "APPROVED",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "asset-social-post"
+            }
+          ]
+        },
+        {
+          "gate_id": "gate-alert-standards",
+          "gate_type": "STANDARDS_APPROVAL",
+          "status": "PENDING",
+          "required_by_skill": "hold-while-flagged",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "alert-push-1600"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "priority": {
+        "level": "URGENT",
+        "reason": "no lobby briefing has been given"
+      },
+      "premise": {
+        "expected_outcome": "Resignation",
+        "confidence": "HIGH",
+        "premise_changed": false
+      }
+    }
+  },
+  {
+    "t": 24.6,
+    "topic": "skill.warning.raised",
+    "originating_system": {
+      "system_id": "hypercontent-01",
+      "system_type": "automation",
+      "system_name": "HyperContent",
+      "vendor": "HyperContent",
+      "version": "0.3.2"
+    },
+    "summary": "HyperContent was given no task. It read the story, composed the post off the approved finding, and stopped itself at the gate.",
+    "payload": {
+      "warning_id": "4e430926-35ba-5ca2-97c8-74e4904e9911",
+      "skill_id": "smart-stories/gate-by-scope",
+      "skill_version": "0.2.2",
+      "story_id": "pm-statement-2026-0622",
+      "scope": "asset:asset-social-post",
+      "severity": "hold",
+      "rule_id": "hc-pm-social-path",
+      "non_overridable": false,
+      "affected_fields": [
+        "assets[].usage[].destination_id"
+      ],
+      "detail": "Post composed off the approved finding and held at the gate.",
+      "blocks": [
+        "publish"
+      ],
+      "skill_warning_ref": "swr-pm-001",
+      "message_type": "skill.warning.raised",
+      "extensions": {
+        "com.somdash.instance": "hc-pm-social-path",
+        "com.somdash.declared_system_type": "distribution",
+        "com.somdash.woken_by": "story.context",
+        "com.somdash.evidence": "no ratified message exists for a Telling, so the Telling itself publishes nothing",
+        "com.somdash.severity": "hold, inform"
+      }
+    }
+  }
+]

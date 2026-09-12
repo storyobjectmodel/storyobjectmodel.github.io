@@ -3,25 +3,611 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The Story Object Model (SOM): the story context layer for content production. An open standard.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='0' y='2' width='17' height='4.6' fill='%23111517'/%3E%3Crect x='5' y='9.7' width='19' height='4.6' fill='%230B7C86'/%3E%3Crect x='0' y='17.4' width='17' height='4.6' fill='%23111517'/%3E%3C/svg%3E">
 <title>Story Object Model</title>
-<meta name="description" content="Story Object Model: an open standard for story context.">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Azeret+Mono:wght@500&display=swap">
+<link rel="canonical" href="https://storyobjectmodel.com/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&family=Azeret+Mono:wght@400;500&display=swap">
 <style>
-html,body{height:100%}
-body{margin:0;background:#F4F6F7;color:#111517;font-family:"Archivo","Helvetica Neue",Arial,sans-serif;display:grid;place-items:start;padding:12vh 8vw;box-sizing:border-box}
-@media (prefers-color-scheme: dark){body{background:#111517;color:#F4F6F7}}
-main{max-width:34ch;display:grid;gap:18px}
-h1{margin:0;font-size:clamp(1.8rem,5vw,2.8rem);font-weight:600;letter-spacing:-.02em;line-height:1.1}
-p{margin:0;font-size:1.05rem;line-height:1.5;opacity:.8}
-small{font-family:"Azeret Mono",ui-monospace,monospace;font-size:.78rem;opacity:.6}
+:root{
+  --cloud:#F4F6F7; --mist:#ECEFF1; --line:#DFE4E7; --steel:#8E9BA5; --slate:#5B6670; --graphite:#2C333A; --ink:#111517;
+  --teal:#0B7C86; --lift:#6FDCE2; --navy:#0E3A5C; --amber:#B0700F;
+  --paper:var(--cloud); --card:#FFFFFF; --rule:var(--line);
+  --fg:var(--ink); --fg-2:var(--graphite); --fg-3:var(--slate);
+  --mark:var(--teal); --held-bg:#E3EAF1; --held-fg:var(--navy); --warn-bg:#F3E9DA; --warn-fg:var(--amber);
+  --dark-bg:var(--ink); --dark-fg:var(--cloud); --dark-fg-2:#C3CBD1; --dark-mark:var(--lift);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#111517; --card:#1A1F24; --rule:#2C333A; --mist:#1A1F24;
+    --fg:#F4F6F7; --fg-2:#C3CBD1; --fg-3:#8E9BA5; --mark:#6FDCE2;
+    --held-bg:#16283A; --held-fg:#9CC3E6; --warn-bg:#3A2A10; --warn-fg:#E2B15A;
+    --dark-bg:#1A1F24;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#111517; --card:#1A1F24; --rule:#2C333A; --mist:#1A1F24;
+  --fg:#F4F6F7; --fg-2:#C3CBD1; --fg-3:#8E9BA5; --mark:#6FDCE2;
+  --held-bg:#16283A; --held-fg:#9CC3E6; --warn-bg:#3A2A10; --warn-fg:#E2B15A;
+  --dark-bg:#1A1F24;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--fg);font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.58;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Archivo",sans-serif;text-wrap:balance;margin:0;line-height:1.1}
+h2{font-size:clamp(1.6rem,3.6vw,2.2rem);font-weight:600;letter-spacing:-.02em}
+h3{font-size:1.15rem;font-weight:600;line-height:1.3;letter-spacing:-.01em}
+p{margin:0}
+a{color:var(--mark)}
+code,.mono{font-family:"Azeret Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78em}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.prose{max-width:62ch}
+.eyebrow{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);display:block;border-left:2px solid var(--fg);padding-left:10px;line-height:1.4}
+.eyebrow b{display:block;font-weight:500;color:var(--fg)}
+section{padding:84px 0;border-top:1px solid var(--rule)}
+section .wrap{display:grid;gap:32px}
+.lede{font-size:1.2rem;color:var(--fg-2);max-width:60ch}
+.stack{display:grid;gap:14px}
+.pull{font-family:"Archivo",sans-serif;font-weight:600;font-size:clamp(1.3rem,2.6vw,1.7rem);letter-spacing:-.02em;line-height:1.25;max-width:30ch}
+
+/* the mark */
+.mark{display:block;overflow:visible}
+.mark .b{fill:var(--fg)}.mark .b.c{fill:var(--mark)}
+.on-ink .mark .b{fill:var(--dark-fg)}.on-ink .mark .b.c{fill:var(--dark-mark)}
+.mark .b.c{transition:transform 200ms cubic-bezier(.2,.7,.2,1)}
+.brand:hover .mark .b.c{transform:translateX(1px)}
+/* 1a commit: once on arrival */
+.commit .mark .b.c{animation:commit 750ms cubic-bezier(.2,.7,.2,1) 500ms both}
+@keyframes commit{0%{transform:translateX(-5px);fill:var(--fg)}28%{transform:translateX(0);fill:var(--fg)}48%,100%{transform:translateX(0);fill:var(--mark)}}
+@media (prefers-reduced-motion: reduce){.commit .mark .b.c{animation:none}.mark .b.c{transition:none}}
+
+/* nav */
+nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:12px;font-family:"Archivo",sans-serif;font-weight:700;font-size:1.3rem;text-decoration:none;letter-spacing:-.03em;color:var(--fg)}
+.brand svg{width:24px;height:24px}
+nav ul{display:flex;gap:24px;list-style:none;margin:0;padding:0;font-size:.92rem;font-weight:500}
+nav ul a{text-decoration:none;color:var(--fg-3)}
+nav ul a:hover{color:var(--fg)}
+nav .ver{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3)}
+@media(max-width:820px){nav ul{display:none}}
+
+/* buttons: mono labels, square */
+.btn{display:inline-flex;align-items:center;gap:.5em;padding:.7em 1.1em;font-family:"Azeret Mono",monospace;font-size:.78rem;font-weight:500;text-decoration:none;border:1px solid transparent}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--mark);outline-offset:3px}
+.btn-primary{background:var(--fg);color:var(--paper)}
+.btn-secondary{border-color:var(--fg-3);color:var(--fg);background:transparent}
+.on-ink .btn-primary{background:var(--dark-fg);color:var(--ink)}
+.on-ink .btn-secondary{border-color:var(--steel);color:var(--dark-fg)}
+.btn-row{display:flex;flex-wrap:wrap;gap:12px}
+
+/* hero */
+.hero{padding:64px 0 48px}
+.hero .wrap{display:grid;gap:26px}
+.hero-mark{width:96px;height:96px}
+h1{font-size:clamp(2.1rem,5.6vw,3.6rem);font-weight:700;letter-spacing:-.03em;line-height:1.05}
+.hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end}
+@media(max-width:820px){.hero-grid{grid-template-columns:1fr}}
+.hero .lede{font-size:1.25rem}
+.hero .stack{gap:22px}
+.ibc-strap{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);border-top:1px solid var(--rule);padding-top:16px}
+.ibc-strap b{color:var(--fg);font-weight:500}
+.statement{font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:clamp(1.6rem,3.4vw,2.3rem);letter-spacing:-.015em;line-height:1.15;max-width:24ch}
+.statement em{font-style:italic;color:var(--mark)}
+
+/* the record (envelope) */
+.envelope{background:var(--graphite);color:var(--dark-fg);padding:18px 20px;font-family:"Azeret Mono",monospace;font-size:.76rem;line-height:1.6;overflow-x:auto;position:relative;--k:#C3CBD1;--s:#F4F6F7;--n:#8E9BA5;border-left:3px solid var(--lift)}
+.envelope .k{color:var(--k)}.envelope .s{color:var(--s)}.envelope .n{color:var(--n)}.envelope .chg{color:var(--lift)}
+.envelope .cap{position:absolute;top:10px;right:14px;font-size:.68rem;color:var(--steel)}
+.envelope pre{margin:0;white-space:pre}
+
+/* gap section */
+.chat{background:var(--card);border:1px solid var(--rule);padding:18px;max-width:420px;display:grid;gap:10px;font-size:.92rem}
+.msg{display:grid;gap:2px}
+.msg .who{font-family:"Azeret Mono",monospace;font-size:.7rem;color:var(--fg-3)}
+.msg .bubble{background:var(--mist);padding:8px 12px;width:fit-content;max-width:100%}
+.msg.hold .bubble{background:var(--held-bg);color:var(--held-fg);border-left:3px solid var(--held-fg)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+@media(max-width:820px){.two{grid-template-columns:1fr}}
+
+/* diagram */
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.diagram{width:100%;min-width:720px;height:auto;display:block}
+.diagram text{font-family:"Azeret Mono",monospace;font-size:12px;fill:var(--fg-3)}
+.diagram .lbl{font-family:"Archivo",sans-serif;font-weight:600;font-size:14px;fill:var(--fg)}
+.diagram .busline{stroke:var(--fg);stroke-width:5}
+.diagram .tool{fill:var(--card);stroke:var(--rule)}
+.diagram .tap{stroke:var(--steel);stroke-width:1.5}
+.diagram .obj1,.diagram .obj3{fill:var(--fg)}.diagram .obj2{fill:var(--mark)}
+.diagram .rule{fill:var(--card);stroke:var(--fg)}
+.triad{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:720px){.triad{grid-template-columns:1fr}}
+.tri{border-top:2px solid var(--fg);padding-top:14px;display:grid;gap:8px}
+.tri .mono{color:var(--fg-3);font-size:.76rem}
+
+/* skills panel */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:720px){.pair{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--rule);padding:18px;display:grid;gap:8px}
+.panel .cap{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
+.panel pre{margin:0;font-family:"Azeret Mono",monospace;font-size:.78rem;line-height:1.6;white-space:pre-wrap;color:var(--fg-2)}
+.panel blockquote{margin:0;font-size:1.05rem;line-height:1.5;color:var(--fg-2)}
+
+/* not list */
+.nots{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.nots li{border:1px solid var(--rule);padding:.35em .9em;font-size:.9rem;color:var(--fg-2);background:var(--card)}
+.nots li::before{content:"not ";color:var(--fg-3)}
+
+/* proofs */
+.proofs{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media(max-width:900px){.proofs{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.proofs{grid-template-columns:1fr}}
+.proof{background:var(--card);border:1px solid var(--rule);padding:16px;display:grid;gap:8px;align-content:start}
+.proof h3{font-size:1.02rem}
+.proof p{font-size:.92rem;color:var(--fg-2)}
+.films{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:720px){.films{grid-template-columns:1fr}}
+.film{border:1px solid var(--rule);background:var(--card);display:grid}
+.film .frame{aspect-ratio:16/9;background:var(--mist);display:grid;place-items:start end;padding:14px;color:var(--fg-3);font-family:"Azeret Mono",monospace;font-size:.74rem}
+.film .meta{padding:14px 16px;display:grid;gap:4px}
+.film .meta b{font-weight:600}
+.film .meta span{font-size:.88rem;color:var(--fg-3)}
+
+/* room */
+.room{display:grid;grid-template-columns:1fr;gap:40px}
+@media(max-width:720px){.room{grid-template-columns:1fr}}
+.names{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.95rem;color:var(--fg-2)}
+.count{font-family:"Archivo",sans-serif;font-size:2.6rem;font-weight:700;letter-spacing:-.03em;line-height:1}
+.count small{display:block;font-size:.85rem;font-weight:400;letter-spacing:0;color:var(--fg-3);margin-top:4px}
+
+/* publish on ink */
+.publish{background:var(--dark-bg);color:var(--dark-fg)}
+.publish .lede{color:var(--dark-fg-2)}
+.publish .eyebrow{color:var(--steel);border-color:var(--dark-fg)}.publish .eyebrow b{color:var(--dark-fg)}
+.publish li span{color:var(--dark-fg-2)}
+.publish a{color:var(--dark-mark)}
+.repo-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px 24px;font-size:.95rem}
+@media(max-width:720px){.repo-list{grid-template-columns:1fr}}
+.repo-list li{display:grid;gap:2px;padding:10px 0;border-top:1px solid var(--graphite)}
+.repo-list code{color:var(--steel)}
+
+/* involve */
+.asks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:720px){.asks{grid-template-columns:1fr}}
+.ask{display:grid;gap:8px;padding:18px;border:1px solid var(--rule);background:var(--card)}
+.ask h3{font-size:1.02rem}
+.ask p{font-size:.92rem;color:var(--fg-2)}
+.formbox{border:1px solid var(--rule);padding:22px;display:grid;gap:14px;background:var(--mist)}
+.formbox form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.formbox form{grid-template-columns:1fr}}
+.field{display:grid;gap:4px;font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
+.field textarea{resize:vertical}
+.field input,.field select,.field textarea{font:inherit;font-family:"Archivo",sans-serif;font-size:1rem;color:var(--fg);background:var(--card);border:1px solid var(--rule);padding:.6em .7em}
+.field.full{grid-column:1/-1}
+.formbox .note{font-size:.82rem;color:var(--fg-3)}
+.formbox button{cursor:pointer}
+.field.consent span{font-family:"Archivo",sans-serif;font-size:.95rem;color:var(--fg-2);display:flex;gap:8px;align-items:flex-start}
+.field.consent input{margin-top:.3em}
+
+footer{padding:56px 0 72px;border-top:1px solid var(--rule);font-size:.9rem;color:var(--fg-3)}
+footer .wrap{display:grid;gap:18px}
+footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
+@media(max-width:720px){footer .cols{grid-template-columns:1fr}}
+footer a{color:var(--fg-2);text-decoration:none}
+footer a:hover{color:var(--mark)}
+/* additions for the story page */
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:720px){.why{grid-template-columns:1fr}}
+.why .item{border-top:2px solid var(--fg);padding-top:12px;display:grid;gap:6px}
+.why .item b{font-weight:600}
+.why .item p{font-size:.95rem;color:var(--fg-2)}
+.eras{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:720px){.eras{grid-template-columns:1fr}}
+.era{background:var(--card);border:1px solid var(--rule);padding:16px;display:grid;gap:6px;align-content:start}
+.era .n{font-family:"Azeret Mono",monospace;font-size:.72rem;color:var(--fg-3)}
+.era h3{font-size:1.05rem}
+.era p{font-size:.92rem;color:var(--fg-2)}
+.era.now{border-color:var(--mark);border-width:2px}
+.night{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:820px){.night{grid-template-columns:1fr}}
+.col{display:grid;gap:10px;align-content:start;padding:18px;border:1px solid var(--rule);background:var(--card)}
+.col.som{border-color:var(--mark);border-width:2px}
+.col .cap{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
+.col h3{font-size:1.1rem}
+.col ul{margin:0;padding-left:1.1em;display:grid;gap:6px;font-size:.95rem;color:var(--fg-2)}
+.col li::marker{color:var(--fg-3)}
+.col .verdict{font-weight:600;color:var(--fg);padding-top:6px;border-top:1px solid var(--rule)}
+.beats{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:b}
+.beat{display:grid;grid-template-columns:56px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--rule)}
+.beat .num{font-family:"Azeret Mono",monospace;font-size:.78rem;color:var(--fg-3);padding-top:4px}
+.beat b{display:block;font-weight:600;margin-bottom:4px}
+.beat p{font-size:.95rem;color:var(--fg-2)}
+.quote{margin-top:6px;font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:clamp(1.25rem,2.6vw,1.6rem);line-height:1.3;letter-spacing:-.01em;max-width:34ch;color:var(--fg)}
+.quote small{display:block;font-family:"Azeret Mono",monospace;font-size:.72rem;color:var(--fg-3);margin-top:8px;letter-spacing:0}
+.hops{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
+.hops .sys{border:1px solid var(--rule);background:var(--card);padding:.4em .7em;color:var(--fg)}
+.hops .hop{background:#F2D24B;color:#111517;padding:.4em .6em;border-radius:2px}
+.year{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:720px){.year{grid-template-columns:1fr 1fr}}
+.year div{display:grid;gap:4px;border-top:1px solid var(--rule);padding-top:10px}
+.year .y{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3)}
+.year b{font-weight:600;font-size:.95rem}
+.year p{font-size:.88rem;color:var(--fg-2)}
+.logos{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.logos img{width:100%;height:56px;object-fit:contain;background:#FFFFFF;border:1px solid var(--rule);padding:8px 14px;box-sizing:border-box}
+.demoband{background:var(--card)}
+.bandhead{display:flex;flex-wrap:wrap;gap:18px 32px;align-items:flex-end;justify-content:space-between}
+.thumbs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:720px){.thumbs{grid-template-columns:1fr}}
+.thumb{position:relative;display:block;text-decoration:none;color:var(--fg);border:1px solid var(--rule);background:var(--mist);overflow:hidden}
+.thumb img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.thumb .play{position:absolute;left:50%;top:38%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(17,21,23,.82);border:2px solid #F4F6F7;transition:transform 200ms cubic-bezier(.2,.7,.2,1)}
+.thumb .play::after{content:"";position:absolute;left:26px;top:19px;border-style:solid;border-width:13px 0 13px 20px;border-color:transparent transparent transparent #F4F6F7}
+.thumb:hover .play{transform:scale(1.06)}
+.thumb .meta{display:grid;gap:2px;padding:12px 14px;border-top:1px solid var(--rule);background:var(--card)}
+.thumb .meta small{font-family:"Azeret Mono",monospace;font-size:.72rem;color:var(--fg-3)}
+.thumb .meta b{font-weight:600}
+@media(max-width:720px){section{padding:60px 0}section .wrap{gap:26px}.hero{padding:44px 0 36px}.two{gap:28px}}
+.credits{display:grid;grid-template-columns:1.4fr 1fr;gap:24px}
+@media(max-width:820px){.credits{grid-template-columns:1fr}}
+.credit{display:grid;gap:6px;border-top:2px solid var(--fg);padding-top:12px}
+.credit .cap{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
+.credit p{font-size:.95rem;color:var(--fg-2)}
+.teaser{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;border:1px solid var(--rule);background:var(--card);padding:18px 20px}
+.teaser .stack{gap:2px}.teaser b{font-weight:600}.teaser span{font-size:.92rem;color:var(--fg-3)}
+.hero .why{border-top:1px solid var(--rule);padding-top:22px}
+.figure{display:block;max-width:100%;height:auto;border:1px solid var(--rule);background:#FFFFFF}
+.figure.wide{width:100%;min-width:720px}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.field.consent span{font-family:"Archivo",sans-serif;font-size:.95rem;color:var(--fg-2);display:flex;gap:8px;align-items:flex-start}
+.field.consent input{margin-top:.3em}
+.pubs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:820px){.pubs{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pubs{grid-template-columns:1fr}}
+.pub{display:grid;gap:4px;padding:12px 0;border-top:1px solid var(--graphite)}
+.pub b{font-weight:600}.pub span{font-size:.92rem;color:var(--dark-fg-2)}.pub code{color:var(--steel)}
 </style>
+<style>img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<main>
-  <h1>Story Object Model</h1>
-  <p>An open standard for story context in content production. Published at IBC 2026 by the Accelerator project SMART STORIES.</p>
-  <p>Final showcase session: Saturday 12 September, 16:00, Future Tech Stage, Hall 14, RAI Amsterdam. Demonstrations at the Accelerator pod throughout the show.</p>
-  <small>storyobjectmodel.com</small>
-</main>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><rect class="b" x="0" y="2" width="17" height="4.6"/><rect class="b c" x="5" y="9.7" width="19" height="4.6"/><rect class="b" x="0" y="17.4" width="17" height="4.6"/></svg>SOM</a>
+    <ul>
+      <li><a href="#idea">The idea</a></li>
+      <li><a href="#model">Story, Asset, Telling</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#decision">One decision</a></li>
+      <li><a href="#demos">Demos</a></li>
+      <li><a href="#publish">The specification</a></li>
+      <li><a href="#involved">Get involved</a></li>
+    </ul>
+    <a class="ver" href="/schema/1.0/" style="text-decoration:none">SOM 1.0</a>
+  </div>
+</nav>
+
+<header class="hero commit" id="top">
+  <div class="wrap">
+    <svg class="mark hero-mark" viewBox="0 0 24 24" aria-hidden="true"><rect class="b" x="0" y="2" width="17" height="4.6"/><rect class="b c" x="5" y="9.7" width="19" height="4.6"/><rect class="b" x="0" y="17.4" width="17" height="4.6"/></svg>
+    <span class="eyebrow">story object model<b>an open standard</b></span>
+    <div class="hero-grid">
+      <div class="stack">
+        <h1>The story context layer for content production.</h1>
+        <p class="lede">A layer under the tools you already have, carrying what is true about a story at any moment in time, and over time.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="https://github.com/storyobjectmodel/som">read the specification</a>
+          <a class="btn btn-secondary" href="https://storyobjectmodel.com/emulator/">run the bus</a>
+          <a class="btn btn-secondary" href="demos.html">watch the demos</a>
+          <a class="btn btn-secondary" href="#involved">get involved</a>
+        </div>
+      </div>
+      <div class="envelope" aria-label="Example SOM message, abridged">
+        <span class="cap">story.context · abridged</span>
+<pre>{
+  <span class="k">"som_version"</span>: <span class="s">"1.0.0"</span>,
+  <span class="k">"message_type"</span>: <span class="s">"story.context"</span>,
+  <span class="k">"payload"</span>: {
+    <span class="k">"story_id"</span>: <span class="s">"story-8f2c"</span>,
+    <span class="k">"lifecycle"</span>: { <span class="k">"phase"</span>: <span class="s">"BREAKING"</span> },
+    <span class="k">"editorial_gates"</span>: [ {
+      <span class="k">"gate_type"</span>: <span class="chg">"CASUALTY_FIGURE"</span>,
+      <span class="k">"status"</span>: <span class="chg">"PENDING"</span>,
+      <span class="k">"assigned_to"</span>: <span class="s">"standards_desk"</span>
+    } ],
+    <span class="k">"assets"</span>: [ <span class="n">3 items</span> ],
+    <span class="k">"assertions"</span>: [ <span class="n">2 items</span> ]
+  }
+}</pre>
+      </div>
+    </div>
+    <div class="why">
+      <div class="item"><b>The problem</b><p>Every system in the newsroom holds a fragment of the story, and every fragment is accurate. No system holds the story. The decisions that matter travel by phone, by chat, by a word across the desk. Everything talks. Nothing understands.</p></div>
+      <div class="item"><b>The opportunity</b><p>Write the story down once, where every tool can read it, and a decision made once is obeyed everywhere and provable afterwards. Buy a tool and one job gets smarter. Build this layer and everything you plug in gets smarter.</p></div>
+      <div class="item"><b>The idea</b><p>The Story Object Model: an open standard for what a story is, carried on an ordinary publish and subscribe bus. Tools stop talking to each other. They talk to a shared, live description of the story. Nothing sits in charge above them: each tool reads the story and decides for itself.</p></div>
+    </div>
+    <div class="ibc-strap">
+      <span>developed through the <b>IBC Accelerator</b> programme as the project SMART STORIES</span>
+      <span>open specification · <b>version 1.0</b></span>
+    </div>
+  </div>
+</header>
+
+<section id="gap">
+  <div class="wrap">
+    <span class="eyebrow">som.site / 01<b>the gap</b></span>
+    <div class="two">
+      <div class="stack prose">
+        <h2>The most important knowledge app in the newsroom is a messaging app.</h2>
+        <p>A hold on a casualty figure, issued in chat; the seen counter is the only record that exists. Two script versions, nobody sure which is current. Chat is where newsroom knowledge is fast. It is not where newsroom knowledge is durable.</p>
+        <p>And chat is only the visible part. Trace a story from wire to air and every hop between systems is a person carrying it by hand: a rebrief, a phone call, a word across the desk, a note in somebody's head. A human API, copying, pasting and relaying between a growing list of tools. The decisions that shaped the story never reach the tools that act on it, and they do not survive the handoff either: from one shift to the next, from Tuesday to Friday, or when the story comes back three weeks later. People are the glue, and always have been. Now the machines working alongside them are kept in the dark too, and a tool with AI in it cannot act on what it cannot see.</p>
+      </div>
+      <div role="img" aria-label="A newsroom group chat: a hold on a casualty figure is issued, one desk marks it seen, another asks which script version is current, and graphics misses it and the strap goes out with the number" style="width:100%;max-width:460px;justify-self:center;background:#FFFFFF;border:1px solid #DFE4E7;box-shadow:0 24px 48px -32px rgba(17,21,23,.25);display:grid;font-size:14px;line-height:1.4;min-width:0;align-self:center">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;border-bottom:1px solid #DFE4E7">
+            <div style="display:grid;gap:1px"><div style="font-weight:600;font-size:15px;letter-spacing:-.01em"># breaking-output</div><div style="font-family:'Azeret Mono',monospace;font-size:11px;color:#5B6670">14 members · 6 online</div></div>
+            <div style="display:flex"><span style="width:22px;height:22px;border-radius:50%;background:#2C333A;border:2px solid #FFFFFF"></span><span style="width:22px;height:22px;border-radius:50%;background:#5B6670;border:2px solid #FFFFFF;margin-left:-8px"></span><span style="width:22px;height:22px;border-radius:50%;background:#8E9BA5;border:2px solid #FFFFFF;margin-left:-8px"></span><span style="width:22px;height:22px;border-radius:50%;background:#ECEFF1;border:2px solid #FFFFFF;margin-left:-8px;font-family:'Azeret Mono',monospace;font-size:9px;color:#5B6670;display:grid;place-items:center">+11</span></div>
+          </div>
+          <div style="padding:12px 14px 14px;display:grid;gap:10px">
+
+            <div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px">
+              <span style="width:28px;height:28px;border-radius:50%;font-size:10px;background:#2C333A;color:#F4F6F7;display:grid;place-items:center;font-family:'Azeret Mono',monospace">OE</span>
+              <div style="display:grid;gap:3px;justify-items:start"><div style="display:flex;gap:8px;align-items:baseline"><b style="font-weight:600;font-size:14px">output editor</b><span style="font-family:'Azeret Mono',monospace;font-size:11px;color:#8E9BA5">22:41</span></div><div style="background:#ECEFF1;padding:6px 11px;border-radius:2px 12px 12px 12px;max-width:100%">Wire is in. Are we running the number?</div></div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px">
+              <span style="width:28px;height:28px;border-radius:50%;font-size:10px;background:#0E3A5C;color:#F4F6F7;display:grid;place-items:center;font-family:'Azeret Mono',monospace">SD</span>
+              <div style="display:grid;gap:3px;justify-items:start"><div style="display:flex;gap:8px;align-items:baseline"><b style="font-weight:600;font-size:14px">standards desk</b><span style="font-family:'Azeret Mono',monospace;font-size:11px;color:#8E9BA5">22:47</span></div><div style="background:#E3EAF1;color:#0E3A5C;padding:8px 12px;border-left:3px solid #0E3A5C;border-radius:0 12px 12px 12px;max-width:100%"><b style="font-weight:600">HOLD</b> the casualty figure. Two sources say 40,000, agency says unconfirmed. Do not run until I clear it.</div><div style="font-family:'Azeret Mono',monospace;font-size:11px;color:#8E9BA5;display:flex;gap:6px;align-items:center"><span style="display:flex"><i style="width:12px;height:12px;border-radius:50%;background:#8E9BA5;display:block"></i></span>seen by 1</div></div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px">
+              <span style="width:28px;height:28px;border-radius:50%;font-size:10px;background:#8E9BA5;color:#F4F6F7;display:grid;place-items:center;font-family:'Azeret Mono',monospace">GA</span>
+              <div style="display:grid;gap:3px;justify-items:start"><div style="display:flex;gap:8px;align-items:baseline"><b style="font-weight:600;font-size:14px">gallery</b><span style="font-family:'Azeret Mono',monospace;font-size:11px;color:#8E9BA5">22:48</span></div><div style="background:#ECEFF1;padding:6px 11px;border-radius:2px 12px 12px 12px">seen</div></div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px">
+              <span style="width:28px;height:28px;border-radius:50%;font-size:10px;background:#5B6670;color:#F4F6F7;display:grid;place-items:center;font-family:'Azeret Mono',monospace">SO</span>
+              <div style="display:grid;gap:3px;justify-items:start"><div style="display:flex;gap:8px;align-items:baseline"><b style="font-weight:600;font-size:14px">social</b><span style="font-family:'Azeret Mono',monospace;font-size:11px;color:#8E9BA5">22:52</span></div><div style="background:#ECEFF1;padding:6px 11px;border-radius:2px 12px 12px 12px">Which version is FINAL_FINAL?</div></div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px">
+              <span style="width:28px;height:28px;border-radius:50%;font-size:10px;background:#B0700F;color:#F4F6F7;display:grid;place-items:center;font-family:'Azeret Mono',monospace">GR</span>
+              <div style="display:grid;gap:3px;justify-items:start"><div style="display:flex;gap:8px;align-items:baseline"><b style="font-weight:600;font-size:14px">graphics</b><span style="font-family:'Azeret Mono',monospace;font-size:11px;color:#8E9BA5">23:04</span></div><div style="background:#F3E9DA;color:#111517;padding:6px 11px;border-radius:2px 12px 12px 12px">Sorry, missed this. Strap already went out with the number.</div></div>
+            </div>
+
+            <div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px">
+              <span style="width:28px;height:28px;border-radius:50%;font-size:10px;background:#111517;color:#F4F6F7;display:grid;place-items:center;font-family:'Azeret Mono',monospace">DE</span>
+              <div style="display:grid;gap:3px;justify-items:start"><div style="display:flex;gap:8px;align-items:baseline"><b style="font-weight:600;font-size:14px">duty editor</b><span style="font-family:'Azeret Mono',monospace;font-size:11px;color:#8E9BA5">23:06</span></div><div style="background:#ECEFF1;padding:6px 11px;border-radius:2px 12px 12px 12px">Can someone check the website?</div></div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="scroll"><img class="figure wide" src="assets/hops.svg" width="960" height="120" alt="A story's path from wire to air: wire, planning, rundown, graphics, web, social, with a person carrying it by hand between every pair of systems"></div>
+    <p class="quote">The context was never missing. It is stranded where no system can read it.</p>
+  </div>
+</section>
+
+<section id="idea">
+  <div class="wrap">
+    <span class="eyebrow">som.site / 02<b>the idea</b></span>
+    <div class="stack prose">
+      <h2>The story carries its own context.</h2>
+      <p class="lede">Anyone whose AI became useful the day they managed what it could see already knows the principle: the right context, at the right time. Now scale it to a newsroom. Fifty tools, hundreds of stories, every decision moving by the minute. You cannot hand-feed a building. So the story carries its own context, and publishes it to everything at once.</p>
+    </div>
+    <div class="scroll"><img class="figure wide" src="assets/bus.svg" width="960" height="340" alt="Tools subscribe to a shared story object over a bus; a rulebook of Skills says what each tool does with it. No orchestrator and no central application: each tool reads the story and decides for itself."></div>
+    <div class="two">
+      <p class="statement">One decision, made once, <em>obeyed everywhere</em>, provable afterwards.</p>
+      <div class="stack prose">
+        <p>We wrote down the thing that was missing: the story itself, as an object every tool can read. It carries what the newsroom knows: what the story is about, what is decided, what is cleared, what is held. Everything that cares subscribes, reads the story, decides for itself, and what it did goes on the record.</p>
+        <p>Nothing in the standard is wired to anything else, so change your mind about any tool later and lose nothing. The knowledge lives in the layer, not the tool.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="model">
+  <div class="wrap">
+    <span class="eyebrow">story · asset · telling<b>what a story carries</b></span>
+    <div class="stack prose">
+      <h2>Story, Asset, Telling.</h2>
+      <p class="lede">Defining what a story is, and the decisions that shape it. A story is the real world event: the thing happening out there, to people, in places, across time. It grows, splits and changes direction, and you do not know its shape until it is over. Mapping that onto a schema came down to three words.</p>
+    </div>
+    <div class="triad">
+      <div class="tri"><span class="mono">story.context</span><h3>Story</h3><p>The thing that is happening. What it is about, the sources and how far they are trusted, where it has got to, the time pressure, the premise the newsroom expects, and the claims being made and whether editorial has confirmed them.</p></div>
+      <div class="tri"><span class="mono">assets[]</span><h3>Asset</h3><p>What the newsroom gathers and makes to tell it: video, audio, scripts, graphics, transcripts. References only; the media never travels the bus. Each asset carries where it came from, who or what made it, and its evidential standing.</p></div>
+      <div class="tri"><span class="mono">telling.event</span><h3>Telling</h3><p>The moment an asset meets an audience: which outlet, which version, who saw it. One story, a pool of assets, any number of tellings. The compliance position belongs to the telling, not to the media, and the human judgement that sits between content and audience has a place in the schema.</p></div>
+    </div>
+    <p class="quote">We might not usually call it that, but this is how journalists already think. We did not invent this. We just wrote it down.</p>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <span class="eyebrow">skill.warning.raised<b>the rulebook</b></span>
+    <div class="stack prose">
+      <h2>SOM carries context. Skills carry knowledge.</h2>
+      <p class="lede">Rules written down once, in a place every tool can read. Written by editorial, readable by machines, in the open <a href="https://agentskills.io">agentskills.io</a> shape. Skills are passive: a Skill declares what is true, and the tool that owns the executor acts on it. If a rule cannot be evaluated, the output it guards stays held and a person decides.</p>
+    </div>
+    <div class="pair">
+      <div class="panel"><span class="cap">as your standards desk already writes it</span><blockquote>Casualty figures are not broadcast until confirmed by two independent sources, both named, or an official statement. Until then, hold the figure on every output and route to the standards desk.</blockquote></div>
+      <div class="panel"><span class="cap">the same rule, once, for every tool · illustrative</span><pre>skill: casualty-figure-hold
+declares: GATE
+scope: story.context.editorial_gates
+when: confirming_sources &lt; 2 and no official_statement
+then: hold · route: standards_desk
+authored_by: standards desk
+silence: valid</pre></div>
+    </div>
+    <div class="stack prose">
+      <p>Same author, same scope, one copy. Nobody translated it into six products, because there is nothing to translate it into. Your policy stays yours, and no vendor needs a copy of it to work for you. Ten Skills are published with the authoring guide. Skills declare. Executors act.</p>
+      <p class="quote">The framework is open. Your workflow is yours.</p>
+    </div>
+  </div>
+</section>
+
+<section id="demos" class="demoband">
+  <div class="wrap">
+    <span class="eyebrow">som.site / 05<b>watch it happen</b></span>
+    <div class="bandhead">
+      <div class="stack prose">
+        <h2>Two breaking news scenarios. One story bus.</h2>
+        <p class="lede">Different stories, different vendors, real production tools, all reading and writing the same story. Nothing in either scenario sends a command to anything.</p>
+      </div>
+      <a class="btn btn-primary" href="demos.html">watch the demos</a>
+    </div>
+    <div class="thumbs">
+      <a class="thumb" href="demos.html#demo-1"><img src="assets/demo-hurricane-poster.jpg" width="1280" height="720" alt="The hurricane demo: Moments Lab offers two archive clips to the story on the bus"><span class="play" aria-hidden="true"></span><span class="meta"><small>scenario 01</small><b>The hurricane</b></span></a>
+      <a class="thumb" href="demos.html#demo-2"><img src="assets/demo-pm-poster.jpg" width="1280" height="720" alt="The Prime Minister demo: the lobby briefing is cancelled and the story goes urgent"><span class="play" aria-hidden="true"></span><span class="meta"><small>scenario 02</small><b>The Prime Minister announcement</b></span></a>
+    </div>
+  </div>
+</section>
+
+<section id="decision">
+  <div class="wrap">
+    <span class="eyebrow">som.site / 06<b>when the human decided</b></span>
+    <div class="stack prose">
+      <h2>10:47 at night. Breaking news. The duty editor makes a call: hold the casualty figure.</h2>
+    </div>
+    <div class="night">
+      <div class="col">
+        <span class="cap">Today</span>
+        <h3>The decision spreads by hand</h3>
+        <ul>
+          <li>The rundown gets it. The producer rebriefs graphics; a misunderstanding, and the graphic with the figure goes to air.</li>
+          <li>Web and breaking news both heard from the group chat. One person saw it and one did not. Held on one outlet, not the other.</li>
+          <li>Nobody told the ticker. It is still scrolling the wrong figure sixty minutes later, and by tomorrow the trail is memory.</li>
+        </ul>
+      </div>
+      <div class="col som">
+        <span class="cap">With SOM</span>
+        <h3>The same editor, the same call, published to the bus</h3>
+        <ul>
+          <li>She uses the tools she always uses. They write her decision to the story, and every other tool sees it at once.</li>
+          <li>Each tool applies the rules it knows. The clip cannot run, the graphic does not play, the ticker loses the figure. Withheld everywhere, simultaneously.</li>
+          <li>The decision, who made it, why and when are on the record, and so is what every tool did about it. Nobody kept that log.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="quote">The human was not replaced. The human was promoted, from carrying the state to making the call.</p>
+  </div>
+</section>
+
+<section id="junctions">
+  <div class="wrap">
+    <span class="eyebrow">tams.source + timerange<b>one new standard, plus smart junctions</b></span>
+    <div class="two">
+      <div class="stack prose">
+        <h2>It replaces nothing.</h2>
+        <p>Every era needed a new standard. Hardware had GPIs. Software had MOS, designed by engineers from broadcasters and vendors on behalf of their industry, and nobody owns it. Intelligence is the third era, and SOM meets the standards that already do their jobs brilliantly where they are. Your MOS lines stay, with a bridge that makes them smarter. What you built with MCP and agents stays.</p>
+        <p><b>TAMS</b>, the BBC R&amp;D Time Addressable Media Store, holds the frames; SOM holds what they mean to the story. At the junction, a hold pins to the exact frames it blocks, a quote knows its own in and out points, and which frames reached which audience becomes a query. Binding happens at the editorial act, never at ingest.</p>
+      </div>
+      <div class="stack">
+        <h3>What SOM is not</h3>
+        <ul class="nots">
+          <li>the media</li><li>the rundown</li><li>a MAM</li><li>a product</li><li>software</li><li>a replacement for anything you run</li><li>owned by any vendor</li>
+        </ul>
+        <p class="pull">A standard owned by one vendor is a product. A standard owned by an industry is infrastructure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="room">
+  <div class="wrap">
+    <span class="eyebrow">som.site / 08<b>credits</b></span>
+    <div class="stack prose">
+      <h2>Built by the industry. Published for the industry.</h2>
+      <p class="lede">Argued into shape in the open: two hackathons, a weekly working group, and six months from kickstart to a working bus.</p>
+    </div>
+    <div class="credits">
+      <div class="credit"><span class="cap">authors</span><p><b>Jon Roberts, Morag McIntosh, Alex Bassett and John Boucklos.</b> Jon Roberts, Morag McIntosh and Alex Bassett conceived the Story Object Model and led the project that developed it, alongside Brian Hopman of AP. John Boucklos co-wrote the specification, led the schema from its first ratified version to 1.0, and built the validators and the repository.</p></div>
+      <div class="credit"><span class="cap">developed through</span><p>The IBC Accelerator Media Innovation Programme 2026, as the project SMART STORIES, with fourteen champion organisations and seventeen participants.</p></div>
+    </div>
+    <div class="room">
+      <div class="stack">
+        <div class="count">14<small>champions, including both global wire services</small></div>
+        <div class="logos"><img src="assets/logos/ITN.png" alt="ITN" title="ITN"><img src="assets/logos/NBCUniversal.png" alt="NBCUniversal" title="NBCUniversal"><img src="assets/logos/AP.png" alt="AP" title="AP"><img src="assets/logos/Channel-4.png" alt="Channel 4" title="Channel 4"><img src="assets/logos/Al-Jazeera.png" alt="Al Jazeera" title="Al Jazeera"><img src="assets/logos/The-Washington-Post.png" alt="The Washington Post" title="The Washington Post"><img src="assets/logos/ITV.png" alt="ITV" title="ITV"><img src="assets/logos/BBC.png" alt="BBC" title="BBC"><img src="assets/logos/Sky.png" alt="Sky" title="Sky"><img src="assets/logos/EBU.png" alt="EBU" title="EBU"><img src="assets/logos/SMPTE.png" alt="SMPTE" title="SMPTE"><img src="assets/logos/Reuters.png" alt="Reuters" title="Reuters"><img src="assets/logos/Scripps.png" alt="Scripps" title="Scripps"><img src="assets/logos/GC-SC.png" alt="GC-SC" title="GC-SC"></div>
+      </div>
+      <div class="stack">
+        <div class="count">17<small>participants, on the bus</small></div>
+        <div class="logos"><img src="assets/logos/Shure.png" alt="Shure" title="Shure"><img src="assets/logos/EVS.png" alt="EVS" title="EVS"><img src="assets/logos/Cuez.png" alt="Cuez" title="Cuez"><img src="assets/logos/Moments-Lab.png" alt="Moments Lab" title="Moments Lab"><img src="assets/logos/Perspective-Media-Group.png" alt="Perspective Media Group" title="Perspective Media Group"><img src="assets/logos/Google-Cloud.png" alt="Google Cloud" title="Google Cloud"><img src="assets/logos/Trint.png" alt="Trint" title="Trint"><img src="assets/logos/Cognizant.png" alt="Cognizant" title="Cognizant"><img src="assets/logos/AWS.png" alt="Amazon Web Services" title="Amazon Web Services"><img src="assets/logos/Electric-Sheep.png" alt="Electric Sheep" title="Electric Sheep"><img src="assets/logos/Nuvelics.png" alt="Nuvelics" title="Nuvelics"><img src="assets/logos/Octopus.png" alt="Octopus" title="Octopus"><img src="assets/logos/Fonn-Group.png" alt="Fonn Group" title="Fonn Group"><img src="assets/logos/The-Weather-Company.png" alt="The Weather Company" title="The Weather Company"><img src="assets/logos/HyperContent-AI.png" alt="HyperContent AI" title="HyperContent AI"><img src="assets/logos/LiveU.png" alt="LiveU" title="LiveU"><img src="assets/logos/Vizrt.png" alt="Vizrt" title="Vizrt"></div>
+      </div>
+    </div>
+    <p class="prose" style="color:var(--fg-3);font-size:.92rem">With BBC R&amp;D on the TAMS junction. Supported by Google Cloud as title sponsor of the Accelerator project; reference bus, dashboard and TAMS store provided by Amazon Web Services; data provided by The Associated Press and The Weather Company.</p>
+  </div>
+</section>
+
+<section id="publish" class="publish">
+  <div class="wrap">
+    <span class="eyebrow">version 1.0<b>published, not finished</b></span>
+    <div class="stack prose">
+      <h2>The specification is published, open, and free to implement.</h2>
+      <p class="lede">And not just the specification, because a specification on its own is homework. The open register lists what is not yet settled, and the working group is where it changes.</p>
+    </div>
+    <div class="pubs">
+      <div class="pub"><b>The specification</b><span>Seven message families as JSON Schema, each served at its stable URL under <a href="/schema/1.0/">storyobjectmodel.com/schema/1.0/</a>. Conformance, compatibility policy, migration note, open register, glossary.</span><code>/schema · /spec</code></div>
+      <div class="pub"><b>The Skills library</b><span>Ten published Skills and one proposed, the authoring guide, the lookup table and the template.</span><code>/skills</code></div>
+      <div class="pub"><b>Tools and examples</b><span>Linter, differ, validator and sequence check, pure Python. Seventeen worked messages, including one story across seven snapshots. And the emulator: a dashboard on a live bus you can <a href="https://storyobjectmodel.com/emulator/">run yourself</a>.</span><code>/tools · /examples · /emulator</code></div>
+      <div class="pub"><b>How it is looked after</b><span>Open and unowned. Governance, contributing and the contributors record. Every change arrives as a pull request, and anyone may open one.</span><code>/GOVERNANCE.md</code></div>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="https://github.com/storyobjectmodel/som">github · storyobjectmodel/som</a>
+      <a class="btn btn-secondary" href="/schema/1.0/">schemas · /schema/1.0/</a>
+      <a class="btn btn-secondary" href="https://agentskills.io">skills · agentskills.io</a>
+    </div>
+    <p style="font-size:.9rem;opacity:.75;max-width:62ch">No fee and nothing to sign. Schemas, examples, tools and skills are licensed Apache 2.0; the specification prose CC BY 4.0. Those licences are the whole of the terms.</p>
+  </div>
+</section>
+
+<section id="involved">
+  <div class="wrap">
+    <span class="eyebrow">som.site / 10<b>get involved</b></span>
+    <div class="stack prose">
+      <h2>The work continues as an open consortium project.</h2>
+      <p class="lede">Read it. Build a basic integration. Tell us what breaks, and what is missing. If you would like to know more, including how you can join, fill in this form.</p>
+    </div>
+    <div class="formbox">
+      <div class="stack">
+        <h3>Get involved.</h3>
+        <p class="note" style="font-size:.95rem;color:var(--fg-2)">Tell us who you are and what you want to do: build against it, write Skills, run a Story Archaeology session, join the working group, or just follow the work.</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://tally.so/r/aQRBDX">get involved</a>
+        <a class="btn btn-secondary" href="mailto:hello@storyobjectmodel.com">or email hello@storyobjectmodel.com</a>
+      </div>
+      <p class="note">Name, organisation, email, what you are and what you want to do. One consent line: occasional news about SOM, the working group and releases. Nothing else.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p class="pull" style="color:var(--fg)">Context is infrastructure. Let's build it like infrastructure.</p>
+    <div class="cols">
+      <div class="stack">
+        <p><b style="color:var(--fg)">SOM · story object model</b><br>An open standard for story context in content production. Developed through the IBC Accelerator programme as the project SMART STORIES; first published at IBC 2026, Amsterdam.</p>
+        <p>The standard is open and unowned; the working group continues.</p>
+      </div>
+      <div class="stack">
+        <a href="https://github.com/storyobjectmodel/som">GitHub</a>
+        <a href="https://agentskills.io">agentskills.io</a>
+        <a href="https://show.ibc.org/accelerator-media-innovation-programme">IBC Accelerator programme</a>
+      </div>
+      <div class="stack">
+        <a href="https://github.com/storyobjectmodel/som">The specification</a>
+        <a href="/schema/1.0/">Schemas 1.0</a>
+        <a href="https://storyobjectmodel.com/emulator/">Emulator</a>
+        <a href="demos.html">Demos</a>
+        <a href="principles.html">Principles</a>
+        <a href="faq.html">FAQ</a>
+        <a href="joining.html">Joining</a>
+        <a href="mailto:hello@storyobjectmodel.com">hello@storyobjectmodel.com</a>
+      </div>
+    </div>
+    <p>Schemas, tools and skills licensed Apache 2.0; specification prose CC BY 4.0.</p>
+  </div>
+</footer>
+
 </body>
 </html>

@@ -1,0 +1,921 @@
+[
+  {
+    "t": 0,
+    "topic": "demo.marker",
+    "payload": {
+      "beat": "B1 · The prepared hold",
+      "sub": "Both packages built ahead, held by reference, one carrying a restriction. Caught before any rundown."
+    }
+  },
+  {
+    "t": 1.7,
+    "topic": "som.story.st-ver-001.context",
+    "originating_system": {
+      "system_id": "mam-01",
+      "system_type": "ARCHIVE",
+      "system_name": "MAM",
+      "vendor": "role",
+      "version": "0.9"
+    },
+    "summary": "Verdict package minted under a reporting restriction. Two cuts prepared; nothing held or cleared yet.",
+    "payload": {
+      "story_id": "st-ver-001",
+      "slug": "crown-court-verdict",
+      "headline": "Verdict due: crown court trial, two counts",
+      "story_type": "ACTIVE",
+      "lifecycle": {
+        "phase": "READY_TO_AIR",
+        "phase_entered_at": "2026-04-01T12:00:00Z"
+      },
+      "premise": {
+        "expected_outcome": "Jury returns verdicts on both counts today",
+        "premise_changed": false
+      },
+      "assertions": [],
+      "editorial_source": [
+        {
+          "source_id": "src-501",
+          "provider": "Court reporting",
+          "source_type": "FIELD_CREW",
+          "credibility": "VERIFIED",
+          "received_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "as-501",
+          "asset_type": "VIDEO",
+          "evidential_position": "TERTIARY",
+          "acquisition_state": "CAPTURED",
+          "status": "PREPARED",
+          "standards_clearance": {
+            "status": "PENDING"
+          }
+        },
+        {
+          "asset_id": "as-502",
+          "asset_type": "VIDEO",
+          "evidential_position": "TERTIARY",
+          "acquisition_state": "CAPTURED",
+          "status": "PREPARED",
+          "standards_clearance": {
+            "status": "PENDING"
+          }
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "cmp-501",
+          "type": "REPORTING_RESTRICTION",
+          "status": "ACTIVE",
+          "detail": "detail inside Package A",
+          "severity": "HIGH",
+          "raised_by": "compliance-engine-01",
+          "raised_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "editorial_gates": [],
+      "relations": [],
+      "sequence_number": 1,
+      "updated_at": "2026-04-01T12:00:00Z"
+    }
+  },
+  {
+    "t": 3.4,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "mam-01",
+      "system_type": "ARCHIVE",
+      "system_name": "MAM",
+      "vendor": "role",
+      "version": "0.9"
+    },
+    "summary": "Read court-reporting-restriction. While the flag stands, the restricted package is held and stays uncommittable.",
+    "payload": {
+      "skill": "hold-while-flagged",
+      "skill_id": "sk-08",
+      "triggered_by": "MAM",
+      "outcome": "COMPLETED",
+      "note": "restricted package held by reference, off air by construction",
+      "evidence": "asset as-501 held; gate gate-501 PENDING"
+    }
+  },
+  {
+    "t": 5.1,
+    "topic": "som.story.st-ver-001.context",
+    "originating_system": {
+      "system_id": "mam-01",
+      "system_type": "ARCHIVE",
+      "system_name": "MAM",
+      "vendor": "role",
+      "version": "0.9"
+    },
+    "summary": "MAM held Package A by reference: restricted detail, uncommittable until the restriction clears.",
+    "payload": {
+      "story_id": "st-ver-001",
+      "slug": "crown-court-verdict",
+      "headline": "Verdict due: crown court trial, two counts",
+      "story_type": "ACTIVE",
+      "lifecycle": {
+        "phase": "READY_TO_AIR",
+        "phase_entered_at": "2026-04-01T12:00:00Z"
+      },
+      "premise": {
+        "expected_outcome": "Jury returns verdicts on both counts today",
+        "premise_changed": false
+      },
+      "assertions": [],
+      "editorial_source": [
+        {
+          "source_id": "src-501",
+          "provider": "Court reporting",
+          "source_type": "FIELD_CREW",
+          "credibility": "VERIFIED",
+          "received_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "as-501",
+          "asset_type": "VIDEO",
+          "evidential_position": "TERTIARY",
+          "acquisition_state": "CAPTURED",
+          "status": "PREPARED",
+          "standards_clearance": {
+            "status": "PENDING"
+          }
+        },
+        {
+          "asset_id": "as-502",
+          "asset_type": "VIDEO",
+          "evidential_position": "TERTIARY",
+          "acquisition_state": "CAPTURED",
+          "status": "PREPARED",
+          "standards_clearance": {
+            "status": "PENDING"
+          }
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "cmp-501",
+          "type": "REPORTING_RESTRICTION",
+          "status": "ACTIVE",
+          "detail": "detail inside Package A",
+          "severity": "HIGH",
+          "raised_by": "compliance-engine-01",
+          "raised_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-501",
+          "gate_type": "Package A (restricted detail)",
+          "status": "PENDING"
+        }
+      ],
+      "relations": [],
+      "sequence_number": 1,
+      "updated_at": "2026-04-01T12:00:00Z"
+    }
+  },
+  {
+    "t": 6.8,
+    "topic": "som.system.audit",
+    "originating_system": {
+      "system_id": "mam-01",
+      "system_type": "ARCHIVE",
+      "system_name": "MAM",
+      "vendor": "role",
+      "version": "0.9"
+    },
+    "summary": "Hold recorded against the restricted package.",
+    "payload": {
+      "action": "WITHHELD",
+      "target": {
+        "kind": "ASSET",
+        "id": "as-501"
+      },
+      "message_type": "system.audit",
+      "actor": {
+        "actor_id": "compliance rule (declared policy)",
+        "actor_type": "system"
+      },
+      "recorded_at": "2026-04-01T12:00:00Z",
+      "audit_id": "64169a92-7219-521b-ae2b-4791a0897b67"
+    }
+  },
+  {
+    "t": 8.5,
+    "topic": "demo.marker",
+    "payload": {
+      "beat": "B2 · The partial fire",
+      "sub": "The verdict lands. One event: right set out, wrong set superseded, count two held."
+    }
+  },
+  {
+    "t": 10.2,
+    "topic": "som.story.st-ver-001.context",
+    "originating_system": {
+      "system_id": "wire-ingest-01",
+      "system_type": "WIRE_SERVICE",
+      "system_name": "Wire ingest",
+      "vendor": "role",
+      "version": "0.9"
+    },
+    "summary": "Count one returned. Carried as a confirmed structured assertion.",
+    "payload": {
+      "story_id": "st-ver-001",
+      "slug": "crown-court-verdict",
+      "headline": "Verdict due: crown court trial, two counts",
+      "story_type": "ACTIVE",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-04-01T12:00:00Z"
+      },
+      "premise": {
+        "expected_outcome": "Jury returns verdicts on both counts today",
+        "premise_changed": false
+      },
+      "assertions": [
+        {
+          "assertion_id": "asr-501",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "st-ver-001"
+          },
+          "claim": {
+            "metric": "count one verdict",
+            "value": "Not guilty"
+          },
+          "provenance": {
+            "author": "HUMAN",
+            "confidence": 1,
+            "review": {
+              "state": "CONFIRMED"
+            }
+          },
+          "attributed_to": "Court clerk",
+          "asserted_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-501",
+          "provider": "Court reporting",
+          "source_type": "FIELD_CREW",
+          "credibility": "VERIFIED",
+          "received_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "as-501",
+          "asset_type": "VIDEO",
+          "evidential_position": "TERTIARY",
+          "acquisition_state": "CAPTURED",
+          "status": "PREPARED",
+          "standards_clearance": {
+            "status": "PENDING"
+          }
+        },
+        {
+          "asset_id": "as-502",
+          "asset_type": "VIDEO",
+          "evidential_position": "TERTIARY",
+          "acquisition_state": "CAPTURED",
+          "status": "PREPARED",
+          "standards_clearance": {
+            "status": "PENDING"
+          }
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "cmp-501",
+          "type": "REPORTING_RESTRICTION",
+          "status": "ACTIVE",
+          "detail": "detail inside Package A",
+          "severity": "HIGH",
+          "raised_by": "compliance-engine-01",
+          "raised_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-501",
+          "gate_type": "Package A (restricted detail)",
+          "status": "PENDING"
+        }
+      ],
+      "relations": [],
+      "sequence_number": 1,
+      "updated_at": "2026-04-01T12:00:00Z"
+    }
+  },
+  {
+    "t": 11.9,
+    "topic": "som.system.audit",
+    "originating_system": {
+      "system_id": "rundown-01",
+      "system_type": "MOS_DEVICE",
+      "system_name": "Rundown",
+      "vendor": "role",
+      "version": "0.9"
+    },
+    "summary": "First clearance recorded by the editor: count one, Package B cleared, Package A suppressed, count two stays held.",
+    "payload": {
+      "action": "CLEARED",
+      "target": {
+        "kind": "ASSET",
+        "id": "as-502"
+      },
+      "message_type": "system.audit",
+      "actor": {
+        "actor_id": "output editor",
+        "actor_type": "human"
+      },
+      "recorded_at": "2026-04-01T12:00:00Z",
+      "audit_id": "4288d5ef-a5ab-544e-8dd6-0ab876b92c46"
+    }
+  },
+  {
+    "t": 13.6,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "mam-01",
+      "system_type": "ARCHIVE",
+      "system_name": "MAM",
+      "vendor": "role",
+      "version": "0.9"
+    },
+    "summary": "Read expose-current-vs-superseded. Current and superseded states exposed so downstream tools resolve correctly.",
+    "payload": {
+      "skill": "expose-current-vs-superseded",
+      "skill_id": "sk-09",
+      "triggered_by": "MAM",
+      "outcome": "COMPLETED",
+      "note": "version states readable by every subscriber",
+      "evidence": "as-502 CURRENT · as-501 SUPERSEDED"
+    }
+  },
+  {
+    "t": 15.3,
+    "topic": "som.story.st-ver-001.context",
+    "originating_system": {
+      "system_id": "mam-01",
+      "system_type": "ARCHIVE",
+      "system_name": "MAM",
+      "vendor": "role",
+      "version": "0.9"
+    },
+    "summary": "MAM exposed the version states: the cleared cut is current, the restricted cut superseded.",
+    "payload": {
+      "story_id": "st-ver-001",
+      "slug": "crown-court-verdict",
+      "headline": "Verdict due: crown court trial, two counts",
+      "story_type": "ACTIVE",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-04-01T12:00:00Z"
+      },
+      "premise": {
+        "expected_outcome": "Jury returns verdicts on both counts today",
+        "premise_changed": false
+      },
+      "assertions": [
+        {
+          "assertion_id": "asr-501",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "st-ver-001"
+          },
+          "claim": {
+            "metric": "count one verdict",
+            "value": "Not guilty"
+          },
+          "provenance": {
+            "author": "HUMAN",
+            "confidence": 1,
+            "review": {
+              "state": "CONFIRMED"
+            }
+          },
+          "attributed_to": "Court clerk",
+          "asserted_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-501",
+          "provider": "Court reporting",
+          "source_type": "FIELD_CREW",
+          "credibility": "VERIFIED",
+          "received_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "as-501",
+          "asset_type": "VIDEO",
+          "evidential_position": "TERTIARY",
+          "acquisition_state": "CAPTURED",
+          "status": "INVALIDATED",
+          "invalidated_by": "as-502"
+        },
+        {
+          "asset_id": "as-502",
+          "asset_type": "VIDEO",
+          "evidential_position": "TERTIARY",
+          "acquisition_state": "CAPTURED",
+          "status": "PREPARED",
+          "standards_clearance": {
+            "status": "CLEARED"
+          }
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "cmp-501",
+          "type": "REPORTING_RESTRICTION",
+          "status": "ACTIVE",
+          "detail": "detail inside Package A",
+          "severity": "HIGH",
+          "raised_by": "compliance-engine-01",
+          "raised_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-501",
+          "gate_type": "Package A (restricted detail)",
+          "status": "PENDING"
+        }
+      ],
+      "relations": [],
+      "sequence_number": 1,
+      "updated_at": "2026-04-01T12:00:00Z"
+    }
+  },
+  {
+    "t": 17.0,
+    "topic": "link.committed",
+    "originating_system": {
+      "system_id": "playout-01",
+      "system_type": "AUTOMATION",
+      "system_name": "Playout",
+      "vendor": "role",
+      "version": "0.9"
+    },
+    "summary": "Cleared package committed to the broadcast path off the same event.",
+    "payload": {
+      "link_id": "38a8105b-c7c3-5424-a72c-a2f88deb0c1f",
+      "asset_id": "as-502",
+      "destination_id": "broadcast",
+      "message_type": "link.committed",
+      "compliance_gate_status": "CLEARED",
+      "committed_by": "output-editor-01",
+      "committed_at": "2026-04-01T12:00:00Z"
+    }
+  },
+  {
+    "t": 18.7,
+    "topic": "link.committed",
+    "originating_system": {
+      "system_id": "digital-01",
+      "system_type": "AUTOMATION",
+      "system_name": "Digital publish",
+      "vendor": "role",
+      "version": "0.9"
+    },
+    "summary": "Cleared package committed to the web path off the same event.",
+    "payload": {
+      "link_id": "5cd5133d-5ba7-5c4e-9f89-b365061edfe0",
+      "asset_id": "as-502",
+      "destination_id": "web",
+      "message_type": "link.committed",
+      "compliance_gate_status": "CLEARED",
+      "committed_by": "output-editor-01",
+      "committed_at": "2026-04-01T12:00:00Z"
+    }
+  },
+  {
+    "t": 20.4,
+    "topic": "som.story.st-ver-001.context",
+    "originating_system": {
+      "system_id": "playout-01",
+      "system_type": "AUTOMATION",
+      "system_name": "Playout",
+      "vendor": "role",
+      "version": "0.9"
+    },
+    "summary": "Two paths committed against one clearance. Nothing point-to-point between the tools.",
+    "payload": {
+      "story_id": "st-ver-001",
+      "slug": "crown-court-verdict",
+      "headline": "Verdict due: crown court trial, two counts",
+      "story_type": "ACTIVE",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-04-01T12:00:00Z"
+      },
+      "premise": {
+        "expected_outcome": "Jury returns verdicts on both counts today",
+        "premise_changed": false
+      },
+      "assertions": [
+        {
+          "assertion_id": "asr-501",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "st-ver-001"
+          },
+          "claim": {
+            "metric": "count one verdict",
+            "value": "Not guilty"
+          },
+          "provenance": {
+            "author": "HUMAN",
+            "confidence": 1,
+            "review": {
+              "state": "CONFIRMED"
+            }
+          },
+          "attributed_to": "Court clerk",
+          "asserted_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-501",
+          "provider": "Court reporting",
+          "source_type": "FIELD_CREW",
+          "credibility": "VERIFIED",
+          "received_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "as-501",
+          "asset_type": "VIDEO",
+          "evidential_position": "TERTIARY",
+          "acquisition_state": "CAPTURED",
+          "status": "INVALIDATED",
+          "invalidated_by": "as-502"
+        },
+        {
+          "asset_id": "as-502",
+          "asset_type": "VIDEO",
+          "evidential_position": "TERTIARY",
+          "acquisition_state": "CAPTURED",
+          "status": "PREPARED",
+          "standards_clearance": {
+            "status": "CLEARED"
+          },
+          "usage": [
+            {
+              "link_id": "38a8105b-c7c3-5424-a72c-a2f88deb0c1f",
+              "destination_id": "broadcast",
+              "state": "committed"
+            },
+            {
+              "link_id": "5cd5133d-5ba7-5c4e-9f89-b365061edfe0",
+              "destination_id": "web",
+              "state": "committed"
+            }
+          ]
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "cmp-501",
+          "type": "REPORTING_RESTRICTION",
+          "status": "ACTIVE",
+          "detail": "detail inside Package A",
+          "severity": "HIGH",
+          "raised_by": "compliance-engine-01",
+          "raised_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-501",
+          "gate_type": "Package A (restricted detail)",
+          "status": "PENDING"
+        }
+      ],
+      "relations": [],
+      "sequence_number": 1,
+      "updated_at": "2026-04-01T12:00:00Z"
+    }
+  },
+  {
+    "t": 22.1,
+    "topic": "demo.marker",
+    "payload": {
+      "beat": "B3 · Settled and audited",
+      "sub": "Counts resolve at staggered moments. The close is the trail."
+    }
+  },
+  {
+    "t": 23.8,
+    "topic": "som.story.st-ver-001.context",
+    "originating_system": {
+      "system_id": "wire-ingest-01",
+      "system_type": "WIRE_SERVICE",
+      "system_name": "Wire ingest",
+      "vendor": "role",
+      "version": "0.9"
+    },
+    "summary": "Count two returned, its own moment, carried the same way.",
+    "payload": {
+      "story_id": "st-ver-001",
+      "slug": "crown-court-verdict",
+      "headline": "Verdict due: crown court trial, two counts",
+      "story_type": "ACTIVE",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-04-01T12:00:00Z"
+      },
+      "premise": {
+        "expected_outcome": "Jury returns verdicts on both counts today",
+        "premise_changed": false
+      },
+      "assertions": [
+        {
+          "assertion_id": "asr-501",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "st-ver-001"
+          },
+          "claim": {
+            "metric": "count one verdict",
+            "value": "Not guilty"
+          },
+          "provenance": {
+            "author": "HUMAN",
+            "confidence": 1,
+            "review": {
+              "state": "CONFIRMED"
+            }
+          },
+          "attributed_to": "Court clerk",
+          "asserted_at": "2026-04-01T12:00:00Z"
+        },
+        {
+          "assertion_id": "asr-502",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "st-ver-001"
+          },
+          "claim": {
+            "metric": "count two verdict",
+            "value": "Guilty"
+          },
+          "provenance": {
+            "author": "HUMAN",
+            "confidence": 1,
+            "review": {
+              "state": "CONFIRMED"
+            }
+          },
+          "attributed_to": "Court clerk",
+          "asserted_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-501",
+          "provider": "Court reporting",
+          "source_type": "FIELD_CREW",
+          "credibility": "VERIFIED",
+          "received_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "as-501",
+          "asset_type": "VIDEO",
+          "evidential_position": "TERTIARY",
+          "acquisition_state": "CAPTURED",
+          "status": "INVALIDATED",
+          "invalidated_by": "as-502"
+        },
+        {
+          "asset_id": "as-502",
+          "asset_type": "VIDEO",
+          "evidential_position": "TERTIARY",
+          "acquisition_state": "CAPTURED",
+          "status": "PREPARED",
+          "standards_clearance": {
+            "status": "CLEARED"
+          },
+          "usage": [
+            {
+              "link_id": "38a8105b-c7c3-5424-a72c-a2f88deb0c1f",
+              "destination_id": "broadcast",
+              "state": "committed"
+            },
+            {
+              "link_id": "5cd5133d-5ba7-5c4e-9f89-b365061edfe0",
+              "destination_id": "web",
+              "state": "committed"
+            }
+          ]
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "cmp-501",
+          "type": "REPORTING_RESTRICTION",
+          "status": "ACTIVE",
+          "detail": "detail inside Package A",
+          "severity": "HIGH",
+          "raised_by": "compliance-engine-01",
+          "raised_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-501",
+          "gate_type": "Package A (restricted detail)",
+          "status": "PENDING"
+        }
+      ],
+      "relations": [],
+      "sequence_number": 1,
+      "updated_at": "2026-04-01T12:00:00Z"
+    }
+  },
+  {
+    "t": 25.5,
+    "topic": "som.system.audit",
+    "originating_system": {
+      "system_id": "rundown-01",
+      "system_type": "MOS_DEVICE",
+      "system_name": "Rundown",
+      "vendor": "role",
+      "version": "0.9"
+    },
+    "summary": "Second clearance recorded: count two resolved.",
+    "payload": {
+      "action": "CLEARED",
+      "target": {
+        "kind": "ASSET",
+        "id": "as-502"
+      },
+      "message_type": "system.audit",
+      "actor": {
+        "actor_id": "output editor",
+        "actor_type": "human"
+      },
+      "recorded_at": "2026-04-01T12:00:00Z",
+      "audit_id": "4288d5ef-a5ab-544e-8dd6-0ab876b92c46"
+    }
+  },
+  {
+    "t": 27.2,
+    "topic": "som.story.st-ver-001.context",
+    "originating_system": {
+      "system_id": "mam-01",
+      "system_type": "ARCHIVE",
+      "system_name": "MAM",
+      "vendor": "role",
+      "version": "0.9"
+    },
+    "summary": "Restriction resolved and the gate closed by a person. The record is complete: who cleared what, when, and what was suppressed.",
+    "payload": {
+      "story_id": "st-ver-001",
+      "slug": "crown-court-verdict",
+      "headline": "Verdict due: crown court trial, two counts",
+      "story_type": "ACTIVE",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-04-01T12:00:00Z"
+      },
+      "premise": {
+        "expected_outcome": "Jury returns verdicts on both counts today",
+        "premise_changed": false
+      },
+      "assertions": [
+        {
+          "assertion_id": "asr-501",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "st-ver-001"
+          },
+          "claim": {
+            "metric": "count one verdict",
+            "value": "Not guilty"
+          },
+          "provenance": {
+            "author": "HUMAN",
+            "confidence": 1,
+            "review": {
+              "state": "CONFIRMED"
+            }
+          },
+          "attributed_to": "Court clerk",
+          "asserted_at": "2026-04-01T12:00:00Z"
+        },
+        {
+          "assertion_id": "asr-502",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "st-ver-001"
+          },
+          "claim": {
+            "metric": "count two verdict",
+            "value": "Guilty"
+          },
+          "provenance": {
+            "author": "HUMAN",
+            "confidence": 1,
+            "review": {
+              "state": "CONFIRMED"
+            }
+          },
+          "attributed_to": "Court clerk",
+          "asserted_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-501",
+          "provider": "Court reporting",
+          "source_type": "FIELD_CREW",
+          "credibility": "VERIFIED",
+          "received_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "as-501",
+          "asset_type": "VIDEO",
+          "evidential_position": "TERTIARY",
+          "acquisition_state": "CAPTURED",
+          "status": "INVALIDATED",
+          "invalidated_by": "as-502"
+        },
+        {
+          "asset_id": "as-502",
+          "asset_type": "VIDEO",
+          "evidential_position": "TERTIARY",
+          "acquisition_state": "CAPTURED",
+          "status": "PREPARED",
+          "standards_clearance": {
+            "status": "CLEARED"
+          },
+          "usage": [
+            {
+              "link_id": "38a8105b-c7c3-5424-a72c-a2f88deb0c1f",
+              "destination_id": "broadcast",
+              "state": "committed"
+            },
+            {
+              "link_id": "5cd5133d-5ba7-5c4e-9f89-b365061edfe0",
+              "destination_id": "web",
+              "state": "committed"
+            }
+          ]
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "cmp-501",
+          "type": "REPORTING_RESTRICTION",
+          "status": "RESOLVED",
+          "detail": "detail inside Package A",
+          "severity": "HIGH",
+          "raised_by": "compliance-engine-01",
+          "raised_at": "2026-04-01T12:00:00Z"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-501",
+          "gate_type": "Package A (restricted detail)",
+          "status": "APPROVED"
+        }
+      ],
+      "relations": [],
+      "sequence_number": 1,
+      "updated_at": "2026-04-01T12:00:00Z"
+    }
+  },
+  {
+    "t": 28.9,
+    "topic": "demo.marker",
+    "payload": {
+      "beat": "Verdict complete",
+      "sub": "Held before air · one event moved every system · a complete governance trail."
+    }
+  }
+]

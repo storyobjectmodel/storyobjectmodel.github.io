@@ -1,0 +1,3632 @@
+[
+  {
+    "t": 1.4,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "Read record-provenance-on-ingest as ap-wire-source-provenance. The wire source is registered and its credibility comes from the house register.",
+    "payload": {
+      "skill": "record-provenance-on-ingest",
+      "instance": "ap-wire-source-provenance",
+      "declared_system_type": "ingest",
+      "woken_by": "source.registered",
+      "outcome": "DECLARED",
+      "severity": "inform",
+      "note": "source registered, provenance present",
+      "evidence": "editorial_source[].credibility"
+    }
+  },
+  {
+    "t": 3,
+    "topic": "som.story.hurricane-melissa-2026-0911.context",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "Story minted from the opening AP wire. Owner and newsroom stamped at mint. No assets.",
+    "payload": {
+      "story_id": "hurricane-melissa-2026-0911",
+      "slug": "MELISSA",
+      "headline": "Tropical Storm Melissa brings heavy rain and a flood risk to Haiti, Dominican Republic and Jamaica",
+      "story_type": "ACTIVE",
+      "sequence_number": 1,
+      "updated_at": "2026-09-11T13:04:00Z",
+      "story_owner": "ap-storytelling-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "DEVELOPING",
+        "phase_entered_at": "2026-09-11T13:04:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "17000000",
+          "label": "weather"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "severe-weather"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-ap-wire",
+          "source_type": "WIRE",
+          "provider": "AP",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:04:00Z"
+        }
+      ],
+      "content_refs": [
+        {
+          "uri": "https://wire.ap.org/stories/melissa-2025-1022-02.json",
+          "content_format": "ap-som-body-json-v1",
+          "source_id": "src-ap-wire"
+        }
+      ],
+      "assertions": [],
+      "assets": [],
+      "compliance": [],
+      "editorial_gates": [],
+      "relations": []
+    }
+  },
+  {
+    "t": 4.4,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "Read raise-flag-on-match as ap-breaking-figures-unconfirmed. It declares the flag. It withholds nothing, and the owner writes the compliance entry.",
+    "payload": {
+      "skill": "raise-flag-on-match",
+      "instance": "ap-breaking-figures-unconfirmed",
+      "declared_system_type": "rundown",
+      "woken_by": "story.context",
+      "outcome": "DECLARED",
+      "severity": "flag",
+      "note": "figures unconfirmed on a breaking story",
+      "evidence": "lifecycle.phase = BREAKING · clears: duty-editor"
+    }
+  },
+  {
+    "t": 6,
+    "topic": "som.story.hurricane-melissa-2026-0911.context",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "Phase BREAKING, priority HIGH, premise recorded. Standards raise figures-unconfirmed; raising needs nobody named.",
+    "payload": {
+      "story_id": "hurricane-melissa-2026-0911",
+      "slug": "MELISSA",
+      "headline": "Tropical Storm Melissa brings heavy rain and a flood risk to Haiti, Dominican Republic and Jamaica",
+      "story_type": "ACTIVE",
+      "sequence_number": 2,
+      "updated_at": "2026-09-11T13:40:00Z",
+      "story_owner": "ap-storytelling-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T13:40:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "17000000",
+          "label": "weather"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "severe-weather"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-ap-wire",
+          "source_type": "WIRE",
+          "provider": "AP",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:04:00Z"
+        }
+      ],
+      "content_refs": [
+        {
+          "uri": "https://wire.ap.org/stories/melissa-2025-1022-02.json",
+          "content_format": "ap-som-body-json-v1",
+          "source_id": "src-ap-wire"
+        }
+      ],
+      "assertions": [],
+      "assets": [],
+      "compliance": [
+        {
+          "flag_id": "figures-unconfirmed",
+          "type": "EDITORIAL_REVIEW",
+          "severity": "HIGH",
+          "detail": "casualty and outage figures unconfirmed",
+          "raised_by": "standards",
+          "raised_at": "2026-09-11T13:40:00Z",
+          "status": "ACTIVE"
+        }
+      ],
+      "editorial_gates": [],
+      "relations": [],
+      "priority": {
+        "level": "HIGH",
+        "reason": "severe weather approaching populated coast"
+      },
+      "premise": {
+        "expected_outcome": "Gradual strengthening, track uncertain",
+        "confidence": "MEDIUM",
+        "premise_changed": false
+      }
+    }
+  },
+  {
+    "t": 7.4,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "momentslab-platform",
+      "system_type": "custom",
+      "system_name": "MomentsLab",
+      "vendor": "MomentsLab",
+      "version": "0.3.2"
+    },
+    "summary": "Read surface-on-context-match as ml-archive-prior-coverage. It displays two prior-coverage candidates and stops. Nothing is written as a relation.",
+    "payload": {
+      "skill": "surface-on-context-match",
+      "instance": "ml-archive-prior-coverage",
+      "declared_system_type": "discovery",
+      "woken_by": "story.context",
+      "outcome": "DECLARED",
+      "severity": "inform",
+      "note": "2 prior coverage candidates displayed",
+      "evidence": "archive:momentslab-house · match_against tags[].value · threshold 0.75"
+    }
+  },
+  {
+    "t": 9,
+    "topic": "som.story.hurricane-melissa-2026-0911.context",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "Two prior-coverage proposals land on the story. Cuez renders them as text cards, visibly awaiting review. relations[] stays empty.",
+    "payload": {
+      "story_id": "hurricane-melissa-2026-0911",
+      "slug": "MELISSA",
+      "headline": "Tropical Storm Melissa brings heavy rain and a flood risk to Haiti, Dominican Republic and Jamaica",
+      "story_type": "ACTIVE",
+      "sequence_number": 3,
+      "updated_at": "2026-09-11T13:47:00Z",
+      "story_owner": "ap-storytelling-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T13:40:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "17000000",
+          "label": "weather"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "severe-weather"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-ap-wire",
+          "source_type": "WIRE",
+          "provider": "AP",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:04:00Z"
+        }
+      ],
+      "content_refs": [
+        {
+          "uri": "https://wire.ap.org/stories/melissa-2025-1022-02.json",
+          "content_format": "ap-som-body-json-v1",
+          "source_id": "src-ap-wire"
+        }
+      ],
+      "assertions": [
+        {
+          "assertion_id": "assn-prior-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "hurricane-2024-0918"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.88,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-prior-02",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "gulf-levee-repairs-2025"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.86,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        }
+      ],
+      "assets": [],
+      "compliance": [
+        {
+          "flag_id": "figures-unconfirmed",
+          "type": "EDITORIAL_REVIEW",
+          "severity": "HIGH",
+          "detail": "casualty and outage figures unconfirmed",
+          "raised_by": "standards",
+          "raised_at": "2026-09-11T13:40:00Z",
+          "status": "ACTIVE"
+        }
+      ],
+      "editorial_gates": [],
+      "relations": [],
+      "priority": {
+        "level": "HIGH",
+        "reason": "severe weather approaching populated coast"
+      },
+      "premise": {
+        "expected_outcome": "Gradual strengthening, track uncertain",
+        "confidence": "MEDIUM",
+        "premise_changed": false
+      }
+    }
+  },
+  {
+    "t": 10.4,
+    "topic": "delivery.media_available",
+    "originating_system": {
+      "system_id": "momentslab-platform",
+      "system_type": "custom",
+      "system_name": "MomentsLab",
+      "vendor": "MomentsLab",
+      "version": "0.3.2"
+    },
+    "summary": "Agency clip announced. C2PA credential present and validated. TAMS Source reference.",
+    "payload": {
+      "asset_id": "asset-agency-01",
+      "message_type": "delivery.media_available",
+      "delivery_id": "f655f8be-715a-5de7-8020-a4947708d098",
+      "source": "tams://tams-demo-store/9f2e7c1a",
+      "arrived_in": "tams-demo-store",
+      "time_range": "[0:0_45:0)",
+      "arrived_at": "2026-09-11T15:00:00Z",
+      "extensions": {
+        "com.somdash.acquisition_state": "CAPTURED",
+        "com.somdash.label": "agency hurricane clip"
+      }
+    }
+  },
+  {
+    "t": 11.8,
+    "topic": "delivery.media_available",
+    "originating_system": {
+      "system_id": "momentslab-platform",
+      "system_type": "custom",
+      "system_name": "MomentsLab",
+      "vendor": "MomentsLab",
+      "version": "0.3.2"
+    },
+    "summary": "Viewer clip announced. No credential chain, recorded as absent rather than left blank. Locator reference, not TAMS.",
+    "payload": {
+      "asset_id": "asset-ugc-01",
+      "message_type": "delivery.media_available",
+      "delivery_id": "e9b060b8-0667-52b0-8592-3671b98570fb",
+      "locator": {
+        "store": "s3-demo-clips",
+        "ref": "ugc/melissa-viewer-a.mp4"
+      },
+      "arrived_in": "s3-demo-clips",
+      "arrived_at": "2026-09-11T15:00:00Z",
+      "extensions": {
+        "com.somdash.acquisition_state": "CAPTURED",
+        "com.somdash.label": "viewer clip"
+      }
+    }
+  },
+  {
+    "t": 13.2,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "momentslab-platform",
+      "system_type": "custom",
+      "system_name": "MomentsLab",
+      "vendor": "MomentsLab",
+      "version": "0.3.2"
+    },
+    "summary": "Read record-provenance-on-ingest as ml-media-ingest-c2pa. The declaration is the absence: the viewer clip carries no chain, and that is written down.",
+    "payload": {
+      "skill": "record-provenance-on-ingest",
+      "instance": "ml-media-ingest-c2pa",
+      "declared_system_type": "mam",
+      "woken_by": "media.ingested",
+      "outcome": "DECLARED",
+      "severity": "inform",
+      "note": "no provenance record on asset-ugc-01",
+      "evidence": "assets[].authenticity_credential absent"
+    }
+  },
+  {
+    "t": 14.6,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "momentslab-platform",
+      "system_type": "custom",
+      "system_name": "MomentsLab",
+      "vendor": "MomentsLab",
+      "version": "0.3.2"
+    },
+    "summary": "Read match-and-propose as ml-loose-media-match. A match proposed at 0.91, review PENDING, for a producer to confirm.",
+    "payload": {
+      "skill": "match-and-propose",
+      "instance": "ml-loose-media-match",
+      "declared_system_type": "multimodal",
+      "woken_by": "media.match.candidate",
+      "outcome": "DECLARED",
+      "severity": "inform",
+      "note": "proposed match at 0.91",
+      "evidence": "assertions[].confidence 0.91 · threshold 0.85 · confirming role producer"
+    }
+  },
+  {
+    "t": 16.2,
+    "topic": "som.story.hurricane-melissa-2026-0911.context",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "Both clips on the story. Trusted and unverified answer different questions. The match is a proposal; the gate holds the viewer clip.",
+    "payload": {
+      "story_id": "hurricane-melissa-2026-0911",
+      "slug": "MELISSA",
+      "headline": "Tropical Storm Melissa brings heavy rain and a flood risk to Haiti, Dominican Republic and Jamaica",
+      "story_type": "ACTIVE",
+      "sequence_number": 4,
+      "updated_at": "2026-09-11T14:06:00Z",
+      "story_owner": "ap-storytelling-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T13:40:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "17000000",
+          "label": "weather"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "severe-weather"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-ap-wire",
+          "source_type": "WIRE",
+          "provider": "AP",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:04:00Z"
+        },
+        {
+          "source_id": "src-ugc-01",
+          "source_type": "USER_GENERATED",
+          "provider": "viewer submission",
+          "credibility": "UNVERIFIED",
+          "received_at": "2026-09-11T14:05:00Z"
+        }
+      ],
+      "content_refs": [
+        {
+          "uri": "https://wire.ap.org/stories/melissa-2025-1022-02.json",
+          "content_format": "ap-som-body-json-v1",
+          "source_id": "src-ap-wire"
+        }
+      ],
+      "assertions": [
+        {
+          "assertion_id": "assn-prior-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "hurricane-2024-0918"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.88,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-prior-02",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "gulf-levee-repairs-2025"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.86,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-match-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "story_id": "hurricane-melissa-2026-0911"
+          },
+          "asserted_at": "2026-09-11T14:06:00Z",
+          "confidence": 0.91,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "asset-agency-01",
+          "asset_type": "VIDEO",
+          "status": "READY",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": true,
+            "validated_by": "momentslab-c2pa-check",
+            "standard": "C2PA"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/9f2e7c1a",
+              "label": "agency hurricane clip",
+              "time_range": "[0:0_45:0)"
+            }
+          ]
+        },
+        {
+          "asset_id": "asset-ugc-01",
+          "asset_type": "VIDEO",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "SECONDARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": false
+          },
+          "media_refs": [
+            {
+              "locator": {
+                "store": "s3-demo-clips",
+                "ref": "ugc/melissa-viewer-a.mp4"
+              },
+              "label": "viewer clip"
+            }
+          ]
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "figures-unconfirmed",
+          "type": "EDITORIAL_REVIEW",
+          "severity": "HIGH",
+          "detail": "casualty and outage figures unconfirmed",
+          "raised_by": "standards",
+          "raised_at": "2026-09-11T13:40:00Z",
+          "status": "ACTIVE"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-verify-ugc-01",
+          "gate_type": "VERIFICATION",
+          "status": "PENDING",
+          "required_by_skill": "match-and-propose",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "asset-ugc-01"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "priority": {
+        "level": "HIGH",
+        "reason": "severe weather approaching populated coast"
+      },
+      "premise": {
+        "expected_outcome": "Gradual strengthening, track uncertain",
+        "confidence": "MEDIUM",
+        "premise_changed": false
+      }
+    }
+  },
+  {
+    "t": 17.6,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "momentslab-platform",
+      "system_type": "custom",
+      "system_name": "MomentsLab",
+      "vendor": "MomentsLab",
+      "version": "0.3.2"
+    },
+    "summary": "Read enrich-on-condition as ml-unverified-synthetic-check. It declares what the analysis found and nothing else: generative artefacts in the spray, a horizon against the tide, no sensor noise.",
+    "payload": {
+      "skill": "enrich-on-condition",
+      "instance": "ml-unverified-synthetic-check",
+      "declared_system_type": "verification",
+      "woken_by": "asset.updated",
+      "outcome": "DECLARED",
+      "severity": "inform",
+      "note": "DETECTION assertion, synthetic media at 0.97",
+      "evidence": "the skill rejects nothing, invalidates nothing and closes no gate; POL-SYNTHETIC-INVALIDATE does all three"
+    }
+  },
+  {
+    "t": 19,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "momentslab-platform",
+      "system_type": "custom",
+      "system_name": "MomentsLab",
+      "vendor": "MomentsLab",
+      "version": "0.3.2"
+    },
+    "summary": "Recalled match-and-propose again on the same configured instance. Its own proposal now reads REJECTED, so the condition no longer holds and it declares nothing.",
+    "payload": {
+      "skill": "match-and-propose",
+      "instance": "ml-loose-media-match",
+      "declared_system_type": "multimodal",
+      "woken_by": "story.context",
+      "outcome": "EVALUATED",
+      "severity": "inform",
+      "note": "nothing declared",
+      "evidence": "nothing in the library rejects a proposal; a person or a policy declines it"
+    }
+  },
+  {
+    "t": 20.6,
+    "topic": "som.story.hurricane-melissa-2026-0911.context",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "Match REJECTED, asset INVALIDATED, gate REJECTED. All four values land under POL-SYNTHETIC-INVALIDATE: automatic, fail-closed, record kept. Nothing is deleted.",
+    "payload": {
+      "story_id": "hurricane-melissa-2026-0911",
+      "slug": "MELISSA",
+      "headline": "Tropical Storm Melissa brings heavy rain and a flood risk to Haiti, Dominican Republic and Jamaica",
+      "story_type": "ACTIVE",
+      "sequence_number": 5,
+      "updated_at": "2026-09-11T14:19:00Z",
+      "story_owner": "ap-storytelling-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T13:40:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "17000000",
+          "label": "weather"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "severe-weather"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-ap-wire",
+          "source_type": "WIRE",
+          "provider": "AP",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:04:00Z"
+        },
+        {
+          "source_id": "src-ugc-01",
+          "source_type": "USER_GENERATED",
+          "provider": "viewer submission",
+          "credibility": "UNVERIFIED",
+          "received_at": "2026-09-11T14:05:00Z"
+        }
+      ],
+      "content_refs": [
+        {
+          "uri": "https://wire.ap.org/stories/melissa-2025-1022-02.json",
+          "content_format": "ap-som-body-json-v1",
+          "source_id": "src-ap-wire"
+        }
+      ],
+      "assertions": [
+        {
+          "assertion_id": "assn-prior-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "hurricane-2024-0918"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.88,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-prior-02",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "gulf-levee-repairs-2025"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.86,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-match-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "story_id": "hurricane-melissa-2026-0911"
+          },
+          "asserted_at": "2026-09-11T14:06:00Z",
+          "confidence": 0.91,
+          "review": {
+            "state": "REJECTED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-det-01",
+          "assertion_type": "DETECTION",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "detection_class": "SYNTHETIC_MEDIA",
+            "verdict": "DETECTED"
+          },
+          "asserted_at": "2026-09-11T14:19:00Z",
+          "confidence": 0.97,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "synthetic-detect"
+          }
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "asset-agency-01",
+          "asset_type": "VIDEO",
+          "status": "READY",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": true,
+            "validated_by": "momentslab-c2pa-check",
+            "standard": "C2PA"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/9f2e7c1a",
+              "label": "agency hurricane clip",
+              "time_range": "[0:0_45:0)"
+            }
+          ]
+        },
+        {
+          "asset_id": "asset-ugc-01",
+          "asset_type": "VIDEO",
+          "status": "INVALIDATED",
+          "evidential_position": "SECONDARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": false
+          },
+          "media_refs": [
+            {
+              "locator": {
+                "store": "s3-demo-clips",
+                "ref": "ugc/melissa-viewer-a.mp4"
+              },
+              "label": "viewer clip"
+            }
+          ],
+          "invalidated_by": "assn-det-01"
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "figures-unconfirmed",
+          "type": "EDITORIAL_REVIEW",
+          "severity": "HIGH",
+          "detail": "casualty and outage figures unconfirmed",
+          "raised_by": "standards",
+          "raised_at": "2026-09-11T13:40:00Z",
+          "status": "ACTIVE"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-verify-ugc-01",
+          "gate_type": "VERIFICATION",
+          "status": "REJECTED",
+          "required_by_skill": "match-and-propose",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "asset-ugc-01"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "priority": {
+        "level": "HIGH",
+        "reason": "severe weather approaching populated coast"
+      },
+      "premise": {
+        "expected_outcome": "Gradual strengthening, track uncertain",
+        "confidence": "MEDIUM",
+        "premise_changed": false
+      }
+    }
+  },
+  {
+    "t": 22,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "twc-severe-feed",
+      "system_type": "custom",
+      "system_name": "The Weather Company",
+      "vendor": "The Weather Company",
+      "version": "0.3.2"
+    },
+    "summary": "Read surface-on-context-match as twc-severe-weather-watch. The classification upgrade is displayed, attributed to the National Hurricane Center, review PENDING.",
+    "payload": {
+      "skill": "surface-on-context-match",
+      "instance": "twc-severe-weather-watch",
+      "declared_system_type": "markets_data",
+      "woken_by": "source.item.observed",
+      "outcome": "DECLARED",
+      "severity": "inform",
+      "note": "classification upgrade item, PENDING review",
+      "evidence": "feed:twc-severe-weather · equality on a structured path, not similarity"
+    }
+  },
+  {
+    "t": 23.6,
+    "topic": "som.story.hurricane-melissa-2026-0911.context",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "The classification lands on the story still carrying review PENDING. The Weather Company does not edit the story and does not publish one.",
+    "payload": {
+      "story_id": "hurricane-melissa-2026-0911",
+      "slug": "MELISSA",
+      "headline": "Tropical Storm Melissa brings heavy rain and a flood risk to Haiti, Dominican Republic and Jamaica",
+      "story_type": "ACTIVE",
+      "sequence_number": 6,
+      "updated_at": "2026-09-11T14:52:00Z",
+      "story_owner": "ap-storytelling-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T13:40:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "17000000",
+          "label": "weather"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "severe-weather"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-ap-wire",
+          "source_type": "WIRE",
+          "provider": "AP",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:04:00Z"
+        },
+        {
+          "source_id": "src-ugc-01",
+          "source_type": "USER_GENERATED",
+          "provider": "viewer submission",
+          "credibility": "UNVERIFIED",
+          "received_at": "2026-09-11T14:05:00Z"
+        }
+      ],
+      "content_refs": [
+        {
+          "uri": "https://wire.ap.org/stories/melissa-2025-1022-02.json",
+          "content_format": "ap-som-body-json-v1",
+          "source_id": "src-ap-wire"
+        }
+      ],
+      "assertions": [
+        {
+          "assertion_id": "assn-prior-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "hurricane-2024-0918"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.88,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-prior-02",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "gulf-levee-repairs-2025"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.86,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-match-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "story_id": "hurricane-melissa-2026-0911"
+          },
+          "asserted_at": "2026-09-11T14:06:00Z",
+          "confidence": 0.91,
+          "review": {
+            "state": "REJECTED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-det-01",
+          "assertion_type": "DETECTION",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "detection_class": "SYNTHETIC_MEDIA",
+            "verdict": "DETECTED"
+          },
+          "asserted_at": "2026-09-11T14:19:00Z",
+          "confidence": 0.97,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "synthetic-detect"
+          }
+        },
+        {
+          "assertion_id": "assn-class-01",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "metric": "storm_classification",
+            "value": "HURRICANE"
+          },
+          "attributed_to": "National Hurricane Center",
+          "asserted_at": "2026-09-11T14:52:00Z",
+          "confidence": 0.96,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "twc-severe-feed"
+          }
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "asset-agency-01",
+          "asset_type": "VIDEO",
+          "status": "READY",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": true,
+            "validated_by": "momentslab-c2pa-check",
+            "standard": "C2PA"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/9f2e7c1a",
+              "label": "agency hurricane clip",
+              "time_range": "[0:0_45:0)"
+            }
+          ]
+        },
+        {
+          "asset_id": "asset-ugc-01",
+          "asset_type": "VIDEO",
+          "status": "INVALIDATED",
+          "evidential_position": "SECONDARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": false
+          },
+          "media_refs": [
+            {
+              "locator": {
+                "store": "s3-demo-clips",
+                "ref": "ugc/melissa-viewer-a.mp4"
+              },
+              "label": "viewer clip"
+            }
+          ],
+          "invalidated_by": "assn-det-01"
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "figures-unconfirmed",
+          "type": "EDITORIAL_REVIEW",
+          "severity": "HIGH",
+          "detail": "casualty and outage figures unconfirmed",
+          "raised_by": "standards",
+          "raised_at": "2026-09-11T13:40:00Z",
+          "status": "ACTIVE"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-verify-ugc-01",
+          "gate_type": "VERIFICATION",
+          "status": "REJECTED",
+          "required_by_skill": "match-and-propose",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "asset-ugc-01"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "priority": {
+        "level": "HIGH",
+        "reason": "severe weather approaching populated coast"
+      },
+      "premise": {
+        "expected_outcome": "Gradual strengthening, track uncertain",
+        "confidence": "MEDIUM",
+        "premise_changed": false
+      }
+    }
+  },
+  {
+    "t": 25.2,
+    "topic": "som.story.hurricane-melissa-2026-0911.context",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "The premise turns. The record holds what the story was and what it is, and names what was built on the old classification.",
+    "payload": {
+      "story_id": "hurricane-melissa-2026-0911",
+      "slug": "MELISSA",
+      "headline": "Melissa strengthens into a hurricane as it nears Jamaica",
+      "story_type": "ACTIVE",
+      "sequence_number": 7,
+      "updated_at": "2026-09-11T15:02:00Z",
+      "story_owner": "ap-storytelling-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T13:40:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "17000000",
+          "label": "weather"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "severe-weather"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-ap-wire",
+          "source_type": "WIRE",
+          "provider": "AP",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:04:00Z"
+        },
+        {
+          "source_id": "src-ugc-01",
+          "source_type": "USER_GENERATED",
+          "provider": "viewer submission",
+          "credibility": "UNVERIFIED",
+          "received_at": "2026-09-11T14:05:00Z"
+        }
+      ],
+      "content_refs": [
+        {
+          "uri": "https://wire.ap.org/stories/melissa-2025-1022-02.json",
+          "content_format": "ap-som-body-json-v1",
+          "source_id": "src-ap-wire"
+        }
+      ],
+      "assertions": [
+        {
+          "assertion_id": "assn-prior-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "hurricane-2024-0918"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.88,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-prior-02",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "gulf-levee-repairs-2025"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.86,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-match-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "story_id": "hurricane-melissa-2026-0911"
+          },
+          "asserted_at": "2026-09-11T14:06:00Z",
+          "confidence": 0.91,
+          "review": {
+            "state": "REJECTED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-det-01",
+          "assertion_type": "DETECTION",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "detection_class": "SYNTHETIC_MEDIA",
+            "verdict": "DETECTED"
+          },
+          "asserted_at": "2026-09-11T14:19:00Z",
+          "confidence": 0.97,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "synthetic-detect"
+          }
+        },
+        {
+          "assertion_id": "assn-class-01",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "metric": "storm_classification",
+            "value": "HURRICANE"
+          },
+          "attributed_to": "National Hurricane Center",
+          "asserted_at": "2026-09-11T14:52:00Z",
+          "confidence": 0.96,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewer": "producer-01",
+            "reviewed_at": "2026-09-11T15:02:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "twc-severe-feed"
+          }
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "asset-agency-01",
+          "asset_type": "VIDEO",
+          "status": "READY",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": true,
+            "validated_by": "momentslab-c2pa-check",
+            "standard": "C2PA"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/9f2e7c1a",
+              "label": "agency hurricane clip",
+              "time_range": "[0:0_45:0)"
+            }
+          ]
+        },
+        {
+          "asset_id": "asset-ugc-01",
+          "asset_type": "VIDEO",
+          "status": "INVALIDATED",
+          "evidential_position": "SECONDARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": false
+          },
+          "media_refs": [
+            {
+              "locator": {
+                "store": "s3-demo-clips",
+                "ref": "ugc/melissa-viewer-a.mp4"
+              },
+              "label": "viewer clip"
+            }
+          ],
+          "invalidated_by": "assn-det-01"
+        },
+        {
+          "asset_id": "script-0400",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "wall-explainer",
+          "asset_type": "GRAPHIC",
+          "status": "PREPARED",
+          "evidential_position": "TERTIARY"
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "figures-unconfirmed",
+          "type": "EDITORIAL_REVIEW",
+          "severity": "HIGH",
+          "detail": "casualty and outage figures unconfirmed",
+          "raised_by": "standards",
+          "raised_at": "2026-09-11T13:40:00Z",
+          "status": "ACTIVE"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-verify-ugc-01",
+          "gate_type": "VERIFICATION",
+          "status": "REJECTED",
+          "required_by_skill": "match-and-propose",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "asset-ugc-01"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "priority": {
+        "level": "HIGH",
+        "reason": "severe weather approaching populated coast"
+      },
+      "premise": {
+        "expected_outcome": "Gradual strengthening, track uncertain",
+        "confidence": "MEDIUM",
+        "premise_changed": true,
+        "previous_outcome": "Tropical storm",
+        "actual_outcome": "Hurricane",
+        "affected_assets": [
+          "script-0400",
+          "wall-explainer"
+        ],
+        "change_detected_at": "2026-09-11T15:02:00Z"
+      }
+    }
+  },
+  {
+    "t": 26.6,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "cuez-01",
+      "system_type": "mos_device",
+      "system_name": "Cuez",
+      "vendor": "Cuez",
+      "version": "0.3.2"
+    },
+    "summary": "Read flag-on-mismatch: the script and the story disagree. It stops nothing, and blocks[] is empty.",
+    "payload": {
+      "skill": "flag-on-mismatch",
+      "instance": "cuez-premise-mismatch-rundown",
+      "declared_system_type": "rundown",
+      "woken_by": "story.context",
+      "outcome": "DECLARED",
+      "severity": "flag",
+      "note": "asset script-0400 carries a superseded value",
+      "evidence": "watched premise.actual_outcome · bound to a rundown item · no hold authority, blocks[] empty"
+    }
+  },
+  {
+    "t": 28,
+    "topic": "skill.warning.raised",
+    "originating_system": {
+      "system_id": "cuez-01",
+      "system_type": "mos_device",
+      "system_name": "Cuez",
+      "vendor": "Cuez",
+      "version": "0.3.2"
+    },
+    "summary": "Read hold-while-flagged: raise the standards gate against the script. Raising is pre-decided by newsroom policy; clearing needs a person.",
+    "payload": {
+      "warning_id": "a78fcf68-504d-59f4-8fc6-43e60bf0f14e",
+      "skill_id": "smart-stories/hold-while-flagged",
+      "skill_version": "0.2.2",
+      "story_id": "hurricane-melissa-2026-0911",
+      "scope": "asset:script-0400",
+      "severity": "hold",
+      "rule_id": "cuez-stale-script-hold",
+      "non_overridable": false,
+      "affected_fields": [
+        "editorial_gates[].status"
+      ],
+      "detail": "Standards gate raised against script-0400. Air is withheld until a person of equal or higher authority clears it.",
+      "blocks": [
+        "air"
+      ],
+      "skill_warning_ref": "swr-hur-001",
+      "message_type": "skill.warning.raised",
+      "extensions": {
+        "com.somdash.instance": "cuez-stale-script-hold",
+        "com.somdash.declared_system_type": "rundown",
+        "com.somdash.woken_by": "skill.warning.raised",
+        "com.somdash.evidence": "gate_type STANDARDS_APPROVAL · blocked action air · clears by equal or higher authority"
+      }
+    }
+  },
+  {
+    "t": 29.6,
+    "topic": "som.story.hurricane-melissa-2026-0911.context",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "The script is held. The flagging rule said the two disagree; a separate rule did the stopping.",
+    "payload": {
+      "story_id": "hurricane-melissa-2026-0911",
+      "slug": "MELISSA",
+      "headline": "Melissa strengthens into a hurricane as it nears Jamaica",
+      "story_type": "ACTIVE",
+      "sequence_number": 8,
+      "updated_at": "2026-09-11T15:14:00Z",
+      "story_owner": "ap-storytelling-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T13:40:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "17000000",
+          "label": "weather"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "severe-weather"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-ap-wire",
+          "source_type": "WIRE",
+          "provider": "AP",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:04:00Z"
+        },
+        {
+          "source_id": "src-ugc-01",
+          "source_type": "USER_GENERATED",
+          "provider": "viewer submission",
+          "credibility": "UNVERIFIED",
+          "received_at": "2026-09-11T14:05:00Z"
+        }
+      ],
+      "content_refs": [
+        {
+          "uri": "https://wire.ap.org/stories/melissa-2025-1022-02.json",
+          "content_format": "ap-som-body-json-v1",
+          "source_id": "src-ap-wire"
+        }
+      ],
+      "assertions": [
+        {
+          "assertion_id": "assn-prior-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "hurricane-2024-0918"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.88,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-prior-02",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "gulf-levee-repairs-2025"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.86,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-match-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "story_id": "hurricane-melissa-2026-0911"
+          },
+          "asserted_at": "2026-09-11T14:06:00Z",
+          "confidence": 0.91,
+          "review": {
+            "state": "REJECTED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-det-01",
+          "assertion_type": "DETECTION",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "detection_class": "SYNTHETIC_MEDIA",
+            "verdict": "DETECTED"
+          },
+          "asserted_at": "2026-09-11T14:19:00Z",
+          "confidence": 0.97,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "synthetic-detect"
+          }
+        },
+        {
+          "assertion_id": "assn-class-01",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "metric": "storm_classification",
+            "value": "HURRICANE"
+          },
+          "attributed_to": "National Hurricane Center",
+          "asserted_at": "2026-09-11T14:52:00Z",
+          "confidence": 0.96,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewer": "producer-01",
+            "reviewed_at": "2026-09-11T15:02:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "twc-severe-feed"
+          }
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "asset-agency-01",
+          "asset_type": "VIDEO",
+          "status": "READY",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": true,
+            "validated_by": "momentslab-c2pa-check",
+            "standard": "C2PA"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/9f2e7c1a",
+              "label": "agency hurricane clip",
+              "time_range": "[0:0_45:0)"
+            }
+          ]
+        },
+        {
+          "asset_id": "asset-ugc-01",
+          "asset_type": "VIDEO",
+          "status": "INVALIDATED",
+          "evidential_position": "SECONDARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": false
+          },
+          "media_refs": [
+            {
+              "locator": {
+                "store": "s3-demo-clips",
+                "ref": "ugc/melissa-viewer-a.mp4"
+              },
+              "label": "viewer clip"
+            }
+          ],
+          "invalidated_by": "assn-det-01"
+        },
+        {
+          "asset_id": "script-0400",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "wall-explainer",
+          "asset_type": "GRAPHIC",
+          "status": "PREPARED",
+          "evidential_position": "TERTIARY"
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "figures-unconfirmed",
+          "type": "EDITORIAL_REVIEW",
+          "severity": "HIGH",
+          "detail": "casualty and outage figures unconfirmed",
+          "raised_by": "standards",
+          "raised_at": "2026-09-11T13:40:00Z",
+          "status": "ACTIVE"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-verify-ugc-01",
+          "gate_type": "VERIFICATION",
+          "status": "REJECTED",
+          "required_by_skill": "match-and-propose",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "asset-ugc-01"
+            }
+          ]
+        },
+        {
+          "gate_id": "gate-script-stale",
+          "gate_type": "STANDARDS_APPROVAL",
+          "status": "PENDING",
+          "required_by_skill": "hold-while-flagged",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "script-0400"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "priority": {
+        "level": "HIGH",
+        "reason": "severe weather approaching populated coast"
+      },
+      "premise": {
+        "expected_outcome": "Gradual strengthening, track uncertain",
+        "confidence": "MEDIUM",
+        "premise_changed": true,
+        "previous_outcome": "Tropical storm",
+        "actual_outcome": "Hurricane",
+        "affected_assets": [
+          "script-0400",
+          "wall-explainer"
+        ],
+        "change_detected_at": "2026-09-11T15:02:00Z"
+      }
+    }
+  },
+  {
+    "t": 31,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "vizrt-graphics-01",
+      "system_type": "graphics",
+      "system_name": "Vizrt",
+      "vendor": "Vizrt",
+      "version": "0.3.2"
+    },
+    "summary": "Read flag-on-mismatch. The graphics executor carries the flag and no hold skill, so the operator is alerted and nothing is altered.",
+    "payload": {
+      "skill": "flag-on-mismatch",
+      "instance": "vizrt-premise-mismatch-asset",
+      "declared_system_type": "graphics",
+      "woken_by": "story.context",
+      "outcome": "DECLARED",
+      "severity": "flag",
+      "note": "asset wall-explainer carries a superseded value",
+      "evidence": "same watched field as beat 8, bound to the asset’s own header · never auto-change"
+    }
+  },
+  {
+    "t": 32.6,
+    "topic": "som.story.hurricane-melissa-2026-0911.context",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "Two things are now stopped at once, for two different reasons.",
+    "payload": {
+      "story_id": "hurricane-melissa-2026-0911",
+      "slug": "MELISSA",
+      "headline": "Melissa strengthens into a hurricane as it nears Jamaica",
+      "story_type": "ACTIVE",
+      "sequence_number": 9,
+      "updated_at": "2026-09-11T15:26:00Z",
+      "story_owner": "ap-storytelling-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T13:40:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "17000000",
+          "label": "weather"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "severe-weather"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-ap-wire",
+          "source_type": "WIRE",
+          "provider": "AP",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:04:00Z"
+        },
+        {
+          "source_id": "src-ugc-01",
+          "source_type": "USER_GENERATED",
+          "provider": "viewer submission",
+          "credibility": "UNVERIFIED",
+          "received_at": "2026-09-11T14:05:00Z"
+        }
+      ],
+      "content_refs": [
+        {
+          "uri": "https://wire.ap.org/stories/melissa-2025-1022-02.json",
+          "content_format": "ap-som-body-json-v1",
+          "source_id": "src-ap-wire"
+        }
+      ],
+      "assertions": [
+        {
+          "assertion_id": "assn-prior-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "hurricane-2024-0918"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.88,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-prior-02",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "gulf-levee-repairs-2025"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.86,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-match-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "story_id": "hurricane-melissa-2026-0911"
+          },
+          "asserted_at": "2026-09-11T14:06:00Z",
+          "confidence": 0.91,
+          "review": {
+            "state": "REJECTED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-det-01",
+          "assertion_type": "DETECTION",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "detection_class": "SYNTHETIC_MEDIA",
+            "verdict": "DETECTED"
+          },
+          "asserted_at": "2026-09-11T14:19:00Z",
+          "confidence": 0.97,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "synthetic-detect"
+          }
+        },
+        {
+          "assertion_id": "assn-class-01",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "metric": "storm_classification",
+            "value": "HURRICANE"
+          },
+          "attributed_to": "National Hurricane Center",
+          "asserted_at": "2026-09-11T14:52:00Z",
+          "confidence": 0.96,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewer": "producer-01",
+            "reviewed_at": "2026-09-11T15:02:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "twc-severe-feed"
+          }
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "asset-agency-01",
+          "asset_type": "VIDEO",
+          "status": "READY",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": true,
+            "validated_by": "momentslab-c2pa-check",
+            "standard": "C2PA"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/9f2e7c1a",
+              "label": "agency hurricane clip",
+              "time_range": "[0:0_45:0)"
+            }
+          ]
+        },
+        {
+          "asset_id": "asset-ugc-01",
+          "asset_type": "VIDEO",
+          "status": "INVALIDATED",
+          "evidential_position": "SECONDARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": false
+          },
+          "media_refs": [
+            {
+              "locator": {
+                "store": "s3-demo-clips",
+                "ref": "ugc/melissa-viewer-a.mp4"
+              },
+              "label": "viewer clip"
+            }
+          ],
+          "invalidated_by": "assn-det-01"
+        },
+        {
+          "asset_id": "script-0400",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "wall-explainer",
+          "asset_type": "GRAPHIC",
+          "status": "PREPARED",
+          "evidential_position": "TERTIARY",
+          "standards_clearance": {
+            "status": "BLOCKED",
+            "blocked_by": [
+              "gate-graphic-stale"
+            ],
+            "last_reviewed": "2026-09-11T15:26:00Z"
+          }
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "figures-unconfirmed",
+          "type": "EDITORIAL_REVIEW",
+          "severity": "HIGH",
+          "detail": "casualty and outage figures unconfirmed",
+          "raised_by": "standards",
+          "raised_at": "2026-09-11T13:40:00Z",
+          "status": "ACTIVE"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-verify-ugc-01",
+          "gate_type": "VERIFICATION",
+          "status": "REJECTED",
+          "required_by_skill": "match-and-propose",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "asset-ugc-01"
+            }
+          ]
+        },
+        {
+          "gate_id": "gate-script-stale",
+          "gate_type": "STANDARDS_APPROVAL",
+          "status": "PENDING",
+          "required_by_skill": "hold-while-flagged",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "script-0400"
+            }
+          ]
+        },
+        {
+          "gate_id": "gate-graphic-stale",
+          "gate_type": "STANDARDS_APPROVAL",
+          "status": "PENDING",
+          "required_by_skill": "flag-on-mismatch",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "wall-explainer"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "priority": {
+        "level": "HIGH",
+        "reason": "severe weather approaching populated coast"
+      },
+      "premise": {
+        "expected_outcome": "Gradual strengthening, track uncertain",
+        "confidence": "MEDIUM",
+        "premise_changed": true,
+        "previous_outcome": "Tropical storm",
+        "actual_outcome": "Hurricane",
+        "affected_assets": [
+          "script-0400",
+          "wall-explainer"
+        ],
+        "change_detected_at": "2026-09-11T15:02:00Z"
+      }
+    }
+  },
+  {
+    "t": 34,
+    "topic": "skill.warning.raised",
+    "originating_system": {
+      "system_id": "hypercontent-01",
+      "system_type": "automation",
+      "system_name": "HyperContent",
+      "vendor": "HyperContent",
+      "version": "0.3.2"
+    },
+    "summary": "Read gate-by-scope as hc-storm-web-path. It informs on the web path, whose gate is approved, and withholds on the broadcast path, whose gate is not.",
+    "payload": {
+      "warning_id": "d7634f33-dacd-5479-9349-5a11b8982150",
+      "skill_id": "smart-stories/gate-by-scope",
+      "skill_version": "0.2.2",
+      "story_id": "hurricane-melissa-2026-0911",
+      "scope": "asset:asset-class-lower-third",
+      "severity": "hold",
+      "rule_id": "hc-storm-web-path",
+      "non_overridable": false,
+      "affected_fields": [
+        "assets[].usage[].destination_id"
+      ],
+      "detail": "Informed on the web path, whose gate is approved. Withheld on the broadcast path, which carries no gate entry: a path with no gate entry publishes nothing.",
+      "blocks": [
+        "publish"
+      ],
+      "skill_warning_ref": "swr-hur-002",
+      "message_type": "skill.warning.raised",
+      "extensions": {
+        "com.somdash.instance": "hc-storm-web-path",
+        "com.somdash.declared_system_type": "cms",
+        "com.somdash.woken_by": "telling.proposed",
+        "com.somdash.evidence": "assets[].usage[].destination_id · fails closed: a path with no gate entry publishes nothing",
+        "com.somdash.severity": "hold, inform"
+      }
+    }
+  },
+  {
+    "t": 35.4,
+    "topic": "link.committed",
+    "originating_system": {
+      "system_id": "hypercontent-01",
+      "system_type": "automation",
+      "system_name": "HyperContent",
+      "vendor": "HyperContent",
+      "version": "0.3.2"
+    },
+    "summary": "The cleared lower third commits to dest-web-live. Nothing about the unconfirmed figures goes out on any route.",
+    "payload": {
+      "link_id": "1c106571-fff5-584e-813c-426a086affa6",
+      "asset_id": "asset-class-lower-third",
+      "destination_id": "dest-web-live",
+      "committed_at": "2026-09-11T15:45:00Z",
+      "message_type": "link.committed",
+      "compliance_gate_status": "CLEARED",
+      "committed_by": "output-editor-01"
+    }
+  },
+  {
+    "t": 37,
+    "topic": "som.story.hurricane-melissa-2026-0911.context",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "Publishing is its own moment. The beat 2 flag is still ACTIVE, so the figures are held everywhere.",
+    "payload": {
+      "story_id": "hurricane-melissa-2026-0911",
+      "slug": "MELISSA",
+      "headline": "Melissa strengthens into a hurricane as it nears Jamaica",
+      "story_type": "ACTIVE",
+      "sequence_number": 10,
+      "updated_at": "2026-09-11T15:45:00Z",
+      "story_owner": "ap-storytelling-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T13:40:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "17000000",
+          "label": "weather"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "severe-weather"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-ap-wire",
+          "source_type": "WIRE",
+          "provider": "AP",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:04:00Z"
+        },
+        {
+          "source_id": "src-ugc-01",
+          "source_type": "USER_GENERATED",
+          "provider": "viewer submission",
+          "credibility": "UNVERIFIED",
+          "received_at": "2026-09-11T14:05:00Z"
+        }
+      ],
+      "content_refs": [
+        {
+          "uri": "https://wire.ap.org/stories/melissa-2025-1022-02.json",
+          "content_format": "ap-som-body-json-v1",
+          "source_id": "src-ap-wire"
+        }
+      ],
+      "assertions": [
+        {
+          "assertion_id": "assn-prior-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "hurricane-2024-0918"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.88,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-prior-02",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "gulf-levee-repairs-2025"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.86,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-match-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "story_id": "hurricane-melissa-2026-0911"
+          },
+          "asserted_at": "2026-09-11T14:06:00Z",
+          "confidence": 0.91,
+          "review": {
+            "state": "REJECTED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-det-01",
+          "assertion_type": "DETECTION",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "detection_class": "SYNTHETIC_MEDIA",
+            "verdict": "DETECTED"
+          },
+          "asserted_at": "2026-09-11T14:19:00Z",
+          "confidence": 0.97,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "synthetic-detect"
+          }
+        },
+        {
+          "assertion_id": "assn-class-01",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "metric": "storm_classification",
+            "value": "HURRICANE"
+          },
+          "attributed_to": "National Hurricane Center",
+          "asserted_at": "2026-09-11T14:52:00Z",
+          "confidence": 0.96,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewer": "producer-01",
+            "reviewed_at": "2026-09-11T15:02:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "twc-severe-feed"
+          }
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "asset-agency-01",
+          "asset_type": "VIDEO",
+          "status": "READY",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": true,
+            "validated_by": "momentslab-c2pa-check",
+            "standard": "C2PA"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/9f2e7c1a",
+              "label": "agency hurricane clip",
+              "time_range": "[0:0_45:0)"
+            }
+          ]
+        },
+        {
+          "asset_id": "asset-ugc-01",
+          "asset_type": "VIDEO",
+          "status": "INVALIDATED",
+          "evidential_position": "SECONDARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": false
+          },
+          "media_refs": [
+            {
+              "locator": {
+                "store": "s3-demo-clips",
+                "ref": "ugc/melissa-viewer-a.mp4"
+              },
+              "label": "viewer clip"
+            }
+          ],
+          "invalidated_by": "assn-det-01"
+        },
+        {
+          "asset_id": "script-0400",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "wall-explainer",
+          "asset_type": "GRAPHIC",
+          "status": "PREPARED",
+          "evidential_position": "TERTIARY",
+          "standards_clearance": {
+            "status": "BLOCKED",
+            "blocked_by": [
+              "gate-graphic-stale"
+            ],
+            "last_reviewed": "2026-09-11T15:26:00Z"
+          }
+        },
+        {
+          "asset_id": "asset-class-lower-third",
+          "asset_type": "LOWER_THIRD",
+          "status": "READY",
+          "evidential_position": "TERTIARY",
+          "standards_clearance": {
+            "status": "CLEARED",
+            "blocked_by": [],
+            "last_reviewed": "2026-09-11T15:44:00Z"
+          },
+          "usage": [
+            {
+              "link_id": "1c106571-fff5-584e-813c-426a086affa6",
+              "destination_id": "dest-web-live",
+              "state": "committed"
+            }
+          ]
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "figures-unconfirmed",
+          "type": "EDITORIAL_REVIEW",
+          "severity": "HIGH",
+          "detail": "casualty and outage figures unconfirmed",
+          "raised_by": "standards",
+          "raised_at": "2026-09-11T13:40:00Z",
+          "status": "ACTIVE"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-verify-ugc-01",
+          "gate_type": "VERIFICATION",
+          "status": "REJECTED",
+          "required_by_skill": "match-and-propose",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "asset-ugc-01"
+            }
+          ]
+        },
+        {
+          "gate_id": "gate-script-stale",
+          "gate_type": "STANDARDS_APPROVAL",
+          "status": "PENDING",
+          "required_by_skill": "hold-while-flagged",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "script-0400"
+            }
+          ]
+        },
+        {
+          "gate_id": "gate-graphic-stale",
+          "gate_type": "STANDARDS_APPROVAL",
+          "status": "PENDING",
+          "required_by_skill": "flag-on-mismatch",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "wall-explainer"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "priority": {
+        "level": "HIGH",
+        "reason": "severe weather approaching populated coast"
+      },
+      "premise": {
+        "expected_outcome": "Gradual strengthening, track uncertain",
+        "confidence": "MEDIUM",
+        "premise_changed": true,
+        "previous_outcome": "Tropical storm",
+        "actual_outcome": "Hurricane",
+        "affected_assets": [
+          "script-0400",
+          "wall-explainer"
+        ],
+        "change_detected_at": "2026-09-11T15:02:00Z"
+      }
+    }
+  },
+  {
+    "t": 38.4,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "twc-severe-feed",
+      "system_type": "custom",
+      "system_name": "The Weather Company",
+      "vendor": "The Weather Company",
+      "version": "0.3.2"
+    },
+    "summary": "The same configured instance as beat 6, recalled again five hours later. Nothing was reconfigured between them.",
+    "payload": {
+      "skill": "surface-on-context-match",
+      "instance": "twc-severe-weather-watch",
+      "declared_system_type": "markets_data",
+      "woken_by": "source.item.observed",
+      "outcome": "DECLARED",
+      "severity": "inform",
+      "note": "landfall item, CONFIRMED",
+      "evidence": "confirms under POL-GUARANTOR-CONFIRM, pending the Wednesday lock"
+    }
+  },
+  {
+    "t": 40,
+    "topic": "som.story.hurricane-melissa-2026-0911.context",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "Priority URGENT and the headline follow. The premise is deliberately untouched, and nothing new is stopped.",
+    "payload": {
+      "story_id": "hurricane-melissa-2026-0911",
+      "slug": "MELISSA",
+      "headline": "Hurricane Melissa makes landfall in Jamaica",
+      "story_type": "ACTIVE",
+      "sequence_number": 11,
+      "updated_at": "2026-09-11T16:02:00Z",
+      "story_owner": "ap-storytelling-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T13:40:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "17000000",
+          "label": "weather"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "severe-weather"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-ap-wire",
+          "source_type": "WIRE",
+          "provider": "AP",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:04:00Z"
+        },
+        {
+          "source_id": "src-ugc-01",
+          "source_type": "USER_GENERATED",
+          "provider": "viewer submission",
+          "credibility": "UNVERIFIED",
+          "received_at": "2026-09-11T14:05:00Z"
+        }
+      ],
+      "content_refs": [
+        {
+          "uri": "https://wire.ap.org/stories/melissa-2025-1022-02.json",
+          "content_format": "ap-som-body-json-v1",
+          "source_id": "src-ap-wire"
+        }
+      ],
+      "assertions": [
+        {
+          "assertion_id": "assn-prior-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "hurricane-2024-0918"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.88,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-prior-02",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "gulf-levee-repairs-2025"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.86,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-match-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "story_id": "hurricane-melissa-2026-0911"
+          },
+          "asserted_at": "2026-09-11T14:06:00Z",
+          "confidence": 0.91,
+          "review": {
+            "state": "REJECTED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-det-01",
+          "assertion_type": "DETECTION",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "detection_class": "SYNTHETIC_MEDIA",
+            "verdict": "DETECTED"
+          },
+          "asserted_at": "2026-09-11T14:19:00Z",
+          "confidence": 0.97,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "synthetic-detect"
+          }
+        },
+        {
+          "assertion_id": "assn-class-01",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "metric": "storm_classification",
+            "value": "HURRICANE"
+          },
+          "attributed_to": "National Hurricane Center",
+          "asserted_at": "2026-09-11T14:52:00Z",
+          "confidence": 0.96,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewer": "producer-01",
+            "reviewed_at": "2026-09-11T15:02:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "twc-severe-feed"
+          }
+        },
+        {
+          "assertion_id": "assn-landfall-01",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "metric": "landfall_state",
+            "value": "MADE_LANDFALL"
+          },
+          "attributed_to": "National Hurricane Center",
+          "asserted_at": "2026-09-11T16:02:00Z",
+          "confidence": 0.97,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewer": "pol-guarantor-confirm",
+            "reviewed_at": "2026-09-11T16:02:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "twc-severe-feed"
+          }
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "asset-agency-01",
+          "asset_type": "VIDEO",
+          "status": "READY",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": true,
+            "validated_by": "momentslab-c2pa-check",
+            "standard": "C2PA"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/9f2e7c1a",
+              "label": "agency hurricane clip",
+              "time_range": "[0:0_45:0)"
+            }
+          ]
+        },
+        {
+          "asset_id": "asset-ugc-01",
+          "asset_type": "VIDEO",
+          "status": "INVALIDATED",
+          "evidential_position": "SECONDARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": false
+          },
+          "media_refs": [
+            {
+              "locator": {
+                "store": "s3-demo-clips",
+                "ref": "ugc/melissa-viewer-a.mp4"
+              },
+              "label": "viewer clip"
+            }
+          ],
+          "invalidated_by": "assn-det-01"
+        },
+        {
+          "asset_id": "script-0400",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "wall-explainer",
+          "asset_type": "GRAPHIC",
+          "status": "PREPARED",
+          "evidential_position": "TERTIARY",
+          "standards_clearance": {
+            "status": "BLOCKED",
+            "blocked_by": [
+              "gate-graphic-stale"
+            ],
+            "last_reviewed": "2026-09-11T15:26:00Z"
+          }
+        },
+        {
+          "asset_id": "asset-class-lower-third",
+          "asset_type": "LOWER_THIRD",
+          "status": "READY",
+          "evidential_position": "TERTIARY",
+          "standards_clearance": {
+            "status": "CLEARED",
+            "blocked_by": [],
+            "last_reviewed": "2026-09-11T15:44:00Z"
+          },
+          "usage": [
+            {
+              "link_id": "1c106571-fff5-584e-813c-426a086affa6",
+              "destination_id": "dest-web-live",
+              "state": "committed"
+            }
+          ]
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "figures-unconfirmed",
+          "type": "EDITORIAL_REVIEW",
+          "severity": "HIGH",
+          "detail": "casualty and outage figures unconfirmed",
+          "raised_by": "standards",
+          "raised_at": "2026-09-11T13:40:00Z",
+          "status": "ACTIVE"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-verify-ugc-01",
+          "gate_type": "VERIFICATION",
+          "status": "REJECTED",
+          "required_by_skill": "match-and-propose",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "asset-ugc-01"
+            }
+          ]
+        },
+        {
+          "gate_id": "gate-script-stale",
+          "gate_type": "STANDARDS_APPROVAL",
+          "status": "PENDING",
+          "required_by_skill": "hold-while-flagged",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "script-0400"
+            }
+          ]
+        },
+        {
+          "gate_id": "gate-graphic-stale",
+          "gate_type": "STANDARDS_APPROVAL",
+          "status": "PENDING",
+          "required_by_skill": "flag-on-mismatch",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "wall-explainer"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "priority": {
+        "level": "URGENT",
+        "reason": "landfall"
+      },
+      "premise": {
+        "expected_outcome": "Gradual strengthening, track uncertain",
+        "confidence": "MEDIUM",
+        "premise_changed": true,
+        "previous_outcome": "Tropical storm",
+        "actual_outcome": "Hurricane",
+        "affected_assets": [
+          "script-0400",
+          "wall-explainer"
+        ],
+        "change_detected_at": "2026-09-11T15:02:00Z"
+      }
+    }
+  },
+  {
+    "t": 41.4,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "trint-executor",
+      "system_type": "custom",
+      "system_name": "Trint",
+      "vendor": "Trint",
+      "version": "0.3.2"
+    },
+    "summary": "Read surface-on-context-match as trint-official-briefing-watch. The same skill file as MomentsLab's archive watch on beat 3, on a third corpus.",
+    "payload": {
+      "skill": "surface-on-context-match",
+      "instance": "trint-official-briefing-watch",
+      "declared_system_type": "transcription",
+      "woken_by": "source.item.observed",
+      "outcome": "DECLARED",
+      "severity": "inform",
+      "note": "the line at 04:11, beside the figure the story is holding",
+      "evidence": "it displays and stops: it cannot resolve the flag, clear the gate or write the figure"
+    }
+  },
+  {
+    "t": 43,
+    "topic": "som.story.hurricane-melissa-2026-0911.context",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "The confirming number is on screen and nothing has moved. The next beat happens because a person reads it.",
+    "payload": {
+      "story_id": "hurricane-melissa-2026-0911",
+      "slug": "MELISSA",
+      "headline": "Hurricane Melissa makes landfall in Jamaica",
+      "story_type": "ACTIVE",
+      "sequence_number": 12,
+      "updated_at": "2026-09-11T16:24:00Z",
+      "story_owner": "ap-storytelling-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T13:40:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "17000000",
+          "label": "weather"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "severe-weather"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-ap-wire",
+          "source_type": "WIRE",
+          "provider": "AP",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:04:00Z"
+        },
+        {
+          "source_id": "src-ugc-01",
+          "source_type": "USER_GENERATED",
+          "provider": "viewer submission",
+          "credibility": "UNVERIFIED",
+          "received_at": "2026-09-11T14:05:00Z"
+        },
+        {
+          "source_id": "src-fema-presser",
+          "source_type": "OFFICIAL",
+          "provider": "FEMA",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T16:20:00Z"
+        }
+      ],
+      "content_refs": [
+        {
+          "uri": "https://wire.ap.org/stories/melissa-2025-1022-02.json",
+          "content_format": "ap-som-body-json-v1",
+          "source_id": "src-ap-wire"
+        }
+      ],
+      "assertions": [
+        {
+          "assertion_id": "assn-prior-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "hurricane-2024-0918"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.88,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-prior-02",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "gulf-levee-repairs-2025"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.86,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-match-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "story_id": "hurricane-melissa-2026-0911"
+          },
+          "asserted_at": "2026-09-11T14:06:00Z",
+          "confidence": 0.91,
+          "review": {
+            "state": "REJECTED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-det-01",
+          "assertion_type": "DETECTION",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "detection_class": "SYNTHETIC_MEDIA",
+            "verdict": "DETECTED"
+          },
+          "asserted_at": "2026-09-11T14:19:00Z",
+          "confidence": 0.97,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "synthetic-detect"
+          }
+        },
+        {
+          "assertion_id": "assn-class-01",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "metric": "storm_classification",
+            "value": "HURRICANE"
+          },
+          "attributed_to": "National Hurricane Center",
+          "asserted_at": "2026-09-11T14:52:00Z",
+          "confidence": 0.96,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewer": "producer-01",
+            "reviewed_at": "2026-09-11T15:02:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "twc-severe-feed"
+          }
+        },
+        {
+          "assertion_id": "assn-landfall-01",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "metric": "landfall_state",
+            "value": "MADE_LANDFALL"
+          },
+          "attributed_to": "National Hurricane Center",
+          "asserted_at": "2026-09-11T16:02:00Z",
+          "confidence": 0.97,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewer": "pol-guarantor-confirm",
+            "reviewed_at": "2026-09-11T16:02:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "twc-severe-feed"
+          }
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "asset-agency-01",
+          "asset_type": "VIDEO",
+          "status": "READY",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": true,
+            "validated_by": "momentslab-c2pa-check",
+            "standard": "C2PA"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/9f2e7c1a",
+              "label": "agency hurricane clip",
+              "time_range": "[0:0_45:0)"
+            }
+          ]
+        },
+        {
+          "asset_id": "asset-ugc-01",
+          "asset_type": "VIDEO",
+          "status": "INVALIDATED",
+          "evidential_position": "SECONDARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": false
+          },
+          "media_refs": [
+            {
+              "locator": {
+                "store": "s3-demo-clips",
+                "ref": "ugc/melissa-viewer-a.mp4"
+              },
+              "label": "viewer clip"
+            }
+          ],
+          "invalidated_by": "assn-det-01"
+        },
+        {
+          "asset_id": "script-0400",
+          "asset_type": "SCRIPT",
+          "status": "IN_PRODUCTION",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "wall-explainer",
+          "asset_type": "GRAPHIC",
+          "status": "PREPARED",
+          "evidential_position": "TERTIARY",
+          "standards_clearance": {
+            "status": "BLOCKED",
+            "blocked_by": [
+              "gate-graphic-stale"
+            ],
+            "last_reviewed": "2026-09-11T15:26:00Z"
+          }
+        },
+        {
+          "asset_id": "asset-class-lower-third",
+          "asset_type": "LOWER_THIRD",
+          "status": "READY",
+          "evidential_position": "TERTIARY",
+          "standards_clearance": {
+            "status": "CLEARED",
+            "blocked_by": [],
+            "last_reviewed": "2026-09-11T15:44:00Z"
+          },
+          "usage": [
+            {
+              "link_id": "1c106571-fff5-584e-813c-426a086affa6",
+              "destination_id": "dest-web-live",
+              "state": "committed"
+            }
+          ]
+        },
+        {
+          "asset_id": "asset-presser-feed",
+          "asset_type": "VIDEO",
+          "status": "READY",
+          "acquisition_state": "CAPTURING",
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/3c81aa02",
+              "label": "FEMA presser feed"
+            }
+          ]
+        },
+        {
+          "asset_id": "asset-presser-transcript",
+          "asset_type": "TRANSCRIPT",
+          "status": "IN_PRODUCTION",
+          "derived_from": [
+            "asset-presser-feed"
+          ],
+          "provenance": {
+            "author": "MODEL",
+            "model": "trint-asr",
+            "confidence": 0.96,
+            "generated_at": "2026-09-11T16:24:00Z",
+            "review": {
+              "state": "PENDING"
+            }
+          }
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "figures-unconfirmed",
+          "type": "EDITORIAL_REVIEW",
+          "severity": "HIGH",
+          "detail": "casualty and outage figures unconfirmed",
+          "raised_by": "standards",
+          "raised_at": "2026-09-11T13:40:00Z",
+          "status": "ACTIVE"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-verify-ugc-01",
+          "gate_type": "VERIFICATION",
+          "status": "REJECTED",
+          "required_by_skill": "match-and-propose",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "asset-ugc-01"
+            }
+          ]
+        },
+        {
+          "gate_id": "gate-script-stale",
+          "gate_type": "STANDARDS_APPROVAL",
+          "status": "PENDING",
+          "required_by_skill": "hold-while-flagged",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "script-0400"
+            }
+          ]
+        },
+        {
+          "gate_id": "gate-graphic-stale",
+          "gate_type": "STANDARDS_APPROVAL",
+          "status": "PENDING",
+          "required_by_skill": "flag-on-mismatch",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "wall-explainer"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "priority": {
+        "level": "URGENT",
+        "reason": "landfall"
+      },
+      "premise": {
+        "expected_outcome": "Gradual strengthening, track uncertain",
+        "confidence": "MEDIUM",
+        "premise_changed": true,
+        "previous_outcome": "Tropical storm",
+        "actual_outcome": "Hurricane",
+        "affected_assets": [
+          "script-0400",
+          "wall-explainer"
+        ],
+        "change_detected_at": "2026-09-11T15:02:00Z"
+      }
+    }
+  },
+  {
+    "t": 44.4,
+    "topic": "som.system.audit",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "CLEARED against the script asset, recorded to a named standards editor.",
+    "payload": {
+      "audit_id": "e0984550-b512-5afc-8b5d-3a281ff1de07",
+      "action": "CLEARED",
+      "target": {
+        "kind": "ASSET",
+        "id": "script-0400"
+      },
+      "reason": "outage figure confirmed against the FEMA briefing",
+      "message_type": "system.audit",
+      "actor": {
+        "actor_id": "std-desk-editor-01",
+        "actor_type": "human"
+      },
+      "recorded_at": "2026-09-11T16:39:00Z"
+    }
+  },
+  {
+    "t": 45.8,
+    "topic": "skill.run.completed",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "Read apply-clearance as ap-figure-clearance. It declares the clearance against the held figure once the flag moves.",
+    "payload": {
+      "skill": "apply-clearance",
+      "instance": "ap-figure-clearance",
+      "declared_system_type": "rundown",
+      "woken_by": "compliance.assertion",
+      "outcome": "DECLARED",
+      "severity": "inform",
+      "note": "clearance applied to the held figure",
+      "evidence": "compliance[].status ACTIVE → RESOLVED · clears: std-desk"
+    }
+  },
+  {
+    "t": 47.4,
+    "topic": "som.story.hurricane-melissa-2026-0911.context",
+    "originating_system": {
+      "system_id": "ap-storytelling-01",
+      "system_type": "ncs",
+      "system_name": "AP Storytelling",
+      "vendor": "AP",
+      "version": "0.3.2"
+    },
+    "summary": "Flag RESOLVED, script gate APPROVED. gate-graphic-stale never clears: the wall explainer closes still PREPARED and BLOCKED, with the reason on the object.",
+    "payload": {
+      "story_id": "hurricane-melissa-2026-0911",
+      "slug": "MELISSA",
+      "headline": "Hurricane Melissa makes landfall in Jamaica; 40,000 without power confirmed",
+      "story_type": "ACTIVE",
+      "sequence_number": 13,
+      "updated_at": "2026-09-11T16:41:00Z",
+      "story_owner": "ap-storytelling-01",
+      "newsroom_id": "newsroom-01",
+      "lifecycle": {
+        "phase": "BREAKING",
+        "phase_entered_at": "2026-09-11T13:40:00Z"
+      },
+      "tags": [
+        {
+          "scheme": "iptc-mediatopic",
+          "value": "17000000",
+          "label": "weather"
+        },
+        {
+          "scheme": "newsroom",
+          "value": "severe-weather"
+        }
+      ],
+      "editorial_source": [
+        {
+          "source_id": "src-ap-wire",
+          "source_type": "WIRE",
+          "provider": "AP",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T13:04:00Z"
+        },
+        {
+          "source_id": "src-ugc-01",
+          "source_type": "USER_GENERATED",
+          "provider": "viewer submission",
+          "credibility": "UNVERIFIED",
+          "received_at": "2026-09-11T14:05:00Z"
+        },
+        {
+          "source_id": "src-fema-presser",
+          "source_type": "OFFICIAL",
+          "provider": "FEMA",
+          "credibility": "TRUSTED",
+          "received_at": "2026-09-11T16:20:00Z"
+        }
+      ],
+      "content_refs": [
+        {
+          "uri": "https://wire.ap.org/stories/melissa-2025-1022-02.json",
+          "content_format": "ap-som-body-json-v1",
+          "source_id": "src-ap-wire"
+        }
+      ],
+      "assertions": [
+        {
+          "assertion_id": "assn-prior-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "hurricane-2024-0918"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.88,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-prior-02",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "story_id": "gulf-levee-repairs-2025"
+          },
+          "asserted_at": "2026-09-11T13:47:00Z",
+          "confidence": 0.86,
+          "review": {
+            "state": "PENDING"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-match-01",
+          "assertion_type": "MATCH",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "story_id": "hurricane-melissa-2026-0911"
+          },
+          "asserted_at": "2026-09-11T14:06:00Z",
+          "confidence": 0.91,
+          "review": {
+            "state": "REJECTED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "match-and-propose"
+          }
+        },
+        {
+          "assertion_id": "assn-det-01",
+          "assertion_type": "DETECTION",
+          "target": {
+            "kind": "ASSET",
+            "id": "asset-ugc-01"
+          },
+          "claim": {
+            "detection_class": "SYNTHETIC_MEDIA",
+            "verdict": "DETECTED"
+          },
+          "asserted_at": "2026-09-11T14:19:00Z",
+          "confidence": 0.97,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewed_at": "2026-09-11T14:19:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "synthetic-detect"
+          }
+        },
+        {
+          "assertion_id": "assn-class-01",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "metric": "storm_classification",
+            "value": "HURRICANE"
+          },
+          "attributed_to": "National Hurricane Center",
+          "asserted_at": "2026-09-11T14:52:00Z",
+          "confidence": 0.96,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewer": "producer-01",
+            "reviewed_at": "2026-09-11T15:02:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "twc-severe-feed"
+          }
+        },
+        {
+          "assertion_id": "assn-landfall-01",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "metric": "landfall_state",
+            "value": "MADE_LANDFALL"
+          },
+          "attributed_to": "National Hurricane Center",
+          "asserted_at": "2026-09-11T16:02:00Z",
+          "confidence": 0.97,
+          "review": {
+            "state": "CONFIRMED",
+            "reviewer": "pol-guarantor-confirm",
+            "reviewed_at": "2026-09-11T16:02:00Z"
+          },
+          "provenance": {
+            "author": "MODEL",
+            "model": "twc-severe-feed"
+          }
+        },
+        {
+          "assertion_id": "assn-outage-01",
+          "assertion_type": "FACT_CHECK",
+          "target": {
+            "kind": "STORY",
+            "id": "hurricane-melissa-2026-0911"
+          },
+          "claim": {
+            "metric": "residences_without_power",
+            "value": 40000
+          },
+          "attributed_to": "FEMA Director",
+          "asserted_at": "2026-09-11T16:27:00Z",
+          "confidence": 0.95,
+          "originated_from": "asset-presser-transcript",
+          "review": {
+            "state": "CONFIRMED",
+            "reviewer": "std-desk-editor-01",
+            "reviewed_at": "2026-09-11T16:40:00Z"
+          },
+          "provenance": {
+            "author": "HUMAN"
+          }
+        }
+      ],
+      "assets": [
+        {
+          "asset_id": "asset-agency-01",
+          "asset_type": "VIDEO",
+          "status": "READY",
+          "evidential_position": "PRIMARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": true,
+            "validated_by": "momentslab-c2pa-check",
+            "standard": "C2PA"
+          },
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/9f2e7c1a",
+              "label": "agency hurricane clip",
+              "time_range": "[0:0_45:0)"
+            }
+          ]
+        },
+        {
+          "asset_id": "asset-ugc-01",
+          "asset_type": "VIDEO",
+          "status": "INVALIDATED",
+          "evidential_position": "SECONDARY",
+          "acquisition_state": "CAPTURED",
+          "authenticity_credential": {
+            "present": false
+          },
+          "media_refs": [
+            {
+              "locator": {
+                "store": "s3-demo-clips",
+                "ref": "ugc/melissa-viewer-a.mp4"
+              },
+              "label": "viewer clip"
+            }
+          ],
+          "invalidated_by": "assn-det-01"
+        },
+        {
+          "asset_id": "script-0400",
+          "asset_type": "SCRIPT",
+          "status": "READY",
+          "evidential_position": "PRIMARY"
+        },
+        {
+          "asset_id": "wall-explainer",
+          "asset_type": "GRAPHIC",
+          "status": "PREPARED",
+          "evidential_position": "TERTIARY",
+          "standards_clearance": {
+            "status": "BLOCKED",
+            "blocked_by": [
+              "gate-graphic-stale"
+            ],
+            "last_reviewed": "2026-09-11T15:26:00Z"
+          }
+        },
+        {
+          "asset_id": "asset-class-lower-third",
+          "asset_type": "LOWER_THIRD",
+          "status": "READY",
+          "evidential_position": "TERTIARY",
+          "standards_clearance": {
+            "status": "CLEARED",
+            "blocked_by": [],
+            "last_reviewed": "2026-09-11T15:44:00Z"
+          },
+          "usage": [
+            {
+              "link_id": "1c106571-fff5-584e-813c-426a086affa6",
+              "destination_id": "dest-web-live",
+              "state": "committed"
+            }
+          ]
+        },
+        {
+          "asset_id": "asset-presser-feed",
+          "asset_type": "VIDEO",
+          "status": "READY",
+          "acquisition_state": "CAPTURING",
+          "media_refs": [
+            {
+              "source": "tams://tams-demo-store/3c81aa02",
+              "label": "FEMA presser feed"
+            }
+          ]
+        },
+        {
+          "asset_id": "asset-presser-transcript",
+          "asset_type": "TRANSCRIPT",
+          "status": "READY",
+          "derived_from": [
+            "asset-presser-feed"
+          ],
+          "provenance": {
+            "author": "MODEL",
+            "model": "trint-asr",
+            "confidence": 0.96,
+            "generated_at": "2026-09-11T16:24:00Z",
+            "review": {
+              "state": "PENDING"
+            }
+          }
+        }
+      ],
+      "compliance": [
+        {
+          "flag_id": "figures-unconfirmed",
+          "type": "EDITORIAL_REVIEW",
+          "severity": "HIGH",
+          "detail": "casualty and outage figures unconfirmed",
+          "raised_by": "standards",
+          "raised_at": "2026-09-11T13:40:00Z",
+          "status": "RESOLVED"
+        }
+      ],
+      "editorial_gates": [
+        {
+          "gate_id": "gate-verify-ugc-01",
+          "gate_type": "VERIFICATION",
+          "status": "REJECTED",
+          "required_by_skill": "match-and-propose",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "asset-ugc-01"
+            }
+          ]
+        },
+        {
+          "gate_id": "gate-script-stale",
+          "gate_type": "STANDARDS_APPROVAL",
+          "status": "APPROVED",
+          "required_by_skill": "hold-while-flagged",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "script-0400"
+            }
+          ]
+        },
+        {
+          "gate_id": "gate-graphic-stale",
+          "gate_type": "STANDARDS_APPROVAL",
+          "status": "PENDING",
+          "required_by_skill": "flag-on-mismatch",
+          "blocks": [
+            {
+              "kind": "ASSET",
+              "ref": "wall-explainer"
+            }
+          ]
+        }
+      ],
+      "relations": [],
+      "priority": {
+        "level": "URGENT",
+        "reason": "landfall"
+      },
+      "premise": {
+        "expected_outcome": "Gradual strengthening, track uncertain",
+        "confidence": "MEDIUM",
+        "premise_changed": true,
+        "previous_outcome": "Tropical storm",
+        "actual_outcome": "Hurricane",
+        "affected_assets": [
+          "script-0400",
+          "wall-explainer"
+        ],
+        "change_detected_at": "2026-09-11T15:02:00Z"
+      }
+    }
+  }
+]

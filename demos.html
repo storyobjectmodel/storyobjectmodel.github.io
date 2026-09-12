@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOM demos</title>
+<meta name="description" content="Two breaking news scenarios run on a working SOM bus with real production tools.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='0' y='2' width='17' height='4.6' fill='%23111517'/%3E%3Crect x='5' y='9.7' width='19' height='4.6' fill='%230B7C86'/%3E%3Crect x='0' y='17.4' width='17' height='4.6' fill='%23111517'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Azeret+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#F4F6F7;--fg:#111517;--fg-2:#2C333A;--fg-3:#5B6670;--rule:#DFE4E7;--card:#fff;--mark:#0B7C86;--mist:#ECEFF1}
+@media (prefers-color-scheme: dark){:root{--paper:#111517;--fg:#F4F6F7;--fg-2:#C3CBD1;--fg-3:#8E9BA5;--rule:#2C333A;--card:#1A1F24;--mark:#6FDCE2;--mist:#1A1F24}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--fg);font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.58;-webkit-font-smoothing:antialiased}
+nav{border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.3rem;text-decoration:none;letter-spacing:-.03em;color:var(--fg)}
+.brand svg{width:24px;height:24px}
+.brand .b{fill:var(--fg)}.brand .b.c{fill:var(--mark)}
+nav .ver{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);text-decoration:none}
+main .wrap{padding:48px 20px 72px;display:grid;gap:22px}
+.eyebrow{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);display:block;border-left:2px solid var(--fg);padding-left:10px;line-height:1.4}
+.eyebrow b{display:block;font-weight:500;color:var(--fg)}
+h1{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;letter-spacing:-.03em;line-height:1.08;margin:0}
+h2{font-size:1.3rem;font-weight:600;letter-spacing:-.01em;line-height:1.25;margin:18px 0 0}
+p{margin:0;color:var(--fg-2)}
+a{color:var(--mark)}
+.placeholder{border:1px dashed var(--fg-3);background:var(--mist);padding:18px;display:grid;gap:8px}
+.placeholder .cap{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
+.btn{display:inline-flex;align-items:center;padding:.7em 1.1em;font-family:"Azeret Mono",monospace;font-size:.78rem;font-weight:500;text-decoration:none;background:var(--fg);color:var(--paper);width:fit-content}
+footer{padding:32px 0 56px;border-top:1px solid var(--rule);font-size:.9rem;color:var(--fg-3)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 22px}
+footer a{color:var(--fg-2);text-decoration:none}
+.demo{display:grid;gap:10px;margin-top:8px}
+.frame{aspect-ratio:16/9;max-width:100%;background:var(--mist);border:1px solid var(--rule);display:grid;place-items:center;color:var(--fg-3);font-family:"Azeret Mono",monospace;font-size:.78rem}
+.frame iframe{width:100%;height:100%;border:0}
+.vid{width:100%;max-width:100%;aspect-ratio:16/9;background:#111517;border:1px solid var(--rule);display:block}
+.demo .n{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
+.demo p{font-size:.95rem}
+.cast{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
+.cast-logos{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.cast-logos img{height:44px;width:auto;max-width:150px;object-fit:contain;background:#FFFFFF;border:1px solid var(--rule);padding:6px 12px;box-sizing:border-box}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="b" x="0" y="2" width="17" height="4.6"/><rect class="b c" x="5" y="9.7" width="19" height="4.6"/><rect class="b" x="0" y="17.4" width="17" height="4.6"/></svg>SOM</a>
+  <a class="ver" href="/schema/1.0/">SOM 1.0</a>
+</div></nav>
+<main><div class="wrap">
+<span class="eyebrow">storyobjectmodel.com<b>demos</b></span>
+<h1>Two breaking news scenarios. One story bus.</h1>
+<p>SOM does not tell you what to build or how you and your technology partners implement AI. It enables; it does not define. So the consortium built two realistic newsroom scenarios with different stories and different vendors, all reading and writing the same story on one bus. Old tools and new. AI and not. Nothing in either scenario sends a command to anything.</p>
+
+<div class="demo">
+  <span class="n" id="demo-1">scenario 01</span>
+  <h2>The hurricane</h2>
+  <video class="vid" controls playsinline preload="metadata" poster="assets/demo-hurricane-poster.jpg" src="assets/demo-hurricane.mp4">Your browser cannot play this video. <a href="assets/demo-hurricane.mp4">Download it</a> instead.</video>
+  <p>A storm becomes a hurricane, with one report nobody can confirm. A real wire corpus and a weather data feed on the bus, transcription and media intelligence reading the story. Two clips arrive: one carries its credentials, one does not survive the gate, and the record is kept. The classification changes at source, a journalist confirms it, and everything that depended on the old version finds out in the same second. A single-source claim stays off the page while the page publishes: a system understood something well enough to do nothing. Then the briefing lands, the transcript confirms it, and the clearance becomes a record on the story that every tool can see.</p>
+  <span class="cast">AP · The Weather Company · Trint · Moments Lab · Cuez · Vizrt · Shure · Amazon Web Services</span>
+  <div class="cast-logos"><img src="assets/logos/AP.png" alt="AP" title="AP"><img src="assets/logos/The-Weather-Company.png" alt="The Weather Company" title="The Weather Company"><img src="assets/logos/Trint.png" alt="Trint" title="Trint"><img src="assets/logos/Moments-Lab.png" alt="Moments Lab" title="Moments Lab"><img src="assets/logos/Cuez.png" alt="Cuez" title="Cuez"><img src="assets/logos/Vizrt.png" alt="Vizrt" title="Vizrt"><img src="assets/logos/Shure.png" alt="Shure" title="Shure"><img src="assets/logos/AWS.png" alt="Amazon Web Services" title="Amazon Web Services"></div>
+</div>
+
+<div class="demo">
+  <span class="n" id="demo-2">scenario 02</span>
+  <h2>The Prime Minister announcement</h2>
+  <video class="vid" controls playsinline preload="metadata" poster="assets/demo-pm-poster.jpg" src="assets/demo-pm.mp4">Your browser cannot play this video. <a href="assets/demo-pm.mp4">Download it</a> instead.</video>
+  <p>A statement outside Number Ten, and nobody knows what he will say until he says it. The newsroom writes the story to the bus with the premise it expects and two sets of scripts, neither preferred. Tools reading the story draft and hold social posts, suggest a live unit, transcribe the feed and propose the claim the moment the words are spoken. Nothing changes until a journalist approves it. One approval settles three things, and then four things move: the clip is cut, the right scripts commit to air, the wrong ones are suppressed with the reason recorded, and the held posts release. Nobody was told. They were all reading the same story.</p>
+  <span class="cast">Octopus · LiveU · Fonn Group (Mimir) · Trint · HyperContent AI · Amazon Web Services</span>
+  <div class="cast-logos"><img src="assets/logos/Octopus.png" alt="Octopus" title="Octopus"><img src="assets/logos/LiveU.png" alt="LiveU" title="LiveU"><img src="assets/logos/Fonn-Group.png" alt="Fonn Group" title="Fonn Group"><img src="assets/logos/Trint.png" alt="Trint" title="Trint"><img src="assets/logos/HyperContent-AI.png" alt="HyperContent AI" title="HyperContent AI"><img src="assets/logos/AWS.png" alt="Amazon Web Services" title="Amazon Web Services"></div>
+</div>
+
+<h2>What both prove</h2>
+<p>Provenance: the evidence travels with the story. Accuracy: the premise changes once and every dependent is flagged. Compliance: a held figure reaches no output until the standards desk clears it, and the record says who cleared it, when, against what. Reach: clear once, use everywhere. Synchronisation: nobody synchronised the tools. They were all reading the same story.</p>
+<a class="btn" href="https://github.com/storyobjectmodel/som">read the specification</a>
+</div></main>
+<footer><div class="wrap">
+  <a href="/">Home</a>
+  <a href="https://github.com/storyobjectmodel/som">The specification</a>
+  <a href="/schema/1.0/">Schemas 1.0</a>
+  <a href="demos.html">Demos</a>
+  <a href="principles.html">Principles</a>
+  <a href="faq.html">FAQ</a>
+  <a href="joining.html">Joining</a>
+  <a href="mailto:hello@storyobjectmodel.com">hello@storyobjectmodel.com</a>
+</div></footer>
+</body>
+</html>

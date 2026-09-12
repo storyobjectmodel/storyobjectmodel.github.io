@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 120" width="960" height="120" role="img" aria-label="A story's path from wire to air: wire, planning, rundown, graphics, web, social, ticker, with a person carrying it by hand between every pair of systems">
+<style>
+.sys{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;fill:#111517}
+.hop{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;fill:#111517}
+.cap{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;fill:#5B6670}
+.box{fill:#FFFFFF;stroke:#DFE4E7}
+.p{fill:#F2D24B}
+</style>
+<rect width="960" height="120" fill="#F4F6F7"/>
+<g>
+  <rect class="box" x="20" y="30" width="70" height="34"/><text class="sys" x="55" y="52" text-anchor="middle">wire</text>
+  <rect class="p" x="98" y="36" width="60" height="22" rx="2"/><text class="hop" x="128" y="51" text-anchor="middle">person</text>
+  <rect class="box" x="166" y="30" width="100" height="34"/><text class="sys" x="216" y="52" text-anchor="middle">planning</text>
+  <rect class="p" x="274" y="36" width="60" height="22" rx="2"/><text class="hop" x="304" y="51" text-anchor="middle">person</text>
+  <rect class="box" x="342" y="30" width="100" height="34"/><text class="sys" x="392" y="52" text-anchor="middle">rundown</text>
+  <rect class="p" x="450" y="36" width="60" height="22" rx="2"/><text class="hop" x="480" y="51" text-anchor="middle">person</text>
+  <rect class="box" x="518" y="30" width="100" height="34"/><text class="sys" x="568" y="52" text-anchor="middle">graphics</text>
+  <rect class="p" x="626" y="36" width="60" height="22" rx="2"/><text class="hop" x="656" y="51" text-anchor="middle">person</text>
+  <rect class="box" x="694" y="30" width="70" height="34"/><text class="sys" x="729" y="52" text-anchor="middle">web</text>
+  <rect class="p" x="772" y="36" width="60" height="22" rx="2"/><text class="hop" x="802" y="51" text-anchor="middle">person</text>
+  <rect class="box" x="840" y="30" width="100" height="34"/><text class="sys" x="890" y="52" text-anchor="middle">social</text>
+</g>
+<text class="cap" x="20" y="98">Every yellow hop is a person carrying the story by hand. What they know does not reach the next tool.</text>
+</svg>
