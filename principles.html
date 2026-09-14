@@ -27,8 +27,6 @@ h1{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;letter-spacing:-.03em;li
 h2{font-size:1.3rem;font-weight:600;letter-spacing:-.01em;line-height:1.25;margin:18px 0 0}
 p{margin:0;color:var(--fg-2)}
 a{color:var(--mark)}
-.placeholder{border:1px dashed var(--fg-3);background:var(--mist);padding:18px;display:grid;gap:8px}
-.placeholder .cap{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
 .btn{display:inline-flex;align-items:center;padding:.7em 1.1em;font-family:"Azeret Mono",monospace;font-size:.78rem;font-weight:500;text-decoration:none;background:var(--fg);color:var(--paper);width:fit-content}
 footer{padding:32px 0 56px;border-top:1px solid var(--rule);font-size:.9rem;color:var(--fg-3)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:8px 22px}
@@ -43,9 +41,30 @@ footer a{color:var(--fg-2);text-decoration:none}
 <main><div class="wrap">
 <span class="eyebrow">storyobjectmodel.com<b>principles</b></span>
 <h1>Why SOM is shaped the way it is.</h1>
-<p>The Story Object Model is an open standard for story context in content production. This page will carry the introduction and principles that also open the specification: what SOM standardises, what it deliberately leaves alone, and why.</p>
-<div class="placeholder"><span class="cap">PLACEHOLDER · text to follow from Jon Roberts</span><p>The principles are being written once, to serve both this page and the introduction to the specification. Until they land here, the shape of the model is described on the <a href="/">home page</a> and the normative material is in the repository.</p></div>
-<h2>In the meantime</h2>
+<p>The Story Object Model is an open standard for story context in content production. These are the principles that also open the specification: what SOM standardises, what it deliberately leaves alone, and why.</p>
+<h2>What it is for</h2>
+<p>Every system in a newsroom holds a fragment of the story, and every fragment is accurate. No system holds the story. SOM writes the story down once, in a form every tool can read, so that a decision made once is obeyed everywhere and provable afterwards. It is a description, not an instruction. Nothing in it tells a tool what to do.</p>
+<p>The three nouns were transcribed, not invented. A Story is the thing happening in the world. An Asset is what the newsroom gathers and makes to tell it. A Telling is the moment an asset meets an audience. Journalists already think this way; the model just wrote it down.</p>
+
+<h2>What belongs in the standard</h2>
+<p><strong>It specifies what travels on the bus, not how a publisher organises itself.</strong> Two newsrooms can run entirely different workflows and still speak the same story.</p>
+<p><strong>It carries publisher-asserted state, not state inferred across sources.</strong> What is in the story is what somebody was willing to put their name to.</p>
+<p><strong>It carries what enables coordination, not what enables consumption.</strong> The test for any proposed field is whether another system needs it to act correctly.</p>
+<p><strong>One story is the unit.</strong> The scope of the standard is a single story and everything true about it, over time.</p>
+<p><strong>Default no, justify yes.</strong> A field earns its place by a case made in the open. A standard that accepts everything describes nothing.</p>
+<p><strong>Structure is governed; vocabulary grows deliberately.</strong> Schema patterns can be permissive. The words that carry meaning cannot, or the same term ends up meaning six things.</p>
+
+<h2>How it behaves</h2>
+<p><strong>Nothing sits in charge.</strong> No orchestrator and no central application. Each tool reads the story and decides for itself.</p>
+<p><strong>Skills declare, executors act.</strong> A Skill states what is true against a rule its newsroom wrote. The tool that owns the executor is the only thing that acts, and silence is a valid outcome.</p>
+<p><strong>One writer mints.</strong> The publisher's story management system owns the story and its sequence, never the wire.</p>
+<p><strong>The story republishes in full, never as a delta.</strong> A tool switched on halfway through the night reads one object and knows everything.</p>
+<p><strong>Binding happens at the editorial act, never at ingest.</strong> Media becomes part of a story when a person decides it is, not when it lands.</p>
+<p><strong>A transform never lifts a hold.</strong> Cutting, reframing or re-versioning an asset cannot launder its compliance position.</p>
+<p><strong>Reading leaves no trace.</strong> A tool proves it read something by publishing in its turn, which is also why the audit trail is a by-product of how writes work rather than a feature someone built.</p>
+
+<h2>Where the standard stops</h2>
+<p>SOM describes one story and everything true about it, and stops there. It is not the media, not the rundown, not a MAM and not a product, and it replaces nothing you already run. What each newsroom does with what it reads is its own business, and none of it belongs in a standard. A standard owned by one vendor is a product. A standard owned by an industry is infrastructure.</p>
 <p>Read <a href="https://github.com/storyobjectmodel/som/blob/main/spec/conformance.md">conformance</a> for what it means to speak SOM 1.0, and the <a href="https://github.com/storyobjectmodel/som/blob/main/spec/open-register.md">open register</a> for what is not yet settled.</p>
 <a class="btn" href="https://github.com/storyobjectmodel/som">read the specification</a>
 </div></main>

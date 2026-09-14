@@ -27,8 +27,6 @@ h1{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;letter-spacing:-.03em;li
 h2{font-size:1.3rem;font-weight:600;letter-spacing:-.01em;line-height:1.25;margin:18px 0 0}
 p{margin:0;color:var(--fg-2)}
 a{color:var(--mark)}
-.placeholder{border:1px dashed var(--fg-3);background:var(--mist);padding:18px;display:grid;gap:8px}
-.placeholder .cap{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
 .btn{display:inline-flex;align-items:center;padding:.7em 1.1em;font-family:"Azeret Mono",monospace;font-size:.78rem;font-weight:500;text-decoration:none;background:var(--fg);color:var(--paper);width:fit-content}
 footer{padding:32px 0 56px;border-top:1px solid var(--rule);font-size:.9rem;color:var(--fg-3)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:8px 22px}
@@ -44,9 +42,38 @@ footer a{color:var(--fg-2);text-decoration:none}
 <span class="eyebrow">storyobjectmodel.com<b>frequently asked questions</b></span>
 <h1>Questions people ask.</h1>
 <p>The questions that come up when a newsroom, a vendor or an engineer first meets the model: what it is, what it is not, what joining involves, and what happens to the systems you already run.</p>
-<div class="placeholder"><span class="cap">PLACEHOLDER · content to follow from Alex Bassett</span><p>The FAQ is being written. Until it lands here, the short answers are on the <a href="/">home page</a> under the idea, junctions and get involved, and the long answers are in the repository.</p></div>
-<h2>In the meantime</h2>
-<p>The <a href="https://github.com/storyobjectmodel/som/blob/main/README.md">repository README</a> is the best first read. Anything it does not answer, ask at <a href="mailto:hello@storyobjectmodel.com">hello@storyobjectmodel.com</a>.</p>
+<h2>Does anything act on its own?</h2>
+<p>No. Nothing reaches an audience without an editorial gate. Skills declare what is true about a story; the tool that owns the executor decides what to do about it; a person approves. A clearance is granted to a version of the words, so a rewrite reopens the gate rather than inheriting the approval. If a rule cannot be evaluated, the output it guards stays held and a person decides.</p>
+
+<h2>Is this about replacing journalists?</h2>
+<p>It is about capturing judgement, not replacing it. The decisions that shape a story already exist. Today they live in a chat thread, a rebrief and somebody's head, and they are gone by the next shift. Writing them down puts the call on the record, attributed to the person who made it, which is what a byline has always been for. The human was not replaced. The human was promoted, from carrying the state to making the call.</p>
+
+<h2>What stops two systems writing conflicting versions of the same story?</h2>
+<p>One writer. The publisher's story management system mints the story and owns its sequence, never the wire, even on a flash. Everything else contributes in its own message family, and each family is a closed object with normative ordering. Where Skills disagree, gates combine by conjunction and values by selection, compliance fails closed, and a transform never lifts a hold.</p>
+
+<h2>Who runs the bus, and what happens at three in the morning when it breaks?</h2>
+<p>Each newsroom runs its own, like any other message infrastructure in the building. When it is down, tools work standalone exactly as they do today and reconcile on reconnect. The newsroom never depends on the bus to stay on air. The story republishes in full rather than as a delta, so a tool that comes back at nine on election night reads one object and knows everything.</p>
+
+<h2>Why not point a model at the systems we already have?</h2>
+<p>Retrieval gives one asker one answer at one moment, privately. A production needs shared state that every tool reads the same way, and gating that holds across vendor boundaries with a record of who decided what. That is not a retrieval problem. Models should consume SOM rather than replace it.</p>
+
+<h2>Does media travel on the bus?</h2>
+<p>Never. Assets are references, and the frames stay where they already live. At the TAMS junction a story object points at a Source and a timerange; the same pattern works for a MAM with its own locator. Binding happens at the editorial act, never at ingest.</p>
+
+<h2>What happens to the systems we already run?</h2>
+<p>They stay. SOM replaces nothing and is not a MAM, a rundown or a product. MOS lines keep working, with a bridge that makes them smarter, and what you have built with agents stays yours. One system is enough to start and nothing about your product has to come out; see <a href="joining.html">joining</a>.</p>
+
+<h2>How does the standard change, and who decides?</h2>
+<p>In the open. Every change arrives as a pull request and anyone may open one; the process is in <a href="https://github.com/storyobjectmodel/som/blob/main/GOVERNANCE.md">GOVERNANCE</a>. Additions to an enum are a minor version, deprecated values are marked and never removed, and what is not yet settled is listed in the open register rather than left to be discovered. The Accelerator ended in September. The working group did not.</p>
+
+<h2>Who owns it?</h2>
+<p>Nobody. The standard is open and unowned, and that is the whole point. Schemas, tools and skills are licensed Apache 2.0 and the specification prose CC BY 4.0. There is no fee and nothing to sign.</p>
+
+<h2>What is Story Archaeology?</h2>
+<p>A method, and where the model came from. Take one real story after transmission and trace how its context actually moved, hop by hop, between people and systems. What comes back is a picture of where knowledge was created, where it was lost, and who was carrying it by hand. Newsrooms run sessions on their own stories.</p>
+
+<h2>Anything else</h2>
+<p>The <a href="https://github.com/storyobjectmodel/som/blob/main/README.md">repository README</a> is the best next read. Anything it does not answer, ask at <a href="mailto:hello@storyobjectmodel.com">hello@storyobjectmodel.com</a>.</p>
 <a class="btn" href="https://github.com/storyobjectmodel/som">read the specification</a>
 </div></main>
 <footer><div class="wrap">
