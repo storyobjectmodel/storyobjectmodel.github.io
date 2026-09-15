@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOM: example workflows</title>
+<meta name="description" content="Six illustrations of newsroom work with story context travelling: what is written, what tools do, what stays a human decision.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='0' y='2' width='17' height='4.6' fill='%23111517'/%3E%3Crect x='5' y='9.7' width='19' height='4.6' fill='%230B7C86'/%3E%3Crect x='0' y='17.4' width='17' height='4.6' fill='%23111517'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Azeret+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#F4F6F7;--fg:#111517;--fg-2:#2C333A;--fg-3:#5B6670;--rule:#DFE4E7;--card:#fff;--mark:#0B7C86;--mist:#ECEFF1}
+@media (prefers-color-scheme: dark){:root{--paper:#111517;--fg:#F4F6F7;--fg-2:#C3CBD1;--fg-3:#8E9BA5;--rule:#2C333A;--card:#1A1F24;--mark:#6FDCE2;--mist:#1A1F24}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--fg);font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.58;-webkit-font-smoothing:antialiased}
+nav{border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.3rem;text-decoration:none;letter-spacing:-.03em;color:var(--fg)}
+.brand svg{width:24px;height:24px}
+.brand .b{fill:var(--fg)}.brand .b.c{fill:var(--mark)}
+nav .ver{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);text-decoration:none}
+main .wrap{padding:48px 20px 72px;display:grid;gap:22px}
+.eyebrow{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);display:block;border-left:2px solid var(--fg);padding-left:10px;line-height:1.4}
+.eyebrow b{display:block;font-weight:500;color:var(--fg)}
+h1{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;letter-spacing:-.03em;line-height:1.08;margin:0}
+h2{font-size:1.3rem;font-weight:600;letter-spacing:-.01em;line-height:1.25;margin:18px 0 0}
+p{margin:0;color:var(--fg-2)}
+a{color:var(--mark)}
+.btn{display:inline-flex;align-items:center;padding:.7em 1.1em;font-family:"Azeret Mono",monospace;font-size:.78rem;font-weight:500;text-decoration:none;background:var(--fg);color:var(--paper);width:fit-content}
+.flow{border-top:1px solid var(--rule);padding-top:18px;margin-top:10px;display:grid;gap:12px}
+.flow .n{font-family:"Azeret Mono",monospace;font-size:.74rem;letter-spacing:.08em;color:var(--mark)}
+.flow h2{margin:0}
+.flow .sit{color:var(--fg)}
+.row{display:grid;grid-template-columns:132px 1fr;gap:18px;align-items:start}
+.row b{font-family:"Azeret Mono",monospace;font-size:.72rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-3);padding-top:4px}
+@media (max-width:620px){.row{grid-template-columns:1fr;gap:2px}.row b{padding-top:0}}
+.tw{overflow-x:auto;margin:0 -20px;padding:0 20px}
+table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:620px}
+th,td{text-align:left;vertical-align:top;padding:11px 14px 11px 0;border-bottom:1px solid var(--rule)}
+th{font-family:"Azeret Mono",monospace;font-size:.7rem;font-weight:500;color:var(--fg-3);letter-spacing:.04em;border-bottom:1px solid var(--fg-3)}
+td:first-child{color:var(--fg);font-weight:500;white-space:nowrap}
+td:nth-child(2){color:var(--fg-3)}
+.rule{font-family:"Azeret Mono",monospace;font-size:.82rem;color:var(--fg);border-left:2px solid var(--mark);padding-left:12px;margin:6px 0}
+footer{padding:32px 0 56px;border-top:1px solid var(--rule);font-size:.9rem;color:var(--fg-3)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 22px}
+footer a{color:var(--fg-2);text-decoration:none}
+</style></head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="b" x="0" y="2" width="17" height="4.6"/><rect class="b c" x="5" y="9.7" width="19" height="4.6"/><rect class="b" x="0" y="17.4" width="17" height="4.6"/></svg>SOM</a>
+  <a class="ver" href="/schema/1.0/">SOM 1.0</a>
+</div></nav>
+<main><div class="wrap">
+<span class="eyebrow">storyobjectmodel.com<b>example workflows</b></span>
+<h1>What it looks like on the desk.</h1>
+<p>SOM is not a workflow system and it is not a tool. It carries story context to the tools you already run, old and new, agents included, so each of them can do its own job with the story in hand. It prescribes nothing about how you work.</p>
+<p>So these are illustrations, not instructions. Every one of them is something newsrooms already do, shown as it goes when the context can travel: what is written to the story, what tools do with it on their own, what stays a human decision, and what is left behind afterwards. Your desk will differ in every particular, and none of this is required by the standard.</p>
+<article class="flow">
+<span class="n">01</span>
+<h2>An unconfirmed figure, two destinations</h2>
+<p class="sit">A casualty number is circulating. One source, nobody official, and the digital desk wants to go now.</p>
+<div class="row"><b>on the bus</b><p>The duty editor makes the call in the tool they already use. The hold is written to the story, with the rule it was made against and the person who made it.</p></div>
+<div class="row"><b>the tools</b><p>Every subscribed tool sees it at once and applies the rules its own newsroom wrote. The graphic does not play. The ticker drops the figure. The clip cannot run. The web desk sees the figure marked rather than missing.</p></div>
+<div class="row"><b>the person</b><p>Nothing else. They made the call once, in one place, and did not spend the next hour telling six teams about it.</p></div>
+<div class="row"><b>afterwards</b><p>When the second source lands, the hold lifts in the same place and everything that was waiting is released together, with the clearance attributed and timed.</p></div>
+</article>
+
+<article class="flow">
+<span class="n">02</span>
+<h2>The fact changes after everything is built</h2>
+<p class="sit">The storm is reclassified, or the figure is revised, an hour after the package cut and the graphics rendered.</p>
+<div class="row"><b>on the bus</b><p>The change goes to the story once, at source, with what it was and what it now is.</p></div>
+<div class="row"><b>the tools</b><p>Every tool holding something built on the old fact sees that it is stale. The scripts, the graphic, the social cutdown and the page each raise it in their own way, and each decides for itself whether to hold, revise or withdraw.</p></div>
+<div class="row"><b>the person</b><p>Reviews a list of what is affected rather than trying to remember it. The judgement stays human; the recall does not.</p></div>
+<div class="row"><b>afterwards</b><p>A trail showing what was live on the old fact, for how long, and what each tool did about it.</p></div>
+</article>
+
+<article class="flow">
+<span class="n">03</span>
+<h2>A clip arrives from the public</h2>
+<p class="sit">A bystander clip lands. It might be the best pictures of the day, or it might not be what it claims.</p>
+<div class="row"><b>on the bus</b><p>The clip becomes an asset on the story with whatever came with it: where it came from, what credentials it carries, what is missing.</p></div>
+<div class="row"><b>the tools</b><p>Verification tools read the story and post what they find as assertions: an authenticity check, a match against known material, a transcript. None of them publish anything and none of them act.</p></div>
+<div class="row"><b>the person</b><p>Decides. The verdict from a tool is evidence for that decision, never the decision itself, and the gate on the clip reads the verdict where it sits.</p></div>
+<div class="row"><b>afterwards</b><p>The reason the clip ran, or did not, on the record, and attached to the clip rather than to a chat thread.</p></div>
+</article>
+
+<article class="flow">
+<span class="n">04</span>
+<h2>A cleared asset goes somewhere new</h2>
+<p class="sit">Something approved for the bulletin is now wanted on the site, and then as a cutdown for social.</p>
+<div class="row"><b>on the bus</b><p>The clearance sits on the link between the asset and the destination it was cleared for, not on the asset itself.</p></div>
+<div class="row"><b>the tools</b><p>Each destination reads the clearance for its own route. What was cleared for broadcast does not silently become cleared for everywhere.</p></div>
+<div class="row"><b>the person</b><p>Clears the new route, usually in seconds, because the evidence is already there. If the words have changed since the original approval, the gate reopens rather than inheriting it.</p></div>
+<div class="row"><b>afterwards</b><p>Reach without laundering: one decision reused deliberately, not a permission that leaked.</p></div>
+</article>
+
+<article class="flow">
+<span class="n">05</span>
+<h2>Somebody asks about it six months later</h2>
+<p class="sit">A complaint, a regulator, a lawyer, or your own archive desk wants to know what was broadcast and what was known at the time.</p>
+<div class="row"><b>on the bus</b><p>Nothing new. The story already carries what was decided, by whom, against which rule, and which frames each decision applied to.</p></div>
+<div class="row"><b>the tools</b><p>The tools that were involved each published what they did at the time, in their own message family, on the same story.</p></div>
+<div class="row"><b>the person</b><p>Answers the question from the record instead of reconstructing it from six systems and the memory of whoever was on shift.</p></div>
+<div class="row"><b>afterwards</b><p>This is the part that is hard to retrofit and almost free once the context travels: the audit trail is a by-product of how writes work, not a system somebody had to build.</p></div>
+</article>
+
+<article class="flow">
+<span class="n">06</span>
+<h2>An agent joins the desk</h2>
+<p class="sit">You have built something, or bought something, that can read a story and suggest work.</p>
+<div class="row"><b>on the bus</b><p>It subscribes like any other participant. It reads the story, and the Skills your newsroom has written are the rules it is held to.</p></div>
+<div class="row"><b>the tools</b><p>It declares what it finds, in its own family, attributed to it. It never sends work to another tool and never commands anything. If it has nothing useful to say, silence is a valid outcome.</p></div>
+<div class="row"><b>the person</b><p>Approves, edits or ignores. Anything an agent generates that reaches an audience becomes an asset with its authorship carried, so it can be told apart later.</p></div>
+<div class="row"><b>afterwards</b><p>An agent that is accountable in the same terms as everything else on the desk, rather than a clever black box nobody can audit afterwards.</p></div>
+</article>
+
+<h2>The shape underneath</h2>
+<p>The same three moves appear in all six. A person makes a decision in the tool they already use, and it is written to the story once. Every tool reads the story and decides for itself what to do, against rules its own newsroom wrote. Nothing is orchestrated and nothing is commanded, so what each tool did is recorded as it happens rather than reconstructed afterwards.</p>
+<p>That is the whole of it. The <a href="where-it-goes.html">where it goes</a> page covers which part of a story carries what, and the <a href="demos.html">demos</a> show two of these running with real production tools.</p>
+
+<a class="btn" href="joining.html">how to join</a>
+</div></main>
+<footer><div class="wrap">
+  <a href="/">Home</a>
+  <a href="https://github.com/storyobjectmodel/som">The specification</a>
+  <a href="/schema/1.0/">Schemas 1.0</a>
+  <a href="demos.html">Demos</a>
+  <a href="principles.html">Principles</a>
+  <a href="faq.html">FAQ</a>
+  <a href="joining.html">Joining</a>
+  <a href="where-it-goes.html">Where it goes</a>
+  <a href="workflows.html">Workflows</a>
+  <a href="mailto:hello@storyobjectmodel.com">hello@storyobjectmodel.com</a>
+</div></footer>
+</body>
+</html>

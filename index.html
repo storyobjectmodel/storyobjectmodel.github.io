@@ -1,23 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
 <meta name="description" content="The Story Object Model (SOM): the story context layer for content production. An open standard.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='0' y='2' width='17' height='4.6' fill='%23111517'/%3E%3Crect x='5' y='9.7' width='19' height='4.6' fill='%230B7C86'/%3E%3Crect x='0' y='17.4' width='17' height='4.6' fill='%23111517'/%3E%3C/svg%3E">
 <title>Story Object Model</title>
 <link rel="canonical" href="https://storyobjectmodel.com/">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;1,6..72,500&family=Azeret+Mono:wght@400;500&display=swap">
 <style>
 :root{
   --cloud:#F4F6F7; --mist:#ECEFF1; --line:#DFE4E7; --steel:#8E9BA5; --slate:#5B6670; --graphite:#2C333A; --ink:#111517;
-  --teal:#0B7C86; --lift:#6FDCE2; --navy:#0E3A5C; --amber:#B0700F;
+  --teal:#0A6F78; --lift:#6FDCE2; --navy:#0E3A5C; --amber:#8A5709;
   --paper:var(--cloud); --card:#FFFFFF; --rule:var(--line);
   --fg:var(--ink); --fg-2:var(--graphite); --fg-3:var(--slate);
   --mark:var(--teal); --held-bg:#E3EAF1; --held-fg:var(--navy); --warn-bg:#F3E9DA; --warn-fg:var(--amber);
   --dark-bg:var(--ink); --dark-fg:var(--cloud); --dark-fg-2:#C3CBD1; --dark-mark:var(--lift);
+  /* additive, non-token helpers */
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --section-y:clamp(72px,9vw,120px);
+  --gutter:clamp(20px,4vw,40px);
+  color-scheme:light;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
@@ -25,6 +31,7 @@
     --fg:#F4F6F7; --fg-2:#C3CBD1; --fg-3:#8E9BA5; --mark:#6FDCE2;
     --held-bg:#16283A; --held-fg:#9CC3E6; --warn-bg:#3A2A10; --warn-fg:#E2B15A;
     --dark-bg:#1A1F24;
+    color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
@@ -32,38 +39,66 @@
   --fg:#F4F6F7; --fg-2:#C3CBD1; --fg-3:#8E9BA5; --mark:#6FDCE2;
   --held-bg:#16283A; --held-fg:#9CC3E6; --warn-bg:#3A2A10; --warn-fg:#E2B15A;
   --dark-bg:#1A1F24;
+  color-scheme:dark;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--paper);color:var(--fg);font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.58;-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:"Archivo",sans-serif;text-wrap:balance;margin:0;line-height:1.1}
-h2{font-size:clamp(1.6rem,3.6vw,2.2rem);font-weight:600;letter-spacing:-.02em}
-h3{font-size:1.15rem;font-weight:600;line-height:1.3;letter-spacing:-.01em}
-p{margin:0}
-a{color:var(--mark)}
+
+/* base */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--fg);font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.58;-webkit-font-smoothing:antialiased;font-feature-settings:"kern","liga"}
+h1,h2,h3{font-family:"Archivo",sans-serif;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.3rem,6.2vw,4.6rem);font-weight:700;letter-spacing:-.035em;line-height:.98;max-width:15ch}
+h2{font-size:clamp(1.85rem,3.6vw,2.6rem);font-weight:600;letter-spacing:-.025em;line-height:1.08}
+h3{font-size:1.2rem;font-weight:600;line-height:1.3;letter-spacing:-.012em}
+p{margin:0;text-wrap:pretty}
+a{color:var(--mark);text-decoration-thickness:1px;text-underline-offset:.16em;transition:color 150ms var(--ease),text-decoration-color 150ms var(--ease)}
+a:hover{text-decoration-color:currentColor}
 code,.mono{font-family:"Azeret Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.78em}
-.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+:focus-visible{outline:none;box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--mark)}
+::selection{background:var(--mark);color:var(--paper)}
+img{max-width:100%}[hidden]{display:none!important}
+b{font-weight:600}
+
+/* layout */
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--gutter)}
 .prose{max-width:62ch}
+.stack{display:grid;gap:14px}
+.lede{font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:clamp(1.2rem,1.6vw,1.4rem);line-height:1.42;letter-spacing:-.008em;color:var(--fg-2);max-width:56ch}
+.lede a{color:var(--mark)}
+.pull{font-family:"Archivo",sans-serif;font-weight:600;font-size:clamp(1.35rem,2.6vw,1.8rem);letter-spacing:-.025em;line-height:1.2;max-width:28ch}
+
+/* the eyebrow: signature device, untouched */
 .eyebrow{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);display:block;border-left:2px solid var(--fg);padding-left:10px;line-height:1.4}
 .eyebrow b{display:block;font-weight:500;color:var(--fg)}
-section{padding:84px 0;border-top:1px solid var(--rule)}
-section .wrap{display:grid;gap:32px}
-.lede{font-size:1.2rem;color:var(--fg-2);max-width:60ch}
-.stack{display:grid;gap:14px}
-.pull{font-family:"Archivo",sans-serif;font-weight:600;font-size:clamp(1.3rem,2.6vw,1.7rem);letter-spacing:-.02em;line-height:1.25;max-width:30ch}
+
+/* sections: an editorial grid. The eyebrow takes the margin column and stays put; everything else reads to its right. */
+section{padding:var(--section-y) 0;border-top:1px solid var(--rule)}
+section .wrap{display:grid;gap:36px}
+@media(min-width:960px){
+  section .wrap{grid-template-columns:minmax(150px,1fr) minmax(0,4.4fr);column-gap:56px;row-gap:0}
+  section .wrap>*{grid-column:2}
+  section .wrap>.eyebrow{grid-column:1;grid-row:1/span 40;position:sticky;top:88px;align-self:start;margin-top:.55em}
+  section .wrap>:nth-child(n+3){margin-top:44px}
+}
+
+/* closing serif line: a short accent rule above, so the beat is visible before it is read */
+.quote{font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:clamp(1.4rem,2.8vw,1.95rem);line-height:1.25;letter-spacing:-.012em;max-width:32ch;color:var(--fg);padding-top:20px;position:relative}
+.quote::before{content:"";position:absolute;left:0;top:0;width:44px;height:2px;background:var(--mark)}
+.quote small{display:block;font-family:"Azeret Mono",monospace;font-size:.72rem;color:var(--fg-3);margin-top:8px;letter-spacing:0}
+.statement{font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:clamp(1.8rem,3.6vw,2.7rem);letter-spacing:-.018em;line-height:1.1;max-width:20ch}
+.statement em{font-style:italic;color:var(--mark)}
 
 /* the mark */
 .mark{display:block;overflow:visible}
 .mark .b{fill:var(--fg)}.mark .b.c{fill:var(--mark)}
 .on-ink .mark .b{fill:var(--dark-fg)}.on-ink .mark .b.c{fill:var(--dark-mark)}
-.mark .b.c{transition:transform 200ms cubic-bezier(.2,.7,.2,1)}
+.mark .b.c{transition:transform 240ms var(--ease)}
 .brand:hover .mark .b.c{transform:translateX(1px)}
-/* 1a commit: once on arrival */
-.commit .mark .b.c{animation:commit 750ms cubic-bezier(.2,.7,.2,1) 500ms both}
+.commit .mark .b.c{animation:commit 750ms var(--ease) 500ms both}
 @keyframes commit{0%{transform:translateX(-5px);fill:var(--fg)}28%{transform:translateX(0);fill:var(--fg)}48%,100%{transform:translateX(0);fill:var(--mark)}}
-@media (prefers-reduced-motion: reduce){.commit .mark .b.c{animation:none}.mark .b.c{transition:none}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:0s!important;transition-duration:0s!important}}
 
-/* nav */
+/* nav: untouched */
 nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
 nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
 .brand{display:flex;align-items:center;gap:12px;font-family:"Archivo",sans-serif;font-weight:700;font-size:1.3rem;text-decoration:none;letter-spacing:-.03em;color:var(--fg)}
@@ -74,208 +109,234 @@ nav ul a:hover{color:var(--fg)}
 nav .ver{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3)}
 @media(max-width:820px){nav ul{display:none}}
 
-/* buttons: mono labels, square */
-.btn{display:inline-flex;align-items:center;gap:.5em;padding:.7em 1.1em;font-family:"Azeret Mono",monospace;font-size:.78rem;font-weight:500;text-decoration:none;border:1px solid transparent}
-.btn:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--mark);outline-offset:3px}
+/* buttons: mono labels, square, 44px targets */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:44px;padding:.7em 1.15em;font-family:"Azeret Mono",monospace;font-size:.78rem;font-weight:500;line-height:1.25;text-decoration:none;text-align:left;border:1px solid transparent;cursor:pointer;transition:background 150ms var(--ease),color 150ms var(--ease),border-color 150ms var(--ease),transform 150ms var(--ease)}
+.btn:active{transform:translateY(1px)}
+.btn:focus-visible,a:focus-visible,button:focus-visible{outline:none;box-shadow:0 0 0 2px var(--paper),0 0 0 4px var(--mark)}
 .btn-primary{background:var(--fg);color:var(--paper)}
+.btn-primary:hover{background:var(--fg-2)}
 .btn-secondary{border-color:var(--fg-3);color:var(--fg);background:transparent}
-.on-ink .btn-primary{background:var(--dark-fg);color:var(--ink)}
-.on-ink .btn-secondary{border-color:var(--steel);color:var(--dark-fg)}
-.btn-row{display:flex;flex-wrap:wrap;gap:12px}
+.btn-secondary:hover{border-color:var(--fg);background:var(--card)}
+.on-ink .btn-primary,.publish .btn-primary{background:var(--dark-fg);color:var(--ink)}
+.on-ink .btn-primary:hover,.publish .btn-primary:hover{background:var(--dark-fg-2)}
+.on-ink .btn-secondary,.publish .btn-secondary{border-color:var(--steel);color:var(--dark-fg)}
+.on-ink .btn-secondary:hover,.publish .btn-secondary:hover{border-color:var(--dark-fg);background:transparent}
+.publish .btn:focus-visible{box-shadow:0 0 0 2px var(--dark-bg),0 0 0 4px var(--dark-mark)}
+.btn-row{display:flex;flex-wrap:wrap;gap:10px}
 
 /* hero */
-.hero{padding:64px 0 48px}
-.hero .wrap{display:grid;gap:26px}
-.hero-mark{width:96px;height:96px}
-h1{font-size:clamp(2.1rem,5.6vw,3.6rem);font-weight:700;letter-spacing:-.03em;line-height:1.05}
-.hero-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end}
-@media(max-width:820px){.hero-grid{grid-template-columns:1fr}}
-.hero .lede{font-size:1.25rem}
-.hero .stack{gap:22px}
-.ibc-strap{display:flex;flex-wrap:wrap;gap:6px 22px;font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);border-top:1px solid var(--rule);padding-top:16px}
+.hero{padding:clamp(48px,7vw,104px) 0 clamp(40px,5vw,64px)}
+.hero .wrap{display:grid;gap:clamp(28px,4vw,48px)}
+.hero-mark{width:clamp(64px,8vw,104px);height:auto;aspect-ratio:1}
+.hero .eyebrow{margin-top:-8px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:end}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.hero .lede{font-size:clamp(1.25rem,1.8vw,1.55rem);max-width:34ch}
+.hero .stack{gap:28px}
+.hero .btn-row{padding-top:4px}
+.ibc-strap{display:flex;flex-wrap:wrap;gap:6px 28px;font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);border-top:1px solid var(--rule);padding-top:16px;line-height:1.5}
 .ibc-strap b{color:var(--fg);font-weight:500}
-.statement{font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:clamp(1.6rem,3.4vw,2.3rem);letter-spacing:-.015em;line-height:1.15;max-width:24ch}
-.statement em{font-style:italic;color:var(--mark)}
+.hero .why{border-top:1px solid var(--rule);padding-top:28px}
 
 /* the record (envelope) */
-.envelope{background:var(--graphite);color:var(--dark-fg);padding:18px 20px;font-family:"Azeret Mono",monospace;font-size:.76rem;line-height:1.6;overflow-x:auto;position:relative;--k:#C3CBD1;--s:#F4F6F7;--n:#8E9BA5;border-left:3px solid var(--lift)}
+.envelope{background:var(--graphite);color:var(--dark-fg);padding:44px 22px 22px;font-family:"Azeret Mono",monospace;font-size:.78rem;line-height:1.62;overflow-x:auto;position:relative;--k:#C3CBD1;--s:#F4F6F7;--n:#8E9BA5;border-left:3px solid var(--lift)}
 .envelope .k{color:var(--k)}.envelope .s{color:var(--s)}.envelope .n{color:var(--n)}.envelope .chg{color:var(--lift)}
-.envelope .cap{position:absolute;top:10px;right:14px;font-size:.68rem;color:var(--steel)}
+.envelope .cap{position:absolute;top:14px;left:22px;right:22px;font-size:.68rem;color:var(--steel);border-bottom:1px solid rgba(244,246,247,.12);padding-bottom:8px}
 .envelope pre{margin:0;white-space:pre}
+@media(max-width:520px){.envelope{font-size:.7rem;padding:40px 16px 16px}.envelope .cap{left:16px;right:16px}}
 
-/* gap section */
-.chat{background:var(--card);border:1px solid var(--rule);padding:18px;max-width:420px;display:grid;gap:10px;font-size:.92rem}
-.msg{display:grid;gap:2px}
-.msg .who{font-family:"Azeret Mono",monospace;font-size:.7rem;color:var(--fg-3)}
-.msg .bubble{background:var(--mist);padding:8px 12px;width:fit-content;max-width:100%}
-.msg.hold .bubble{background:var(--held-bg);color:var(--held-fg);border-left:3px solid var(--held-fg)}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+/* two-up */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:center}
 @media(max-width:820px){.two{grid-template-columns:1fr}}
-
-/* diagram */
 .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
-.diagram{width:100%;min-width:720px;height:auto;display:block}
-.diagram text{font-family:"Azeret Mono",monospace;font-size:12px;fill:var(--fg-3)}
-.diagram .lbl{font-family:"Archivo",sans-serif;font-weight:600;font-size:14px;fill:var(--fg)}
-.diagram .busline{stroke:var(--fg);stroke-width:5}
-.diagram .tool{fill:var(--card);stroke:var(--rule)}
-.diagram .tap{stroke:var(--steel);stroke-width:1.5}
-.diagram .obj1,.diagram .obj3{fill:var(--fg)}.diagram .obj2{fill:var(--mark)}
-.diagram .rule{fill:var(--card);stroke:var(--fg)}
-.triad{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:720px){.triad{grid-template-columns:1fr}}
-.tri{border-top:2px solid var(--fg);padding-top:14px;display:grid;gap:8px}
-.tri .mono{color:var(--fg-3);font-size:.76rem}
+.figure{display:block;max-width:100%;height:auto;border:1px solid var(--rule);background:#FFFFFF}
+.figure.wide{width:100%;min-width:720px}
 
-/* skills panel */
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+/* the bus figure */
+.cpfig{width:100%;min-width:860px;height:auto;display:block}
+.cpfig text{font-family:"Azeret Mono",monospace;fill:var(--fg-3)}
+.cpfig .chip{fill:var(--mark)}
+.cpfig .chipt{font-family:"Archivo",sans-serif;font-weight:700;font-size:17px;fill:var(--paper);letter-spacing:-.01em}
+.cpfig .s{font-family:"Archivo",sans-serif;font-weight:600;font-size:13.5px;fill:var(--fg)}
+.cpfig .d{font-size:11.5px;fill:var(--fg-3)}
+.cpfig .k{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;fill:var(--fg);letter-spacing:.1em}
+.cpfig .card,.cpfig .panel{fill:var(--card);stroke:var(--rule);stroke-width:1.5}
+.cpfig .ct{font-family:"Archivo",sans-serif;font-weight:600;font-size:17px;fill:var(--fg);letter-spacing:-.01em}
+.cpfig .tag{fill:none;stroke:var(--fg-3);stroke-width:1}
+.cpfig .tag.acc{stroke:var(--mark);stroke-width:1.5}
+.cpfig .tagt{font-size:10.5px;fill:var(--fg-3);letter-spacing:.04em}
+.cpfig .tagt.acct{fill:var(--mark)}
+.cpfig .band{fill:var(--mark)}
+.cpfig .bandt{font-family:"Archivo",sans-serif;font-weight:700;font-size:26px;fill:var(--paper);letter-spacing:-.01em}
+.cpfig .bands{font-family:"Archivo",sans-serif;font-weight:500;font-size:15px;fill:var(--paper);opacity:.82}
+.cpfig .bandm{font-size:11.5px;fill:var(--paper);opacity:.72;letter-spacing:.04em}
+.cpfig .rule{fill:none;stroke:var(--fg);stroke-width:1.5}
+.cpfig .rulet{font-family:"Archivo",sans-serif;font-weight:500;font-size:13.5px;fill:var(--fg-2)}
+.cpfig .drop{stroke:var(--rule);stroke-width:1.5}
+.cpfig .head{fill:var(--rule)}
+.cpfig .box{fill:none;stroke:var(--fg);stroke-width:2}
+.cpfig .boxt{font-family:"Archivo",sans-serif;font-weight:700;font-size:15px;fill:var(--fg);letter-spacing:.06em}
+.cpfig .api{font-size:10.5px;fill:var(--fg-3);letter-spacing:.08em}
+.cpfig .pill{fill:var(--fg)}
+.cpfig .pillt{font-family:"Archivo",sans-serif;font-weight:600;font-size:13px;fill:var(--paper)}
+.cpfig .foot{font-family:"Archivo",sans-serif;font-weight:500;font-size:16px;fill:var(--fg-3)}
+.cpfig .foot.em{fill:var(--fg);font-weight:600}
+
+/* card family, weight one: open (2px rule, no box) */
+.triad,.why,.credits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.credits{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr)}
+@media(max-width:720px){.triad,.why,.credits{grid-template-columns:1fr;gap:22px}}
+.tri,.why .item,.credit{border-top:2px solid var(--fg);padding-top:16px;display:grid;gap:8px;align-content:start}
+.tri .mono,.credit .cap{font-family:"Azeret Mono",monospace;color:var(--fg-3);font-size:.76rem}
+.tri h3{font-size:1.5rem;letter-spacing:-.02em;line-height:1.1;margin-top:6px}
+.tri p,.why .item p,.credit p{font-size:.95rem;color:var(--fg-2);line-height:1.55}
+.why .item b{font-weight:600;font-size:1.05rem;letter-spacing:-.01em}
+.credit p b{color:var(--fg)}
+
+/* card family, weight two: boxed */
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 @media(max-width:720px){.pair{grid-template-columns:1fr}}
-.panel{background:var(--card);border:1px solid var(--rule);padding:18px;display:grid;gap:8px}
+.panel{background:var(--card);border:1px solid var(--rule);border-top:2px solid var(--fg);padding:20px 22px 24px;display:grid;gap:12px;align-content:start}
 .panel .cap{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
-.panel pre{margin:0;font-family:"Azeret Mono",monospace;font-size:.78rem;line-height:1.6;white-space:pre-wrap;color:var(--fg-2)}
-.panel blockquote{margin:0;font-size:1.05rem;line-height:1.5;color:var(--fg-2)}
+.panel pre{margin:0;font-family:"Azeret Mono",monospace;font-size:.78rem;line-height:1.65;white-space:pre-wrap;color:var(--fg-2)}
+.panel blockquote{margin:0;font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:1.25rem;line-height:1.4;letter-spacing:-.01em;color:var(--fg-2)}
+
+.night{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+@media(max-width:820px){.night{grid-template-columns:1fr}}
+.col{display:grid;gap:12px;align-content:start;padding:20px 22px 24px;border:1px solid var(--rule);border-top:2px solid var(--fg);background:var(--card)}
+.col.som{border-color:var(--mark);box-shadow:inset 0 0 0 1px var(--mark)}
+.col .cap{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
+.col.som .cap{color:var(--mark)}
+.col h3{font-size:1.2rem}
+.col ul{margin:0;padding:0;list-style:none;display:grid;counter-reset:beat}
+.col li{counter-increment:beat;display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px;padding:12px 0;border-top:1px solid var(--rule);font-size:.95rem;color:var(--fg-2);line-height:1.5}
+.col li::before{content:counter(beat,decimal-leading-zero);font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3);padding-top:3px}
+.col.som li::before{color:var(--mark)}
+
+.asks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media(max-width:720px){.asks{grid-template-columns:1fr}}
+.ask{display:grid;gap:8px;padding:20px 22px;border:1px solid var(--rule);border-top:2px solid var(--fg);background:var(--card)}
+.ask h3{font-size:1.05rem}
+.ask p{font-size:.92rem;color:var(--fg-2)}
 
 /* not list */
 .nots{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
-.nots li{border:1px solid var(--rule);padding:.35em .9em;font-size:.9rem;color:var(--fg-2);background:var(--card)}
+.nots li{border:1px solid var(--rule);padding:.45em .9em;font-size:.9rem;color:var(--fg-2);background:var(--card)}
 .nots li::before{content:"not ";color:var(--fg-3)}
 
-/* proofs */
-.proofs{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-@media(max-width:900px){.proofs{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.proofs{grid-template-columns:1fr}}
-.proof{background:var(--card);border:1px solid var(--rule);padding:16px;display:grid;gap:8px;align-content:start}
-.proof h3{font-size:1.02rem}
-.proof p{font-size:.92rem;color:var(--fg-2)}
-.films{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:720px){.films{grid-template-columns:1fr}}
-.film{border:1px solid var(--rule);background:var(--card);display:grid}
-.film .frame{aspect-ratio:16/9;background:var(--mist);display:grid;place-items:start end;padding:14px;color:var(--fg-3);font-family:"Azeret Mono",monospace;font-size:.74rem}
-.film .meta{padding:14px 16px;display:grid;gap:4px}
-.film .meta b{font-weight:600}
-.film .meta span{font-size:.88rem;color:var(--fg-3)}
+/* go deeper: boxed cards that borrow the open card's top rule; the rule turns teal on hover */
+.reads{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media(max-width:900px){.reads{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.reads{grid-template-columns:1fr}}
+.rcard{display:grid;gap:10px;align-content:start;padding:22px 22px 24px;border:1px solid var(--rule);border-top:2px solid var(--fg);background:var(--card);text-decoration:none;color:var(--fg);transition:border-color 150ms var(--ease),transform 240ms var(--ease)}
+.rcard:hover,.rcard:focus-visible{border-top-color:var(--mark);transform:translateY(-2px)}
+.rcard svg{width:62px;height:40px;display:block;margin:4px 0 10px}
+.rcard .a{fill:var(--fg-3);transition:fill 150ms var(--ease)}
+.rcard .m{fill:var(--mark);transition:transform 240ms var(--ease)}
+.rcard:hover .a{fill:var(--fg)}
+.rcard:hover .m{transform:translateX(3px)}
+.rcard b{font-weight:600;font-size:1.15rem;letter-spacing:-.015em;line-height:1.2}
+.rcard span{font-size:.92rem;color:var(--fg-2);line-height:1.5}
+.rcard code{font-family:"Azeret Mono",monospace;font-size:.72rem;color:var(--fg-3);margin-top:4px}
+.rcard:hover code{color:var(--mark)}
 
-/* room */
-.room{display:grid;grid-template-columns:1fr;gap:40px}
-@media(max-width:720px){.room{grid-template-columns:1fr}}
-.names{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.95rem;color:var(--fg-2)}
-.count{font-family:"Archivo",sans-serif;font-size:2.6rem;font-weight:700;letter-spacing:-.03em;line-height:1}
-.count small{display:block;font-size:.85rem;font-weight:400;letter-spacing:0;color:var(--fg-3);margin-top:4px}
+.through{font-family:"Azeret Mono",monospace;font-size:.78rem;color:var(--mark);text-decoration:none;border-left:2px solid var(--mark);padding:2px 0 2px 10px;display:inline-flex;align-items:center;min-height:44px;width:fit-content}
+.through:hover{text-decoration:underline}
 
-/* publish on ink */
-.publish{background:var(--dark-bg);color:var(--dark-fg)}
-.publish .lede{color:var(--dark-fg-2)}
-.publish .eyebrow{color:var(--steel);border-color:var(--dark-fg)}.publish .eyebrow b{color:var(--dark-fg)}
-.publish li span{color:var(--dark-fg-2)}
-.publish a{color:var(--dark-mark)}
-.repo-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px 24px;font-size:.95rem}
-@media(max-width:720px){.repo-list{grid-template-columns:1fr}}
-.repo-list li{display:grid;gap:2px;padding:10px 0;border-top:1px solid var(--graphite)}
-.repo-list code{color:var(--steel)}
-
-/* involve */
-.asks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:720px){.asks{grid-template-columns:1fr}}
-.ask{display:grid;gap:8px;padding:18px;border:1px solid var(--rule);background:var(--card)}
-.ask h3{font-size:1.02rem}
-.ask p{font-size:.92rem;color:var(--fg-2)}
-.formbox{border:1px solid var(--rule);padding:22px;display:grid;gap:14px;background:var(--mist)}
-.formbox form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:600px){.formbox form{grid-template-columns:1fr}}
-.field{display:grid;gap:4px;font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
-.field textarea{resize:vertical}
-.field input,.field select,.field textarea{font:inherit;font-family:"Archivo",sans-serif;font-size:1rem;color:var(--fg);background:var(--card);border:1px solid var(--rule);padding:.6em .7em}
-.field.full{grid-column:1/-1}
-.formbox .note{font-size:.82rem;color:var(--fg-3)}
-.formbox button{cursor:pointer}
-.field.consent span{font-family:"Archivo",sans-serif;font-size:.95rem;color:var(--fg-2);display:flex;gap:8px;align-items:flex-start}
-.field.consent input{margin-top:.3em}
-
-footer{padding:56px 0 72px;border-top:1px solid var(--rule);font-size:.9rem;color:var(--fg-3)}
-footer .wrap{display:grid;gap:18px}
-footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
-@media(max-width:720px){footer .cols{grid-template-columns:1fr}}
-footer a{color:var(--fg-2);text-decoration:none}
-footer a:hover{color:var(--mark)}
-/* additions for the story page */
-.why{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:720px){.why{grid-template-columns:1fr}}
-.why .item{border-top:2px solid var(--fg);padding-top:12px;display:grid;gap:6px}
-.why .item b{font-weight:600}
-.why .item p{font-size:.95rem;color:var(--fg-2)}
-.eras{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-@media(max-width:720px){.eras{grid-template-columns:1fr}}
-.era{background:var(--card);border:1px solid var(--rule);padding:16px;display:grid;gap:6px;align-content:start}
-.era .n{font-family:"Azeret Mono",monospace;font-size:.72rem;color:var(--fg-3)}
-.era h3{font-size:1.05rem}
-.era p{font-size:.92rem;color:var(--fg-2)}
-.era.now{border-color:var(--mark);border-width:2px}
-.night{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:820px){.night{grid-template-columns:1fr}}
-.col{display:grid;gap:10px;align-content:start;padding:18px;border:1px solid var(--rule);background:var(--card)}
-.col.som{border-color:var(--mark);border-width:2px}
-.col .cap{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
-.col h3{font-size:1.1rem}
-.col ul{margin:0;padding-left:1.1em;display:grid;gap:6px;font-size:.95rem;color:var(--fg-2)}
-.col li::marker{color:var(--fg-3)}
-.col .verdict{font-weight:600;color:var(--fg);padding-top:6px;border-top:1px solid var(--rule)}
-.beats{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:b}
-.beat{display:grid;grid-template-columns:56px 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--rule)}
-.beat .num{font-family:"Azeret Mono",monospace;font-size:.78rem;color:var(--fg-3);padding-top:4px}
-.beat b{display:block;font-weight:600;margin-bottom:4px}
-.beat p{font-size:.95rem;color:var(--fg-2)}
-.quote{margin-top:6px;font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:clamp(1.25rem,2.6vw,1.6rem);line-height:1.3;letter-spacing:-.01em;max-width:34ch;color:var(--fg)}
-.quote small{display:block;font-family:"Azeret Mono",monospace;font-size:.72rem;color:var(--fg-3);margin-top:8px;letter-spacing:0}
-.hops{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
-.hops .sys{border:1px solid var(--rule);background:var(--card);padding:.4em .7em;color:var(--fg)}
-.hops .hop{background:#F2D24B;color:#111517;padding:.4em .6em;border-radius:2px}
-.year{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-@media(max-width:720px){.year{grid-template-columns:1fr 1fr}}
-.year div{display:grid;gap:4px;border-top:1px solid var(--rule);padding-top:10px}
-.year .y{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3)}
-.year b{font-weight:600;font-size:.95rem}
-.year p{font-size:.88rem;color:var(--fg-2)}
-.logos{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
-.logos img{width:100%;height:56px;object-fit:contain;background:#FFFFFF;border:1px solid var(--rule);padding:8px 14px;box-sizing:border-box}
+/* demo band: the white beat */
 .demoband{background:var(--card)}
 .bandhead{display:flex;flex-wrap:wrap;gap:18px 32px;align-items:flex-end;justify-content:space-between}
 .thumbs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:720px){.thumbs{grid-template-columns:1fr}}
 .thumb{position:relative;display:block;text-decoration:none;color:var(--fg);border:1px solid var(--rule);background:var(--mist);overflow:hidden}
-.thumb img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
-.thumb .play{position:absolute;left:50%;top:38%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(17,21,23,.82);border:2px solid #F4F6F7;transition:transform 200ms cubic-bezier(.2,.7,.2,1)}
+.thumb img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;transition:transform 750ms var(--ease)}
+.thumb:hover img{transform:scale(1.02)}
+.thumb .play{position:absolute;left:50%;top:38%;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;background:rgba(17,21,23,.82);border:2px solid #F4F6F7;transition:transform 240ms var(--ease)}
 .thumb .play::after{content:"";position:absolute;left:26px;top:19px;border-style:solid;border-width:13px 0 13px 20px;border-color:transparent transparent transparent #F4F6F7}
 .thumb:hover .play{transform:scale(1.06)}
-.thumb .meta{display:grid;gap:2px;padding:12px 14px;border-top:1px solid var(--rule);background:var(--card)}
+.thumb .meta{display:grid;gap:2px;padding:14px 16px;border-top:1px solid var(--rule);background:var(--card)}
 .thumb .meta small{font-family:"Azeret Mono",monospace;font-size:.72rem;color:var(--fg-3)}
-.thumb .meta b{font-weight:600}
-@media(max-width:720px){section{padding:60px 0}section .wrap{gap:26px}.hero{padding:44px 0 36px}.two{gap:28px}}
-.credits{display:grid;grid-template-columns:1.4fr 1fr;gap:24px}
-@media(max-width:820px){.credits{grid-template-columns:1fr}}
-.credit{display:grid;gap:6px;border-top:2px solid var(--fg);padding-top:12px}
-.credit .cap{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
-.credit p{font-size:.95rem;color:var(--fg-2)}
-.teaser{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;border:1px solid var(--rule);background:var(--card);padding:18px 20px}
-.teaser .stack{gap:2px}.teaser b{font-weight:600}.teaser span{font-size:.92rem;color:var(--fg-3)}
-.hero .why{border-top:1px solid var(--rule);padding-top:22px}
-.figure{display:block;max-width:100%;height:auto;border:1px solid var(--rule);background:#FFFFFF}
-.figure.wide{width:100%;min-width:720px}
-.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.thumb .meta b{font-weight:600;font-size:1.05rem;letter-spacing:-.01em}
+
+/* the decision: the one serif headline on the page */
+#decision h2{font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:clamp(1.9rem,3.8vw,2.8rem);letter-spacing:-.015em;line-height:1.12;max-width:26ch}
+
+/* room */
+.room{display:grid;gap:44px}
+.count{font-family:"Archivo",sans-serif;font-size:clamp(2.6rem,4vw,3.4rem);font-weight:700;letter-spacing:-.035em;line-height:1;font-variant-numeric:tabular-nums}
+.count small{display:block;font-family:"Azeret Mono",monospace;font-size:.76rem;font-weight:400;letter-spacing:0;color:var(--fg-3);margin-top:8px}
+.logos{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.logos img{width:100%;height:56px;object-fit:contain;background:#FFFFFF;border:1px solid var(--rule);padding:8px 14px;box-sizing:border-box;filter:grayscale(1);opacity:.85;transition:filter 240ms var(--ease),opacity 240ms var(--ease)}
+.logos img:hover{filter:none;opacity:1}
+.names{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.95rem;color:var(--fg-2)}
+
+/* publish on ink: card family, weight three */
+.publish{background:var(--dark-bg);color:var(--dark-fg);border-top-color:var(--dark-bg)}
+.publish h2{color:var(--dark-fg)}
+.publish .lede{color:var(--dark-fg-2)}
+.publish .eyebrow{color:var(--steel);border-color:var(--dark-fg)}.publish .eyebrow b{color:var(--dark-fg)}
+.publish li span{color:var(--dark-fg-2)}
+.publish a{color:var(--dark-mark)}
+.publish a:focus-visible{box-shadow:0 0 0 2px var(--dark-bg),0 0 0 4px var(--dark-mark)}
+.pubs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px}
+@media(max-width:900px){.pubs{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pubs{grid-template-columns:1fr;gap:20px}}
+.pub{display:grid;gap:8px;padding:16px 0 0;border-top:2px solid var(--dark-fg);align-content:start}
+.pub b{font-weight:600;font-size:1.15rem;letter-spacing:-.015em;line-height:1.2}
+.pub span{font-size:.92rem;color:var(--dark-fg-2);line-height:1.5}
+.pub code{color:var(--steel);font-size:.72rem;margin-top:4px}
+.repo-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 24px;font-size:.95rem}
+@media(max-width:720px){.repo-list{grid-template-columns:1fr}}
+.repo-list li{display:grid;gap:2px;padding:10px 0;border-top:1px solid var(--graphite)}
+.repo-list code{color:var(--steel)}
+.publish+section{border-top-color:transparent}
+
+/* involve */
+.formbox{border:1px solid var(--rule);border-top:2px solid var(--fg);padding:clamp(22px,3vw,36px);display:grid;gap:20px;background:var(--card);max-width:760px}
+.formbox h3{font-size:1.5rem;letter-spacing:-.02em}
+.formbox form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.formbox form{grid-template-columns:1fr}}
+.field{display:grid;gap:4px;font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
+.field textarea{resize:vertical}
+.field input,.field select,.field textarea{font:inherit;font-family:"Archivo",sans-serif;font-size:1rem;color:var(--fg);background:var(--card);border:1px solid var(--rule);padding:.6em .7em;min-height:44px}
+.field input:focus-visible,.field select:focus-visible,.field textarea:focus-visible{border-color:var(--mark);box-shadow:none}
+.field.full{grid-column:1/-1}
+.formbox .note{font-size:.88rem;color:var(--fg-3);max-width:62ch}
+.formbox button{cursor:pointer}
 .field.consent span{font-family:"Archivo",sans-serif;font-size:.95rem;color:var(--fg-2);display:flex;gap:8px;align-items:flex-start}
-.field.consent input{margin-top:.3em}
-.pubs{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-@media(max-width:820px){.pubs{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.pubs{grid-template-columns:1fr}}
-.pub{display:grid;gap:4px;padding:12px 0;border-top:1px solid var(--graphite)}
-.pub b{font-weight:600}.pub span{font-size:.92rem;color:var(--dark-fg-2)}.pub code{color:var(--steel)}
+.field.consent input{margin-top:.3em;accent-color:var(--mark)}
+
+/* footer: link set untouched, given room */
+footer{padding:clamp(56px,7vw,88px) 0 72px;border-top:1px solid var(--rule);font-size:.9rem;color:var(--fg-3)}
+footer .wrap{display:grid;gap:40px}
+footer .pull{font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.015em;line-height:1.15;max-width:24ch}
+footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px 24px;border-top:1px solid var(--rule);padding-top:32px}
+@media(max-width:720px){footer .cols{grid-template-columns:1fr}}
+footer .cols .stack{gap:0}
+footer .cols .stack p{margin-bottom:14px}
+footer a{color:var(--fg-2);text-decoration:none;display:inline-block;padding:9px 0;line-height:1.3}
+footer a:hover{color:var(--mark)}
+footer .stack a{width:fit-content}
+
+/* mobile density */
+@media(max-width:720px){
+  section .wrap{gap:28px}
+  .hero .stack{gap:22px}
+  .two{gap:28px}
+  .btn{width:100%}
+  .btn-row{gap:8px}
+  .hero .btn-row .btn{width:calc(50% - 4px)}
+  .bandhead .btn{width:auto}
+}
+@media(max-width:400px){.hero .btn-row .btn{width:100%}}
 </style>
-<style>img{max-width:100%}[hidden]{display:none!important}</style>
+
 </head>
 <body>
 
 <nav>
   <div class="wrap">
-    <a class="brand" href="#top"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><rect class="b" x="0" y="2" width="17" height="4.6"/><rect class="b c" x="5" y="9.7" width="19" height="4.6"/><rect class="b" x="0" y="17.4" width="17" height="4.6"/></svg>SOM</a>
+    <a class="brand" href="#top"><svg class="mark" viewBox="0 0 24 24" aria-hidden="true"><rect class="b" x="0" y="2" width="17" height="4.6"></rect><rect class="b c" x="5" y="9.7" width="19" height="4.6"></rect><rect class="b" x="0" y="17.4" width="17" height="4.6"></rect></svg>SOM</a>
     <ul>
       <li><a href="#idea">The idea</a></li>
       <li><a href="#model">Story, Asset, Telling</a></li>
@@ -291,7 +352,7 @@ footer a:hover{color:var(--mark)}
 
 <header class="hero commit" id="top">
   <div class="wrap">
-    <svg class="mark hero-mark" viewBox="0 0 24 24" aria-hidden="true"><rect class="b" x="0" y="2" width="17" height="4.6"/><rect class="b c" x="5" y="9.7" width="19" height="4.6"/><rect class="b" x="0" y="17.4" width="17" height="4.6"/></svg>
+    <svg class="mark hero-mark" viewBox="0 0 24 24" aria-hidden="true"><rect class="b" x="0" y="2" width="17" height="4.6"></rect><rect class="b c" x="5" y="9.7" width="19" height="4.6"></rect><rect class="b" x="0" y="17.4" width="17" height="4.6"></rect></svg>
     <span class="eyebrow">story object model<b>an open standard</b></span>
     <div class="hero-grid">
       <div class="stack">
@@ -344,7 +405,7 @@ footer a:hover{color:var(--mark)}
         <p>A hold on a casualty figure, issued in chat; the seen counter is the only record that exists. Two script versions, nobody sure which is current. Chat is where newsroom knowledge is fast. It is not where newsroom knowledge is durable.</p>
         <p>And chat is only the visible part. Trace a story from wire to air and every hop between systems is a person carrying it by hand: a rebrief, a phone call, a word across the desk, a note in somebody's head. A human API, copying, pasting and relaying between a growing list of tools. The decisions that shaped the story never reach the tools that act on it, and they do not survive the handoff either: from one shift to the next, from Tuesday to Friday, or when the story comes back three weeks later. People are the glue, and always have been. Now the machines working alongside them are kept in the dark too, and a tool with AI in it cannot act on what it cannot see.</p>
       </div>
-      <div role="img" aria-label="A newsroom group chat: a hold on a casualty figure is issued, one desk marks it seen, another asks which script version is current, and graphics misses it and the strap goes out with the number" style="width:100%;max-width:460px;justify-self:center;background:#FFFFFF;border:1px solid #DFE4E7;box-shadow:0 24px 48px -32px rgba(17,21,23,.25);display:grid;font-size:14px;line-height:1.4;min-width:0;align-self:center">
+      <div role="img" aria-label="A newsroom group chat: a hold on a casualty figure is issued, one desk marks it seen, another asks which script version is current, and graphics misses it and the strap goes out with the number" style="width:100%;max-width:460px;justify-self:center;background:#FFFFFF;border:1px solid #DFE4E7;box-shadow:0 24px 48px -32px rgba(17,21,23,.25);display:grid;font-size:14px;line-height:1.4;min-width:0;align-self:center;color:#111517">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;border-bottom:1px solid #DFE4E7">
             <div style="display:grid;gap:1px"><div style="font-weight:600;font-size:15px;letter-spacing:-.01em"># breaking-output</div><div style="font-family:'Azeret Mono',monospace;font-size:11px;color:#5B6670">14 members · 6 online</div></div>
             <div style="display:flex"><span style="width:22px;height:22px;border-radius:50%;background:#2C333A;border:2px solid #FFFFFF"></span><span style="width:22px;height:22px;border-radius:50%;background:#5B6670;border:2px solid #FFFFFF;margin-left:-8px"></span><span style="width:22px;height:22px;border-radius:50%;background:#8E9BA5;border:2px solid #FFFFFF;margin-left:-8px"></span><span style="width:22px;height:22px;border-radius:50%;background:#ECEFF1;border:2px solid #FFFFFF;margin-left:-8px;font-family:'Azeret Mono',monospace;font-size:9px;color:#5B6670;display:grid;place-items:center">+11</span></div>
@@ -395,7 +456,7 @@ footer a:hover{color:var(--mark)}
       <h2>The story carries its own context.</h2>
       <p class="lede">Anyone whose AI became useful the day they managed what it could see already knows the principle: the right context, at the right time. Now scale it to a newsroom. Fifty tools, hundreds of stories, every decision moving by the minute. You cannot hand-feed a building. So the story carries its own context, and publishes it to everything at once.</p>
     </div>
-    <div class="scroll"><img class="figure wide" src="assets/bus.svg" width="960" height="340" alt="Tools subscribe to a shared story object over a bus; a rulebook of Skills says what each tool does with it. No orchestrator and no central application: each tool reads the story and decides for itself."></div>
+    
     <div class="two">
       <p class="statement">One decision, made once, <em>obeyed everywhere</em>, provable afterwards.</p>
       <div class="stack prose">
@@ -403,6 +464,112 @@ footer a:hover{color:var(--mark)}
         <p>Nothing in the standard is wired to anything else, so change your mind about any tool later and lose nothing. The knowledge lives in the layer, not the tool.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="picture">
+  <div class="wrap">
+    <span class="eyebrow">context as infrastructure<b>the whole picture</b></span>
+    <div class="stack prose">
+      <h2>Stop sending instructions. Publish context.</h2>
+      <p class="lede">One story, carrying its own state, published once. Every system that cares hears it and decides for itself. This is the drawing the room was shown at IBC, and it is the whole architecture on one page: the stories, the bus they travel on, the rulebook the newsroom writes, and the platforms you already run with their own agents inside.</p>
+    </div>
+    <div class="scroll"><svg class="cpfig" viewBox="0 0 1200 664" role="img" aria-labelledby="cptitle cpdesc" xmlns="http://www.w3.org/2000/svg">
+<title id="cptitle">Context as infrastructure</title>
+<desc id="cpdesc">Four layers. At the top, three live stories carrying their own state: a Crown Court verdict marked developing with a restriction raised, a Prime Ministerial statement written both ways, and Hurricane Melissa with six assertions, two held and one flagged. Beneath them the story bus, with nothing in charge: everything attaches to it, and every system subscribes, renders the current state and attributes every change. Beneath that the rulebook of Skills the newsroom has written, which declare while executors act. At the bottom the newsroom's own platforms, each with its API and its own agents inside, reading the same stories. Nothing new is in charge, and there is one audit trail across all of them.</desc>
+<rect class="chip" x="0" y="6" width="119" height="30" rx="3"/>
+<text class="chipt" x="13" y="26">The Stories</text>
+<text class="s" x="0" y="56">living objects carrying the state</text>
+<text class="d" x="0" y="76">about · decided · cleared ·</text>
+<text class="d" x="0" y="92">held</text>
+<rect class="card" x="270" y="0" width="286" height="120" rx="4"/>
+<text class="ct" x="286" y="34">Crown Court verdict</text>
+<rect class="tag" x="286" y="56" width="86" height="22" rx="3"/>
+<text class="tagt" x="329" y="71" text-anchor="middle">DEVELOPING</text>
+<rect class="tag acc" x="380" y="56" width="141" height="22" rx="3"/>
+<text class="tagt acct" x="451" y="71" text-anchor="middle">RESTRICTION RAISED</text>
+<rect class="card" x="577" y="0" width="286" height="120" rx="4"/>
+<text class="ct" x="593" y="34">PM statement · 16:00</text>
+<rect class="tag" x="593" y="56" width="73" height="22" rx="3"/>
+<text class="tagt" x="629" y="71" text-anchor="middle">BREAKING</text>
+<rect class="tag acc" x="674" y="56" width="134" height="22" rx="3"/>
+<text class="tagt acct" x="741" y="71" text-anchor="middle">WRITTEN BOTH WAYS</text>
+<rect class="card" x="884" y="0" width="286" height="120" rx="4"/>
+<text class="ct" x="900" y="34">Hurricane Melissa</text>
+<rect class="tag" x="900" y="56" width="73" height="22" rx="3"/>
+<text class="tagt" x="936" y="71" text-anchor="middle">BREAKING</text>
+<rect class="tag" x="981" y="56" width="100" height="22" rx="3"/>
+<text class="tagt" x="1031" y="71" text-anchor="middle">6 ASSERTIONS</text>
+<rect class="tag acc" x="1088" y="56" width="59" height="22" rx="3"/>
+<text class="tagt acct" x="1118" y="71" text-anchor="middle">2 HELD</text>
+<rect class="tag acc" x="900" y="84" width="79" height="22" rx="3"/>
+<text class="tagt acct" x="940" y="99" text-anchor="middle">1 FLAGGED</text>
+<rect class="chip" x="0" y="174" width="139" height="30" rx="3"/>
+<text class="chipt" x="13" y="194">The Story Bus</text>
+<text class="s" x="0" y="224">the messaging transport layer</text>
+<text class="d" x="0" y="244">the common integration point</text>
+<rect class="band" x="270" y="168" width="900" height="104" rx="4"/>
+<text class="bandt" x="296" y="212">NOTHING IN CHARGE</text>
+<text class="bands" x="296" y="238">everything attaches to this, and only this.</text>
+<text class="bandm" x="1144" y="238" text-anchor="end">SUBSCRIBE · RENDER CURRENT STATE · ATTRIBUTE EVERY CHANGE</text>
+<rect class="chip" x="0" y="320" width="138" height="30" rx="3"/>
+<text class="chipt" x="13" y="340">The Rulebook</text>
+<text class="s" x="0" y="370">skills declare</text>
+<text class="d" x="0" y="390">written down, readable by every</text>
+<text class="d" x="0" y="406">tool</text>
+<rect class="panel" x="270" y="318" width="900" height="76" rx="4"/>
+<text class="k" x="292" y="363">SKILLS</text>
+<rect class="rule" x="362" y="340" width="288" height="32" rx="4"/>
+<text class="rulet" x="506" y="361" text-anchor="middle">unconfirmed figures do not go into graphics</text>
+<rect class="rule" x="662" y="340" width="135" height="32" rx="4"/>
+<text class="rulet" x="730" y="361" text-anchor="middle">hold while flagged</text>
+<rect class="rule" x="809" y="340" width="229" height="32" rx="4"/>
+<text class="rulet" x="924" y="361" text-anchor="middle">two named sources before output</text>
+<text class="d" x="1162" y="363" text-anchor="end">executors act</text>
+<rect class="chip" x="0" y="464" width="107" height="30" rx="3"/>
+<text class="chipt" x="13" y="484">The Stack</text>
+<text class="s" x="0" y="514">your platforms, their agents inside</text>
+<text class="d" x="0" y="534">what changed is what they can</text>
+<text class="d" x="0" y="550">see</text>
+<line class="drop" x1="352.8" y1="394" x2="352.8" y2="450"/>
+<path class="head" d="M346.8,449 L358.8,449 L352.8,459 Z"/>
+<rect class="box" x="270" y="462" width="166" height="104" rx="4"/>
+<text class="boxt" x="286" y="494">NCS</text>
+<text class="api" x="422" y="492" text-anchor="end">API</text>
+<rect class="pill" x="305" y="520" width="96" height="28" rx="4"/>
+<text class="pillt" x="353" y="539" text-anchor="middle">agent</text>
+<line class="drop" x1="536.4" y1="394" x2="536.4" y2="450"/>
+<path class="head" d="M530.4,449 L542.4,449 L536.4,459 Z"/>
+<rect class="box" x="454" y="462" width="166" height="104" rx="4"/>
+<text class="boxt" x="470" y="494">GRAPHICS</text>
+<text class="api" x="605" y="492" text-anchor="end">API</text>
+<rect class="pill" x="488" y="520" width="96" height="28" rx="4"/>
+<text class="pillt" x="536" y="539" text-anchor="middle">agent</text>
+<line class="drop" x1="720.0" y1="394" x2="720.0" y2="450"/>
+<path class="head" d="M714.0,449 L726.0,449 L720.0,459 Z"/>
+<rect class="box" x="637" y="462" width="166" height="104" rx="4"/>
+<text class="boxt" x="653" y="494">MAM</text>
+<text class="api" x="789" y="492" text-anchor="end">API</text>
+<rect class="pill" x="672" y="520" width="96" height="28" rx="4"/>
+<text class="pillt" x="720" y="539" text-anchor="middle">agent</text>
+<line class="drop" x1="903.6" y1="394" x2="903.6" y2="450"/>
+<path class="head" d="M897.6,449 L909.6,449 L903.6,459 Z"/>
+<rect class="box" x="821" y="462" width="166" height="104" rx="4"/>
+<text class="boxt" x="837" y="494">WEB</text>
+<text class="api" x="972" y="492" text-anchor="end">API</text>
+<rect class="pill" x="856" y="520" width="96" height="28" rx="4"/>
+<text class="pillt" x="904" y="539" text-anchor="middle">agent</text>
+<line class="drop" x1="1087.2" y1="394" x2="1087.2" y2="450"/>
+<path class="head" d="M1081.2,449 L1093.2,449 L1087.2,459 Z"/>
+<rect class="box" x="1004" y="462" width="166" height="104" rx="4"/>
+<text class="boxt" x="1020" y="494">SOCIAL</text>
+<text class="api" x="1156" y="492" text-anchor="end">API</text>
+<rect class="pill" x="1039" y="520" width="96" height="28" rx="4"/>
+<text class="pillt" x="1087" y="539" text-anchor="middle">agent</text>
+<text class="foot" x="0" y="618">Nothing new in charge. Every tool keeps getting smarter.</text>
+<text class="foot em" x="0" y="644">And for the first time, one audit trail across them all.</text>
+</svg></div>
+    <p class="quote">Nothing on here has to talk to anything else. Everything reads the story.</p>
   </div>
 </section>
 
@@ -419,6 +586,7 @@ footer a:hover{color:var(--mark)}
       <div class="tri"><span class="mono">telling.event</span><h3>Telling</h3><p>The moment an asset meets an audience: which outlet, which version, who saw it. One story, a pool of assets, any number of tellings. The compliance position belongs to the telling, not to the media, and the human judgement that sits between content and audience has a place in the schema.</p></div>
     </div>
     <p class="quote">We might not usually call it that, but this is how journalists already think. We did not invent this. We just wrote it down.</p>
+    <a class="through" href="where-it-goes.html">where each kind of thing lives →</a>
   </div>
 </section>
 
@@ -496,19 +664,56 @@ silence: valid</pre></div>
 <section id="junctions">
   <div class="wrap">
     <span class="eyebrow">tams.source + timerange<b>one new standard, plus smart junctions</b></span>
-    <div class="two">
+    <div class="two" style="align-items:start">
       <div class="stack prose">
         <h2>It replaces nothing.</h2>
         <p>Every era needed a new standard. Hardware had GPIs. Software had MOS, designed by engineers from broadcasters and vendors on behalf of their industry, and nobody owns it. Intelligence is the third era, and SOM meets the standards that already do their jobs brilliantly where they are. Your MOS lines stay, with a bridge that makes them smarter. What you built with MCP and agents stays.</p>
         <p><b>TAMS</b>, the BBC R&amp;D Time Addressable Media Store, holds the frames; SOM holds what they mean to the story. At the junction, a hold pins to the exact frames it blocks, a quote knows its own in and out points, and which frames reached which audience becomes a query. Binding happens at the editorial act, never at ingest.</p>
       </div>
-      <div class="stack">
+      <div class="stack" style="gap:24px">
         <h3>What SOM is not</h3>
         <ul class="nots">
           <li>the media</li><li>the rundown</li><li>a MAM</li><li>a product</li><li>software</li><li>a replacement for anything you run</li><li>owned by any vendor</li>
         </ul>
         <p class="pull">A standard owned by one vendor is a product. A standard owned by an industry is infrastructure.</p>
+        <a class="through" href="workflows.html">what it looks like on the desk →</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<section id="deeper">
+  <div class="wrap">
+    <span class="eyebrow">storyobjectmodel.com<b>go deeper</b></span>
+    <div class="stack prose">
+      <h2>Four ways further in.</h2>
+      <p class="lede">The specification is the law and the schemas are the text. These are the pages that make them make sense: what it looks like on a desk, where each kind of thing lives, what the model refuses to do, and the questions everyone asks first.</p>
+    </div>
+    <div class="reads">
+      <a class="rcard" href="workflows.html">
+        <svg viewBox="0 0 62 40" aria-hidden="true"><rect class="a" x="0" y="2" width="16" height="6"></rect><rect class="a" x="10" y="12" width="16" height="6"></rect><rect class="a" x="20" y="22" width="16" height="6"></rect><rect class="m" x="30" y="32" width="32" height="6"></rect></svg>
+        <b>Example workflows</b>
+        <span>Six pieces of newsroom work with the context travelling: what is written to the story, what tools do on their own, and what stays a human decision.</span>
+        <code>workflows →</code>
+      </a>
+      <a class="rcard" href="where-it-goes.html">
+        <svg viewBox="0 0 62 40" aria-hidden="true"><rect class="m" x="0" y="2" width="62" height="6"></rect><rect class="a" x="0" y="14" width="18" height="6"></rect><rect class="a" x="24" y="14" width="38" height="6"></rect><rect class="a" x="0" y="24" width="18" height="6"></rect><rect class="a" x="24" y="24" width="28" height="6"></rect><rect class="a" x="0" y="34" width="18" height="6"></rect><rect class="a" x="24" y="34" width="20" height="6"></rect></svg>
+        <b>Where it goes</b>
+        <span>The question every implementer hits on the first morning. The URI test, asset or assertion, and the residency table: twelve things a newsroom builds with, and what SOM carries about each.</span>
+        <code>where it goes →</code>
+      </a>
+      <a class="rcard" href="principles.html">
+        <svg viewBox="0 0 62 40" aria-hidden="true"><rect class="m" x="0" y="2" width="6" height="38"></rect><rect class="a" x="14" y="2" width="48" height="6"></rect><rect class="a" x="14" y="12" width="36" height="6"></rect><rect class="a" x="14" y="22" width="44" height="6"></rect><rect class="a" x="14" y="32" width="24" height="6"></rect></svg>
+        <b>Principles</b>
+        <span>What belongs in the standard and what deliberately does not, the rules every future change has to pass, and where the standard stops.</span>
+        <code>principles →</code>
+      </a>
+      <a class="rcard" href="faq.html">
+        <svg viewBox="0 0 62 40" aria-hidden="true"><rect class="a" x="0" y="2" width="36" height="6"></rect><rect class="a" x="0" y="12" width="22" height="6"></rect><rect class="m" x="26" y="22" width="36" height="6"></rect><rect class="a" x="26" y="32" width="18" height="6"></rect></svg>
+        <b>Questions people ask</b>
+        <span>Does anything act on its own, what happens at three in the morning, who owns it, and what becomes of the systems you already run.</span>
+        <code>faq →</code>
+      </a>
     </div>
   </div>
 </section>
@@ -556,7 +761,7 @@ silence: valid</pre></div>
       <a class="btn btn-secondary" href="/schema/1.0/">schemas · /schema/1.0/</a>
       <a class="btn btn-secondary" href="https://agentskills.io">skills · agentskills.io</a>
     </div>
-    <p style="font-size:.9rem;opacity:.75;max-width:62ch">No fee and nothing to sign. Schemas, examples, tools and skills are licensed Apache 2.0; the specification prose CC BY 4.0. Those licences are the whole of the terms.</p>
+    <p style="font-size:.9rem;color:var(--dark-fg-2);max-width:62ch">No fee and nothing to sign. Schemas, examples, tools and skills are licensed Apache 2.0; the specification prose CC BY 4.0. Those licences are the whole of the terms.</p>
   </div>
 </section>
 
@@ -590,6 +795,11 @@ silence: valid</pre></div>
         <p>The standard is open and unowned; the working group continues.</p>
       </div>
       <div class="stack">
+        <a href="workflows.html">Workflows</a>
+        <a href="where-it-goes.html">Where it goes</a>
+        <a href="principles.html">Principles</a>
+        <a href="faq.html">FAQ</a>
+        <a href="joining.html">Joining</a>
         <a href="https://github.com/storyobjectmodel/som">GitHub</a>
         <a href="https://agentskills.io">agentskills.io</a>
         <a href="https://show.ibc.org/accelerator-project-incubator-2026-smart-stories-agentic-production-ecosystem">IBC project page</a>
@@ -609,5 +819,4 @@ silence: valid</pre></div>
   </div>
 </footer>
 
-</body>
-</html>
+</body></html>

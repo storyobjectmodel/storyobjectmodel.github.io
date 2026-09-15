@@ -27,6 +27,22 @@ h1{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;letter-spacing:-.03em;li
 h2{font-size:1.3rem;font-weight:600;letter-spacing:-.01em;line-height:1.25;margin:18px 0 0}
 p{margin:0;color:var(--fg-2)}
 a{color:var(--mark)}
+.scroll{overflow-x:auto;margin:0 -20px;padding:0 20px}
+.figcap{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3);line-height:1.5;margin-top:10px}
+.busfig{width:100%;min-width:700px;height:auto;display:block}
+.busfig text{font-family:"Azeret Mono",monospace;font-size:12px;fill:var(--fg-3)}
+.busfig .lbl{font-family:"Archivo",sans-serif;font-weight:600;font-size:15px;fill:var(--fg);letter-spacing:-.01em}
+.busfig .k{font-family:"Archivo",sans-serif;font-weight:700;font-size:12px;fill:var(--fg);letter-spacing:.08em}
+.busfig .foot{font-size:12.5px;fill:var(--fg-2)}
+.busfig .tool{fill:var(--card);stroke:var(--rule);stroke-width:1}
+.busfig .band{fill:none;stroke:var(--rule);stroke-width:1;stroke-dasharray:3 4}
+.busfig .tick{stroke:var(--rule);stroke-width:1;stroke-dasharray:3 4}
+.busfig .tap{stroke:var(--fg-3);stroke-width:1.25}
+.busfig .head{fill:var(--fg-3)}
+.busfig .bus{stroke:var(--fg);stroke-width:5;stroke-linecap:square}
+.busfig .storybg{fill:var(--paper)}
+.busfig .b2{fill:var(--fg)}
+.busfig .m2{fill:var(--mark)}
 .btn{display:inline-flex;align-items:center;padding:.7em 1.1em;font-family:"Azeret Mono",monospace;font-size:.78rem;font-weight:500;text-decoration:none;background:var(--fg);color:var(--paper);width:fit-content}
 footer{padding:32px 0 56px;border-top:1px solid var(--rule);font-size:.9rem;color:var(--fg-3)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:8px 22px}
@@ -42,6 +58,56 @@ footer a{color:var(--fg-2);text-decoration:none}
 <span class="eyebrow">storyobjectmodel.com<b>joining</b></span>
 <h1>What joining actually is.</h1>
 <p>Nothing about your product comes out. One system is enough to start. Tier 1 is subscribe and publish and takes days; Tier 2 carries bidirectional structured context; Tier 3 lets your tool decide autonomously against the story. Change control is in writing.</p>
+<div class="scroll"><svg class="busfig" viewBox="0 0 960 400" role="img" aria-labelledby="bustitle busdesc" xmlns="http://www.w3.org/2000/svg">
+<title id="bustitle">Tools around a shared story bus</title>
+<desc id="busdesc">Five newsroom tools sit above a single bus. Each one publishes to it, subscribes to it, or both. One live story object rides the bus, and a rulebook of Skills written by the newsroom sits above the tools. There is no orchestrator and no central application: each tool reads the story and decides for itself.</desc>
+<rect class="band" x="30" y="26" width="900" height="40" rx="3"></rect>
+<text class="k" x="44" y="51">THE RULEBOOK</text>
+<text class="m" x="170" y="51">Skills your newsroom writes · declare, never act · silence is a valid outcome</text>
+<line class="tick" x1="110.0" y1="66" x2="110.0" y2="96"></line>
+<line class="tick" x1="295.0" y1="66" x2="295.0" y2="96"></line>
+<line class="tick" x1="480.0" y1="66" x2="480.0" y2="96"></line>
+<line class="tick" x1="665.0" y1="66" x2="665.0" y2="96"></line>
+<line class="tick" x1="850.0" y1="66" x2="850.0" y2="96"></line>
+<rect class="tool" x="30.0" y="96" width="160" height="58" rx="4"></rect>
+<text class="lbl" x="110.0" y="121" text-anchor="middle">Planning</text>
+<text class="m" x="110.0" y="140" text-anchor="middle">subscribes</text>
+<rect class="tool" x="215.0" y="96" width="160" height="58" rx="4"></rect>
+<text class="lbl" x="295.0" y="121" text-anchor="middle">Rundown</text>
+<text class="m" x="295.0" y="140" text-anchor="middle">publishes · subscribes</text>
+<rect class="tool" x="400.0" y="96" width="160" height="58" rx="4"></rect>
+<text class="lbl" x="480.0" y="121" text-anchor="middle">Graphics</text>
+<text class="m" x="480.0" y="140" text-anchor="middle">subscribes</text>
+<rect class="tool" x="585.0" y="96" width="160" height="58" rx="4"></rect>
+<text class="lbl" x="665.0" y="121" text-anchor="middle">Transcription</text>
+<text class="m" x="665.0" y="140" text-anchor="middle">publishes</text>
+<rect class="tool" x="770.0" y="96" width="160" height="58" rx="4"></rect>
+<text class="lbl" x="850.0" y="121" text-anchor="middle">Social publish</text>
+<text class="m" x="850.0" y="140" text-anchor="middle">subscribes</text>
+<line class="tap" x1="110.0" y1="250" x2="110.0" y2="163"></line>
+<path class="head" d="M105.0,165 L115.0,165 L110.0,156 Z"></path>
+<line class="tap" x1="290.0" y1="154" x2="290.0" y2="241"></line>
+<path class="head" d="M285.0,239 L295.0,239 L290.0,248 Z"></path>
+<line class="tap" x1="300.0" y1="250" x2="300.0" y2="163"></line>
+<path class="head" d="M295.0,165 L305.0,165 L300.0,156 Z"></path>
+<line class="tap" x1="480.0" y1="250" x2="480.0" y2="163"></line>
+<path class="head" d="M475.0,165 L485.0,165 L480.0,156 Z"></path>
+<line class="tap" x1="665.0" y1="154" x2="665.0" y2="241"></line>
+<path class="head" d="M660.0,239 L670.0,239 L665.0,248 Z"></path>
+<line class="tap" x1="850.0" y1="250" x2="850.0" y2="163"></line>
+<path class="head" d="M845.0,165 L855.0,165 L850.0,156 Z"></path>
+<line class="bus" x1="30" y1="250" x2="930" y2="250"></line>
+<rect class="storybg" x="588" y="231" width="34" height="38" rx="3"></rect>
+<rect class="b2" x="592.0" y="238" width="10.2" height="5"></rect>
+<rect class="m2" x="594.8" y="247" width="11.4" height="5"></rect>
+<rect class="b2" x="592.0" y="256" width="10.2" height="5"></rect>
+<text class="k" x="588" y="280">THE STORY</text>
+<text class="m" x="588" y="298">one live object · decided, cleared, held</text>
+<text class="k" x="30" y="280">THE BUS</text>
+<text class="m" x="30" y="298">publish and subscribe · JSON envelope · media never travels here</text>
+<text class="foot" x="30" y="378">No orchestrator and no central application. Each tool reads the story and decides for itself.</text>
+</svg></div>
+<p class="figcap">Who publishes, who subscribes, and who does both. An arrow into the bus is a system writing to the story; an arrow up into a tool is that tool reading it.</p>
 <p>The schemas are served at <a href="/schema/1.0/">storyobjectmodel.com/schema/1.0/</a>, and the worked examples in the repository show what a conformant message looks like. To talk an integration through, email <a href="mailto:hello@storyobjectmodel.com">hello@storyobjectmodel.com</a>.</p>
 <h2>Taking part</h2>
 <p>The working group is open. Anyone implementing the model or affected by it is welcome; the existing consortium is its foundation, not its boundary. How changes are made is set out in <a href="https://github.com/storyobjectmodel/som/blob/main/GOVERNANCE.md">GOVERNANCE</a> and <a href="https://github.com/storyobjectmodel/som/blob/main/CONTRIBUTING.md">CONTRIBUTING</a>. To follow the work, use the form on the <a href="/#involved">home page</a>.</p>
@@ -55,6 +121,8 @@ footer a{color:var(--fg-2);text-decoration:none}
   <a href="principles.html">Principles</a>
   <a href="faq.html">FAQ</a>
   <a href="joining.html">Joining</a>
+  <a href="where-it-goes.html">Where it goes</a>
+  <a href="workflows.html">Workflows</a>
   <a href="mailto:hello@storyobjectmodel.com">hello@storyobjectmodel.com</a>
 </div></footer>
 </body>
