@@ -43,28 +43,28 @@ footer a{color:var(--fg-2);text-decoration:none}
 <h1>Questions people ask.</h1>
 <p>The questions that come up when a newsroom, a vendor or an engineer first meets the model: what it is, what it is not, what joining involves, and what happens to the systems you already run.</p>
 <h2>Does anything act on its own?</h2>
-<p>No. Nothing reaches an audience without an editorial gate. Skills declare what is true about a story; the tool that owns the executor decides what to do about it; a person approves. A clearance is granted to a version of the words, so a rewrite reopens the gate rather than inheriting the approval. If a rule cannot be evaluated, the output it guards stays held and a person decides.</p>
+<p>No. Nothing reaches an audience because a machine decided it should: a person clears it, and if the words change after that, it has to be cleared again. What the tools do on their own is read the story and apply the rules your newsroom has written down. Those rules are Skills, and a Skill only declares what is true; the tool that owns the executor is the thing that acts. Where a rule cannot be evaluated, the output it guards stays held and a person decides.</p>
 
 <h2>Is this about replacing journalists?</h2>
 <p>It is about capturing judgement, not replacing it. The decisions that shape a story already exist. Today they live in a chat thread, a rebrief and somebody's head, and they are gone by the next shift. Writing them down puts the call on the record, attributed to the person who made it, which is what a byline has always been for. The human was not replaced. The human was promoted, from carrying the state to making the call.</p>
 
 <h2>What stops two systems writing conflicting versions of the same story?</h2>
-<p>One writer. The publisher's story management system mints the story and owns its sequence, never the wire, even on a flash. Everything else contributes in its own message family, and each family is a closed object with normative ordering. Where Skills disagree, gates combine by conjunction and values by selection, compliance fails closed, and a transform never lifts a hold.</p>
+<p>One system in your building is the one that says this story exists, and it stays in charge of the order its updates arrive in. Everything else adds to that story rather than starting its own copy. It is never the agency: a wire arriving is not a story existing. Which of your systems plays that part is your own policy, and it can be as light as a pass-through that opens a story on a flash under a rule you wrote, but it has to be one of them, because two systems opening the same event leaves you with two stories and no clean way to join them back up. After that, every other system refers to the story by its identifier and contributes in its own message family, each one a closed object with an ordering the specification defines. Where two Skills disagree a hold from either holds, compliance fails closed, and cutting or reversioning an asset never lifts a hold.</p>
 
 <h2>Who runs the bus, and what happens at three in the morning when it breaks?</h2>
-<p>Each newsroom runs its own, like any other message infrastructure in the building. When it is down, tools work standalone exactly as they do today and reconcile on reconnect. The newsroom never depends on the bus to stay on air. The story republishes in full rather than as a delta, so a tool that comes back at nine on election night reads one object and knows everything.</p>
+<p>You do, like any other message infrastructure in the building. Nothing goes to air through the bus: it carries context, not media and not playout, so a tool that already has what it needs keeps working and reconciles when the bus returns. Because a story republishes in full rather than as a change note, a tool that comes back at nine on election night reads one object and knows everything that has happened to it. What the standard cannot do is stop you building a dependency. If a tool is set to hold an output until it can confirm a clearance, and that confirmation only arrives over the bus, an outage holds the output: correct behaviour, and still an outage. Which of your outputs behave that way is worth deciding deliberately rather than discovering at three in the morning.</p>
 
 <h2>Why not point a model at the systems we already have?</h2>
-<p>Retrieval gives one asker one answer at one moment, privately. A production needs shared state that every tool reads the same way, and gating that holds across vendor boundaries with a record of who decided what. That is not a retrieval problem. Models should consume SOM rather than replace it.</p>
+<p>Asking a clever system a question gets you one answer, once, for you. A production needs every tool working from the same story at the same moment, and a hold that holds across all of them with a record of who decided what. That is not a retrieval problem and it does not become one with a bigger model. Models should read SOM rather than replace it.</p>
 
 <h2>Does media travel on the bus?</h2>
-<p>Never. Assets are references, and the frames stay where they already live. At the TAMS junction a story object points at a Source and a timerange; the same pattern works for a MAM with its own locator. Binding happens at the editorial act, never at ingest.</p>
+<p>Never. The pictures stay where they are, and what moves is a note saying which shot, and which part of it, belongs to this story. At the TAMS junction that note is a Source and a timerange, and a MAM works the same way through its own locator. The note is written when a journalist decides the material belongs to the story, not when it lands.</p>
 
 <h2>What happens to the systems we already run?</h2>
-<p>They stay. SOM replaces nothing and is not a MAM, a rundown or a product. MOS lines keep working, with a bridge that makes them smarter, and what you have built with agents stays yours. One system is enough to start and nothing about your product has to come out; see <a href="joining.html">joining</a>.</p>
+<p>Nothing gets thrown out. SOM is not a MAM, a rundown or a product, and it replaces nothing you run: your MOS lines keep working, with a bridge that makes them smarter, and what you have built with agents stays yours. One system is enough to start and nothing about how your product works has to be handed over. What joining actually involves is on the <a href="joining.html">joining page</a>.</p>
 
 <h2>How does the standard change, and who decides?</h2>
-<p>In the open. Every change arrives as a pull request and anyone may open one; the process is in <a href="https://github.com/storyobjectmodel/som/blob/main/GOVERNANCE.md">GOVERNANCE</a>. Additions to an enum are a minor version, deprecated values are marked and never removed, and what is not yet settled is listed in the open register rather than left to be discovered. The Accelerator ended in September. The working group did not.</p>
+<p>In public, one proposal at a time, and anyone can make one. Every change arrives as a pull request and the process is in <a href="https://github.com/storyobjectmodel/som/blob/main/GOVERNANCE.md">GOVERNANCE</a>. Adding a value is a minor version, retired values are marked and never removed, and what is not settled yet is listed in the open register rather than left for you to discover. The Accelerator ended in September. The working group did not.</p>
 
 <h2>Who owns it?</h2>
 <p>Nobody. The standard is open and unowned, and that is the whole point. Schemas, tools and skills are licensed Apache 2.0 and the specification prose CC BY 4.0. There is no fee and nothing to sign.</p>
@@ -84,6 +84,8 @@ footer a{color:var(--fg-2);text-decoration:none}
   <a href="principles.html">Principles</a>
   <a href="faq.html">FAQ</a>
   <a href="joining.html">Joining</a>
+  <a href="where-it-goes.html">Where it goes</a>
+  <a href="workflows.html">Workflows</a>
   <a href="mailto:hello@storyobjectmodel.com">hello@storyobjectmodel.com</a>
 </div></footer>
 </body>
