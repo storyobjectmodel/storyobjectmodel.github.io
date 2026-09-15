@@ -329,6 +329,28 @@ footer .stack a{width:fit-content}
   .bandhead .btn{width:auto}
 }
 @media(max-width:400px){.hero .btn-row .btn{width:100%}}
+
+/* motion: scroll-driven, opt-out respected, no JavaScript */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    section .wrap > .stack,
+    section .wrap > .scroll,
+    section .wrap > .triad,
+    section .wrap > .reads,
+    section .wrap > .pubs,
+    section .wrap > .asks,
+    section .wrap > .formbox,
+    section .wrap > .quote,
+    section .wrap > .btn-row{
+      animation:rise linear both;
+      animation-timeline:view();
+      animation-range:entry 4% cover 18%;
+    }
+    @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    .rcard svg .m{animation:mark linear both;animation-timeline:view();animation-range:entry 10% cover 30%}
+    @keyframes mark{from{opacity:.25}to{opacity:1}}
+  }
+}
 </style>
 
 </head>
@@ -356,8 +378,8 @@ footer .stack a{width:fit-content}
     <span class="eyebrow">story object model<b>an open standard</b></span>
     <div class="hero-grid">
       <div class="stack">
-        <h1>The story context layer for content production.</h1>
-        <p class="lede">A layer under the tools you already have, carrying what is true about a story at any moment in time, and over time.</p>
+        <h1>The story context layer for newsrooms.</h1>
+        <p class="lede">An open standard for story context in content production: a layer under the tools you already have, carrying what is true about a story at any moment in time, and over time.</p>
         <div class="btn-row">
           <a class="btn btn-primary" href="https://github.com/storyobjectmodel/som">read the specification</a>
           <a class="btn btn-secondary" href="https://storyobjectmodel.com/emulator/">run the bus</a>
