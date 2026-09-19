@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Principles · Story Object Model</title>
+<meta name="description" content="What the Story Object Model standardises, what it deliberately leaves alone, how it behaves, and where the standard stops.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='0' y='2' width='17' height='4.6' fill='%23111517'/%3E%3Crect x='5' y='9.7' width='19' height='4.6' fill='%230B7C86'/%3E%3Crect x='0' y='17.4' width='17' height='4.6' fill='%23111517'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Azeret+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#F4F6F7;--fg:#111517;--fg-2:#2C333A;--fg-3:#5B6670;--rule:#DFE4E7;--card:#fff;--mark:#0B7C86;--mist:#ECEFF1}
+@media (prefers-color-scheme: dark){:root{--paper:#111517;--fg:#F4F6F7;--fg-2:#C3CBD1;--fg-3:#8E9BA5;--rule:#2C333A;--card:#1A1F24;--mark:#6FDCE2;--mist:#1A1F24}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--fg);font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.58;-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:18px}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:.92rem;font-weight:500}
+nav ul a{text-decoration:none;color:var(--fg-3);white-space:nowrap}
+nav ul a:hover{color:var(--fg)}
+nav ul a[aria-current]{color:var(--fg);box-shadow:inset 0 -2px 0 var(--mark)}
+@media(max-width:820px){
+  nav .wrap{flex-wrap:wrap;height:auto;padding-top:12px;padding-bottom:0;row-gap:8px}
+  nav ul{order:3;flex-basis:100%;overflow-x:auto;gap:18px;padding:0 0 12px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  nav ul::-webkit-scrollbar{display:none}
+  nav ul a[aria-current]{box-shadow:inset 0 -2px 0 var(--mark)}
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.3rem;text-decoration:none;letter-spacing:-.03em;color:var(--fg)}
+.brand svg{width:24px;height:24px}
+.brand .b{fill:var(--fg)}.brand .b.c{fill:var(--mark)}
+nav .ver{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);text-decoration:none}
+main .wrap{padding:48px 20px 72px;display:grid;gap:22px}
+.eyebrow{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);display:block;border-left:2px solid var(--fg);padding-left:10px;line-height:1.4}
+.eyebrow b{display:block;font-weight:500;color:var(--fg)}
+h1{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;letter-spacing:-.03em;line-height:1.08;margin:0}
+h2{font-size:1.3rem;font-weight:600;letter-spacing:-.01em;line-height:1.25;margin:18px 0 0}
+p{margin:0;color:var(--fg-2)}
+a{color:var(--mark)}
+.btn{display:inline-flex;align-items:center;padding:.7em 1.1em;font-family:"Azeret Mono",monospace;font-size:.78rem;font-weight:500;text-decoration:none;background:var(--fg);color:var(--paper);width:fit-content}
+footer{padding:32px 0 56px;border-top:1px solid var(--rule);font-size:.9rem;color:var(--fg-3)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 22px}
+footer a{color:var(--fg-2);text-decoration:none}
+</style>
+<link rel="canonical" href="https://storyobjectmodel.com/principles.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Story Object Model">
+<meta property="og:title" content="Principles · Story Object Model">
+<meta property="og:description" content="What the Story Object Model standardises, what it deliberately leaves alone, how it behaves, and where the standard stops.">
+<meta property="og:url" content="https://storyobjectmodel.com/principles.html">
+<meta property="og:image" content="https://storyobjectmodel.com/assets/social.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Principles · Story Object Model">
+<meta name="twitter:description" content="What the Story Object Model standardises, what it deliberately leaves alone, how it behaves, and where the standard stops.">
+<meta name="twitter:image" content="https://storyobjectmodel.com/assets/social.png">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebPage",
+   "@id": "https://storyobjectmodel.com/principles.html#page",
+   "name": "Principles",
+   "headline": "Principles",
+   "description": "What the Story Object Model standardises, what it deliberately leaves alone, how it behaves, and where the standard stops.",
+   "url": "https://storyobjectmodel.com/principles.html",
+   "isPartOf": {
+    "@id": "https://storyobjectmodel.com/#website"
+   },
+   "inLanguage": "en-GB",
+   "dateModified": "2026-09-15"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="b" x="0" y="2" width="17" height="4.6"/><rect class="b c" x="5" y="9.7" width="19" height="4.6"/><rect class="b" x="0" y="17.4" width="17" height="4.6"/></svg>SOM</a>
+    <ul>
+      <li><a href="/for-newsrooms.html">For newsrooms</a></li>
+      <li><a href="/demos.html">Demos</a></li>
+      <li><a href="/workflows.html">Workflows</a></li>
+      <li><a href="/concepts.html">Concepts</a></li>
+      <li><a href="/principles.html" aria-current="page">Principles</a></li>
+      <li><a href="/faq.html">FAQ</a></li>
+      <li><a href="/joining.html">Joining</a></li>
+      <li><a href="/#involved">Get involved</a></li>
+    </ul>
+    <a class="ver" href="/schema/1.0/">SOM 1.0</a>
+  </div>
+</nav>
+<main><div class="wrap">
+<span class="eyebrow">storyobjectmodel.com<b>principles</b></span>
+<h1>Why SOM is shaped the way it is.</h1>
+<p>The Story Object Model is an open standard for story context in content production. These are the principles that also open the specification: what SOM standardises, what it deliberately leaves alone, and why.</p>
+<h2>What it is for</h2>
+<p>Every system in a newsroom holds a fragment of the story, and every fragment is accurate. No system holds the story. SOM writes the story down once, in a form every tool can read, so that a decision made once is obeyed everywhere and provable afterwards. It is a description, not an instruction. Nothing in it tells a tool what to do.</p>
+<p>The three nouns were transcribed, not invented. A Story is the thing happening in the world. An Asset is what the newsroom gathers and makes to tell it. A Telling is the moment an asset meets an audience. Journalists already think this way; the model just wrote it down.</p>
+
+<h2>What belongs in the standard</h2>
+<p><strong>It specifies what travels on the bus, not how a publisher organises itself.</strong> Two newsrooms can run entirely different workflows and still speak the same story.</p>
+<p><strong>It carries publisher-asserted state, not state inferred across sources.</strong> What is in the story is what somebody was willing to put their name to.</p>
+<p><strong>It carries what enables coordination, not what enables consumption.</strong> The test for any proposed field is whether another system needs it to act correctly.</p>
+<p><strong>One story is the unit.</strong> The scope of the standard is a single story and everything true about it, over time.</p>
+<p><strong>Default no, justify yes.</strong> A field earns its place by a case made in the open. A standard that accepts everything describes nothing.</p>
+<p><strong>Structure is governed; vocabulary grows deliberately.</strong> Schema patterns can be permissive. The words that carry meaning cannot, or the same term ends up meaning six things.</p>
+
+<h2>How it behaves</h2>
+<p><strong>Nothing sits in charge.</strong> No orchestrator and no central application. Each tool reads the story and decides for itself.</p>
+<p><strong>Skills declare, executors act.</strong> A Skill states what is true against a rule its newsroom wrote. The tool that owns the executor is the only thing that acts, and silence is a valid outcome.</p>
+<p><strong>One writer mints.</strong> A story is minted once, by whichever system owns it in that newsroom, and that owner holds the sequence. Never the agency, and never two systems for the same event.</p>
+<p><strong>The story republishes in full, never as a delta.</strong> A tool switched on halfway through the night reads one object and knows everything.</p>
+<p><strong>Binding happens at the editorial act, never at ingest.</strong> Media becomes part of a story when a person decides it is, not when it lands.</p>
+<p><strong>A transform never lifts a hold.</strong> Cutting, reframing or re-versioning an asset cannot launder its compliance position.</p>
+<p><strong>Reading leaves no trace.</strong> A tool proves it read something by publishing in its turn, which is also why the audit trail is a by-product of how writes work rather than a feature someone built.</p>
+
+<h2>Where the standard stops</h2>
+<p>SOM describes one story and everything true about it, and stops there. It is not the media, not the rundown, not a MAM and not a product, and it replaces nothing you already run. What each newsroom does with what it reads is its own business, and none of it belongs in a standard. A standard owned by one vendor is a product. A standard owned by an industry is infrastructure.</p>
+<p>Read <a href="https://github.com/storyobjectmodel/som/blob/main/spec/conformance.md">conformance</a> for what it means to speak SOM 1.0, and the <a href="https://github.com/storyobjectmodel/som/blob/main/spec/open-register.md">open register</a> for what is not yet settled.</p>
+<a class="btn" href="https://github.com/storyobjectmodel/som">read the specification</a>
+</div></main>
+<footer><div class="wrap">
+  <a href="/">Home</a>
+  <a href="for-newsrooms.html">For newsrooms</a>
+  <a href="https://github.com/storyobjectmodel/som">The specification</a>
+  <a href="/schema/1.0/">Schemas 1.0</a>
+  <a href="demos.html">Demos</a>
+  <a href="principles.html">Principles</a>
+  <a href="faq.html">FAQ</a>
+  <a href="joining.html">Joining</a>
+  <a href="where-it-goes.html">Where it goes</a>
+  <a href="workflows.html">Workflows</a>
+  <a href="concepts.html">Concepts</a>
+  <a href="mailto:hello@storyobjectmodel.com">hello@storyobjectmodel.com</a>
+</div></footer>
+</body>
+</html>

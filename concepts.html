@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concepts · Story Object Model</title>
+<meta name="description" content="What an engineer needs before opening a SOM schema: three nouns, one envelope, seven message families, lifecycle, evidence, gates, Skills and the conformance floor, as published in 1.0.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='0' y='2' width='17' height='4.6' fill='%23111517'/%3E%3Crect x='5' y='9.7' width='19' height='4.6' fill='%230B7C86'/%3E%3Crect x='0' y='17.4' width='17' height='4.6' fill='%23111517'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Azeret+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#F4F6F7;--fg:#111517;--fg-2:#2C333A;--fg-3:#5B6670;--rule:#DFE4E7;--card:#fff;--mark:#0B7C86;--mist:#ECEFF1}
+@media (prefers-color-scheme: dark){:root{--paper:#111517;--fg:#F4F6F7;--fg-2:#C3CBD1;--fg-3:#8E9BA5;--rule:#2C333A;--card:#1A1F24;--mark:#6FDCE2;--mist:#1A1F24}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--fg);font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.58;-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:18px}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:.92rem;font-weight:500}
+nav ul a{text-decoration:none;color:var(--fg-3);white-space:nowrap}
+nav ul a:hover{color:var(--fg)}
+nav ul a[aria-current]{color:var(--fg);box-shadow:inset 0 -2px 0 var(--mark)}
+@media(max-width:820px){
+  nav .wrap{flex-wrap:wrap;height:auto;padding-top:12px;padding-bottom:0;row-gap:8px}
+  nav ul{order:3;flex-basis:100%;overflow-x:auto;gap:18px;padding:0 0 12px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  nav ul::-webkit-scrollbar{display:none}
+  nav ul a[aria-current]{box-shadow:inset 0 -2px 0 var(--mark)}
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.3rem;text-decoration:none;letter-spacing:-.03em;color:var(--fg)}
+.brand svg{width:24px;height:24px}
+.brand .b{fill:var(--fg)}.brand .b.c{fill:var(--mark)}
+nav .ver{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);text-decoration:none}
+main .wrap{padding:48px 20px 72px;display:grid;gap:22px}
+.eyebrow{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);display:block;border-left:2px solid var(--fg);padding-left:10px;line-height:1.4}
+.eyebrow b{display:block;font-weight:500;color:var(--fg)}
+h1{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;letter-spacing:-.03em;line-height:1.08;margin:0}
+h2{font-size:1.3rem;font-weight:600;letter-spacing:-.01em;line-height:1.25;margin:18px 0 0}
+p{margin:0;color:var(--fg-2)}
+a{color:var(--mark)}
+.btn{display:inline-flex;align-items:center;padding:.7em 1.1em;font-family:"Azeret Mono",monospace;font-size:.78rem;font-weight:500;text-decoration:none;background:var(--fg);color:var(--paper);width:fit-content}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:4px 0 6px}
+.num{border:1px solid var(--rule);padding:14px 16px;display:grid;gap:4px}
+.num b{font-family:"Archivo",sans-serif;font-size:1.7rem;font-weight:700;letter-spacing:-.02em;color:var(--fg)}
+.num span{font-family:"Azeret Mono",monospace;font-size:.72rem;color:var(--fg-3)}
+@media(max-width:620px){.nums{grid-template-columns:1fr 1fr}}
+.nouns{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:820px){.nouns{grid-template-columns:1fr}}
+.noun{border:1px solid var(--rule);background:var(--card);padding:16px 18px;display:grid;gap:8px;align-content:start}
+.noun h3{margin:0;font-size:1.15rem;letter-spacing:-.01em}
+.noun p{font-size:.92rem}
+.noun code{font-size:.78rem}
+.enum{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3);line-height:1.7}
+.enum b{color:var(--mark);font-weight:500}
+.rules{display:grid;gap:8px}
+.rules p{padding-left:14px;border-left:2px solid var(--rule)}
+.tw{overflow-x:auto;margin:0 -20px;padding:0 20px}
+table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:620px}
+th,td{text-align:left;vertical-align:top;padding:11px 14px 11px 0;border-bottom:1px solid var(--rule)}
+th{font-family:"Azeret Mono",monospace;font-size:.7rem;font-weight:500;color:var(--fg-3);letter-spacing:.04em;border-bottom:1px solid var(--fg-3)}
+td:first-child{color:var(--fg);font-weight:500;white-space:nowrap}
+td:nth-child(2){color:var(--fg-3)}
+.rule{font-family:"Azeret Mono",monospace;font-size:.82rem;color:var(--fg);border-left:2px solid var(--mark);padding-left:12px;margin:6px 0}
+footer{padding:32px 0 56px;border-top:1px solid var(--rule);font-size:.9rem;color:var(--fg-3)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 22px}
+footer a{color:var(--fg-2);text-decoration:none}
+</style><link rel="canonical" href="https://storyobjectmodel.com/concepts.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Story Object Model">
+<meta property="og:title" content="Concepts · Story Object Model">
+<meta property="og:description" content="What an engineer needs before opening a SOM schema: three nouns, one envelope, seven message families, lifecycle, evidence, gates, Skills and the conformance floor, as published in 1.0.">
+<meta property="og:url" content="https://storyobjectmodel.com/concepts.html">
+<meta property="og:image" content="https://storyobjectmodel.com/assets/social.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Concepts · Story Object Model">
+<meta name="twitter:description" content="What an engineer needs before opening a SOM schema: three nouns, one envelope, seven message families, lifecycle, evidence, gates, Skills and the conformance floor, as published in 1.0.">
+<meta name="twitter:image" content="https://storyobjectmodel.com/assets/social.png">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "TechArticle",
+   "@id": "https://storyobjectmodel.com/concepts.html#page",
+   "name": "Concepts",
+   "headline": "Before you open a schema",
+   "description": "What an engineer needs before opening a SOM schema: three nouns, one envelope, seven message families, lifecycle, evidence, gates, Skills and the conformance floor, as published in 1.0.",
+   "url": "https://storyobjectmodel.com/concepts.html",
+   "isPartOf": {
+    "@id": "https://storyobjectmodel.com/#website"
+   },
+   "inLanguage": "en-GB",
+   "dateModified": "2026-09-17"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="b" x="0" y="2" width="17" height="4.6"/><rect class="b c" x="5" y="9.7" width="19" height="4.6"/><rect class="b" x="0" y="17.4" width="17" height="4.6"/></svg>SOM</a>
+    <ul>
+      <li><a href="/for-newsrooms.html">For newsrooms</a></li>
+      <li><a href="/demos.html">Demos</a></li>
+      <li><a href="/workflows.html">Workflows</a></li>
+      <li><a href="/concepts.html" aria-current="page">Concepts</a></li>
+      <li><a href="/principles.html">Principles</a></li>
+      <li><a href="/faq.html">FAQ</a></li>
+      <li><a href="/joining.html">Joining</a></li>
+      <li><a href="/#involved">Get involved</a></li>
+    </ul>
+    <a class="ver" href="/schema/1.0/">SOM 1.0</a>
+  </div>
+</nav>
+<main><div class="wrap">
+<span class="eyebrow">storyobjectmodel.com<b>concepts</b></span>
+<h1>Before you open a schema.</h1>
+<p>The whole model in one read. Everything on this page is SOM 1.0 as published: every field name and every value below is in the schemas served at <a href="/schema/1.0/">/schema/1.0/</a>. The schemas are normative. This is the reading guide.</p>
+
+<div class="nums">
+  <div class="num"><b>1</b><span>envelope, every message</span></div>
+  <div class="num"><b>7</b><span>message families</span></div>
+  <div class="num"><b>3</b><span>nouns: Story, Asset, Telling</span></div>
+  <div class="num"><b>1.0.0</b><span>wire version</span></div>
+</div>
+
+<h2>The idea in three sentences</h2>
+<p>Tools stop talking to each other and talk to a shared, live description of the story. Any system can say what it knows about a story; any other system can act on that without a point-to-point integration and without asking permission. Nothing is in charge: there is no orchestrator, and each system reads the story and decides for itself.</p>
+
+<h2>Three nouns</h2>
+<p>Everything in SOM sits in one of three layers. They were transcribed from how working newsrooms already describe what they do, not invented.</p>
+<div class="nouns">
+  <div class="noun">
+    <h3>Story</h3>
+    <p>The happening. A context that one publisher owns and asserts, carrying everything true about the story right now.</p>
+    <p class="enum">story_type: PLANNED · ACTIVE · KILLED · SPIKED · ARCHIVED · ORPHAN</p>
+    <p class="enum">carries: lifecycle · priority · premise · editorial_gates · compliance · editorial_source · assets · assertions · relations · content_refs</p>
+    <p>Published as <code>story.context</code>, always in full, by the story owner.</p>
+  </div>
+  <div class="noun">
+    <h3>Asset</h3>
+    <p>A discrete piece of media or editorial work, classified by where it sits in the evidential chain. Assets exist whether or not anything is ever published from them.</p>
+    <p class="enum">evidential_position: PRIMARY · SECONDARY · TERTIARY</p>
+    <p class="enum">status: READY · IN_PRODUCTION · PREPARED · INVALIDATED</p>
+    <p class="enum">asset_type: VIDEO · AUDIO · GRAPHIC · STILL · SCRIPT · TRANSCRIPT · SUMMARY · SOCIAL_POST · ARTICLE and nine more</p>
+  </div>
+  <div class="noun">
+    <h3>Telling</h3>
+    <p>The moment an asset meets an audience through a destination, with its own record of when exposure started and ended.</p>
+    <p class="enum">events: telling.started · telling.ended · telling.exposed</p>
+    <p>A Telling follows from a <b>link</b>, the asset-to-destination connection, and the clearance for that route rides the link, not the asset.</p>
+  </div>
+</div>
+
+<h2>The envelope</h2>
+<p>Every SOM message is one envelope with the payload inside it. Eight fields are required, and four rules govern them.</p>
+<div class="rules">
+  <p><code>message_type</code> is the only parsing discriminator. Select the payload schema from it, never from topic, filename, publisher or payload shape.</p>
+  <p><code>correlation_id</code> is required and links every message about one story. It is the natural partition key.</p>
+  <p><code>message_id</code> must be a UUID; UUIDv7 is recommended because it sorts by time. <code>topic</code> must begin <code>som.</code></p>
+  <p><code>som_version</code> is informative. Producers emit the pack they conform to, <code>1.0.0</code>. Consumers never branch on it; <code>0.3.2</code> is not 1.0.</p>
+</div>
+<p>The other required fields are <code>timestamp</code>, the authoritative time of the event, <code>originating_system</code>, and <code>payload</code>. <code>extensions</code> carries vendor fields under a reverse-domain namespace, <code>com.vendor.*</code>, and every consumer must ignore extensions it does not recognise.</p>
+
+<h2>Seven message families</h2>
+<p>A conformant system does not implement seven families. It implements the envelope plus whichever families it has something to say about or something to do with.</p>
+<div class="tw">
+<table>
+<thead><tr><th>FAMILY</th><th>PUBLISHED BY</th><th>WHAT IT SAYS</th></tr></thead>
+<tbody>
+<tr><td><code>story.context</code></td><td>the story owner</td><td>the whole story, republished in full on every change</td></tr>
+<tr><td><code>som.telling.*</code></td><td>the exposure publisher</td><td>an asset met an audience: started, ended, exposed</td></tr>
+<tr><td><code>som.link.*</code></td><td>the committing system</td><td>an asset was committed to a destination, its gate changed, or it was withdrawn</td></tr>
+<tr><td><code>delivery.media_available</code></td><td>the media store</td><td>media has arrived, with a <code>tams://</code> source and time range or a store locator</td></tr>
+<tr><td><code>som.system.audit</code></td><td>any governance actor</td><td>a clearance, suppression, withholding or override, with actor and reason</td></tr>
+<tr><td><code>skill.warning.raised</code></td><td>a skills executor</td><td>a rule fired against the story: what, how severe, what it blocks</td></tr>
+<tr><td>the envelope</td><td>every publisher</td><td>the wrapper all of the above travel in</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>Snapshots, not deltas</h2>
+<p><code>story.context</code> is always the whole story. A tool that comes back after an hour reads one message and is current. The rules that make that safe: <code>story_id</code> never changes; <code>sequence_number</code> must increase, and only the owner sets it; <code>updated_at</code> moves forward; <code>originating_system</code> is re-stamped by whoever publishes, so a correction is attributed to the corrector, not to whoever first minted the story. One owner per story, and minting is deployment policy rather than a rule of the standard: the owner is whichever of the newsroom's systems is nominated, never the agency.</p>
+
+<h2>Lifecycle and priority</h2>
+<p class="enum">lifecycle.phase: <b>DEVELOPING</b> → <b>READY_TO_AIR</b> → <b>BREAKING</b> → <b>PUBLISHED</b></p>
+<p>The phase carries its <code>previous_phase</code>, so a consumer can tell a story that has just gone to air from one that has been on air for an hour. Priority is separate from phase: <code>ROUTINE</code>, <code>STANDARD</code>, <code>HIGH</code>, <code>URGENT</code>, <code>FLASH</code>. A flash is a level of urgency, not a lifecycle state.</p>
+
+<h2>Evidence and claims</h2>
+<p>Three things that look similar and are kept apart.</p>
+<p><strong>Where material came from.</strong> <code>editorial_source[]</code> records each source with a type, <code>WIRE</code>, <code>OFFICIAL</code>, <code>FIELD_CREW</code>, <code>USER_GENERATED</code>, <code>SOCIAL</code>, <code>ARCHIVE</code> among eleven, and a credibility the publisher asserts: <code>TRUSTED</code>, <code>VERIFIED</code>, <code>ENDORSED</code>, <code>UNVERIFIED</code>.</p>
+<p><strong>Who made it.</strong> <code>authorship_provenance</code> says <code>HUMAN</code> or <code>MODEL</code>, so anything a model produced can be told apart later.</p>
+<p><strong>What has been claimed about it.</strong> <code>assertions[]</code> holds claims made by tools: <code>FACT_CHECK</code>, <code>DETECTION</code>, <code>MATCH</code>, each with a target (an asset, a link, a telling or the story) and a <code>review_state</code> of <code>PENDING</code>, <code>CONFIRMED</code> or <code>REJECTED</code>. An assertion is evidence for a decision, never the decision. A deepfake verdict stays an assertion; the gate on the clip reads it there.</p>
+
+<h2>Gates, flags and clearances</h2>
+<p>Three mechanisms, three different kinds of thing.</p>
+<p><strong>An editorial gate is a decision.</strong> <code>editorial_gates[]</code>: a person approves or rejects, status <code>PENDING</code>, <code>APPROVED</code>, <code>REJECTED</code>, and the gate names what it blocks, an <code>ASSET</code> or a <code>PHASE</code>.</p>
+<p><strong>A compliance flag is a condition.</strong> <code>compliance[]</code>: severity <code>LOW</code> to <code>CRITICAL</code>, status <code>ACTIVE</code>, <code>RESOLVED</code> or <code>WAIVED</code>. A flag raised by a tool sits in the story until a person resolves or waives it.</p>
+<p><strong>A clearance is per route.</strong> <code>compliance_gate_status</code> on the link between an asset and a destination: <code>PENDING</code>, <code>CLEARED</code>, <code>BLOCKED</code>. The same asset can be cleared for digital and blocked for broadcast at once, because the state rides the connection, not the asset.</p>
+<p>Where more than one rule bears on an output, holds combine: any hold holds. Every clearance, suppression, withholding and override is recorded in <code>som.system.audit</code> with actor, target and reason.</p>
+
+<h2>Skills</h2>
+<p>A Skill is a rule the newsroom has written down, in the open format at agentskills.io. Skills declare; executors act. A skill reads the story and says what is true against its rule; the tool that owns the executor decides what to do about it, and silence is a valid outcome. A skill never sends work to another tool.</p>
+<p>When a rule fires, the executor publishes <code>skill.warning.raised</code> with a severity that is the standard's only lower-case vocabulary: <b>hold</b>, the executor must withhold the output; <b>flag</b>, the output may go with the warning attached; <b>inform</b>, for the record. The warning names its <code>rule_id</code>, the <code>affected_fields</code>, what it <code>blocks</code>, and whether it is <code>non_overridable</code>. The story's <code>skills_config</code> lists which skills are active, their type, <code>NEWSROOM</code>, <code>VENDOR</code> or <code>REFERENCE</code>, and their priority.</p>
+
+<h2>Media</h2>
+<p>Media never travels the bus. A story points at frames held elsewhere. Against a TAMS store the pointer is a <code>tams://</code> source and a time range, frame accurate; against anything else it is a <code>locator</code> of store plus reference. The media store announces arrivals with <code>delivery.media_available</code>, and nothing is bound to a story on arrival. Binding happens at the editorial act, when a journalist decides the material belongs, never at ingest.</p>
+
+<h2>The conformance floor</h2>
+<p>A system is SOM 1.0 conformant if every message it publishes is a valid envelope, every payload validates against the schema for the <code>message_type</code> it declares, and it ignores what it does not recognise. That is the whole floor. A planning system that only publishes <code>story.context</code> and only reads <code>skill.warning.raised</code> is fully conformant.</p>
+<p class="rule">The requirement most implementations get wrong by default: JSON Schema treats <code>format</code> as an annotation, so most validators accept <code>"message_id": "NOT-A-UUID"</code> unless format assertion is switched on. A conformant implementation must assert <code>uuid</code> and <code>date-time</code>. <code>tools/validate.py</code> in the repository does; anything that passes where it fails is not conformant.</p>
+<p>Implementations should state which families they produce and which they consume. That statement, not the size of the implementation, is what an integrator needs.</p>
+
+<h2>What will not change</h2>
+<p>Within 1.x, schema identifiers never move, changes are additive only, and a field destined for removal is deprecated first and never removed. Producers may start emitting new optional fields at any 1.x release; consumers must keep accepting deprecated ones. Anything that would break a 1.0 consumer is, by definition, 2.0. What is not yet settled is written down in the <a href="https://github.com/storyobjectmodel/som/blob/main/spec/open-register.md">open register</a> rather than left to be discovered.</p>
+
+<h2>Glossary</h2>
+<div class="tw">
+<table>
+<thead><tr><th>TERM</th><th>MEANING</th></tr></thead>
+<tbody>
+<tr><td>Story</td><td>the happening; a context one publisher owns and asserts</td></tr>
+<tr><td>Asset</td><td>a discrete piece of media or editorial work on a story, classified primary, secondary or tertiary</td></tr>
+<tr><td>Telling</td><td>an asset meeting an audience through a destination, with exposure start and end</td></tr>
+<tr><td>Link</td><td>the asset-to-destination connection; carries the clearance for that route</td></tr>
+<tr><td>Destination</td><td>an output: a bulletin, a page, a platform</td></tr>
+<tr><td>Envelope</td><td>the wrapper every message travels in</td></tr>
+<tr><td>Family</td><td>one of the seven message types, each with its own schema</td></tr>
+<tr><td>Snapshot</td><td>a <code>story.context</code> message: always the whole story</td></tr>
+<tr><td>Owner</td><td>the one system that mints a story and sets its sequence number</td></tr>
+<tr><td>Minting</td><td>creating a story and its <code>story_id</code>; once, by the owner, never by an agency</td></tr>
+<tr><td>Premise</td><td>the story's expected outcome and what changed, with confidence</td></tr>
+<tr><td>Editorial gate</td><td>a human decision to approve or reject an asset or a phase</td></tr>
+<tr><td>Compliance flag</td><td>a condition on the story, with severity, active until resolved or waived</td></tr>
+<tr><td>Clearance</td><td>the per-route gate status on a link: pending, cleared, blocked</td></tr>
+<tr><td>Assertion</td><td>a claim made by a tool: fact check, detection, match; evidence, never a decision</td></tr>
+<tr><td>Credibility</td><td>the publisher's assessment of a source: trusted, verified, endorsed, unverified</td></tr>
+<tr><td>Skill</td><td>a rule the newsroom wrote, in the agentskills.io format; declares, never acts</td></tr>
+<tr><td>Executor</td><td>the part of a tool that runs skills and acts on its own rules</td></tr>
+<tr><td>Warning</td><td>a <code>skill.warning.raised</code> message: hold, flag or inform</td></tr>
+<tr><td>Extension</td><td>vendor fields under <code>com.vendor.*</code>, ignored by everyone else</td></tr>
+<tr><td>TAMS</td><td>BBC R&amp;D's open media store standard; every frame addressable; the frame-accurate junction</td></tr>
+<tr><td>Open register</td><td>the published list of what the working group has not yet settled</td></tr>
+</tbody>
+</table>
+</div>
+
+<p>Next: the <a href="https://github.com/storyobjectmodel/som/blob/main/spec/conformance.md">conformance document</a> for the exact rules, the <a href="https://github.com/storyobjectmodel/som/tree/main/examples">worked examples</a> for what a conformant message looks like, and <a href="joining.html">joining</a> for what an integration actually involves.</p>
+
+<a class="btn" href="/schema/1.0/">the schemas</a>
+</div></main>
+<footer><div class="wrap">
+  <a href="/">Home</a>
+  <a href="for-newsrooms.html">For newsrooms</a>
+  <a href="https://github.com/storyobjectmodel/som">The specification</a>
+  <a href="/schema/1.0/">Schemas 1.0</a>
+  <a href="demos.html">Demos</a>
+  <a href="principles.html">Principles</a>
+  <a href="faq.html">FAQ</a>
+  <a href="joining.html">Joining</a>
+  <a href="where-it-goes.html">Where it goes</a>
+  <a href="workflows.html">Workflows</a>
+  <a href="concepts.html">Concepts</a>
+  <a href="mailto:hello@storyobjectmodel.com">hello@storyobjectmodel.com</a>
+</div></footer>
+</body>
+</html>

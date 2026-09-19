@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAQ · Story Object Model</title>
+<meta name="description" content="Questions people ask about the Story Object Model, answered: accountability, jobs, conflicts, the bus at 3am, media, existing systems, change control and ownership.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='0' y='2' width='17' height='4.6' fill='%23111517'/%3E%3Crect x='5' y='9.7' width='19' height='4.6' fill='%230B7C86'/%3E%3Crect x='0' y='17.4' width='17' height='4.6' fill='%23111517'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Azeret+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#F4F6F7;--fg:#111517;--fg-2:#2C333A;--fg-3:#5B6670;--rule:#DFE4E7;--card:#fff;--mark:#0B7C86;--mist:#ECEFF1}
+@media (prefers-color-scheme: dark){:root{--paper:#111517;--fg:#F4F6F7;--fg-2:#C3CBD1;--fg-3:#8E9BA5;--rule:#2C333A;--card:#1A1F24;--mark:#6FDCE2;--mist:#1A1F24}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--fg);font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.58;-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:18px}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:.92rem;font-weight:500}
+nav ul a{text-decoration:none;color:var(--fg-3);white-space:nowrap}
+nav ul a:hover{color:var(--fg)}
+nav ul a[aria-current]{color:var(--fg);box-shadow:inset 0 -2px 0 var(--mark)}
+@media(max-width:820px){
+  nav .wrap{flex-wrap:wrap;height:auto;padding-top:12px;padding-bottom:0;row-gap:8px}
+  nav ul{order:3;flex-basis:100%;overflow-x:auto;gap:18px;padding:0 0 12px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  nav ul::-webkit-scrollbar{display:none}
+  nav ul a[aria-current]{box-shadow:inset 0 -2px 0 var(--mark)}
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.3rem;text-decoration:none;letter-spacing:-.03em;color:var(--fg)}
+.brand svg{width:24px;height:24px}
+.brand .b{fill:var(--fg)}.brand .b.c{fill:var(--mark)}
+nav .ver{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);text-decoration:none}
+main .wrap{padding:48px 20px 72px;display:grid;gap:22px}
+.eyebrow{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);display:block;border-left:2px solid var(--fg);padding-left:10px;line-height:1.4}
+.eyebrow b{display:block;font-weight:500;color:var(--fg)}
+h1{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;letter-spacing:-.03em;line-height:1.08;margin:0}
+h2{font-size:1.3rem;font-weight:600;letter-spacing:-.01em;line-height:1.25;margin:18px 0 0}
+p{margin:0;color:var(--fg-2)}
+a{color:var(--mark)}
+.btn{display:inline-flex;align-items:center;padding:.7em 1.1em;font-family:"Azeret Mono",monospace;font-size:.78rem;font-weight:500;text-decoration:none;background:var(--fg);color:var(--paper);width:fit-content}
+footer{padding:32px 0 56px;border-top:1px solid var(--rule);font-size:.9rem;color:var(--fg-3)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 22px}
+footer a{color:var(--fg-2);text-decoration:none}
+</style>
+<link rel="canonical" href="https://storyobjectmodel.com/faq.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Story Object Model">
+<meta property="og:title" content="FAQ · Story Object Model">
+<meta property="og:description" content="Questions people ask about the Story Object Model, answered: accountability, jobs, conflicts, the bus at 3am, media, existing systems, change control and ownership.">
+<meta property="og:url" content="https://storyobjectmodel.com/faq.html">
+<meta property="og:image" content="https://storyobjectmodel.com/assets/social.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="FAQ · Story Object Model">
+<meta name="twitter:description" content="Questions people ask about the Story Object Model, answered: accountability, jobs, conflicts, the bus at 3am, media, existing systems, change control and ownership.">
+<meta name="twitter:image" content="https://storyobjectmodel.com/assets/social.png">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "FAQPage",
+   "@id": "https://storyobjectmodel.com/faq.html#page",
+   "name": "FAQ",
+   "headline": "FAQ",
+   "description": "Questions people ask about the Story Object Model, answered: accountability, jobs, conflicts, the bus at 3am, media, existing systems, change control and ownership.",
+   "url": "https://storyobjectmodel.com/faq.html",
+   "isPartOf": {
+    "@id": "https://storyobjectmodel.com/#website"
+   },
+   "inLanguage": "en-GB",
+   "dateModified": "2026-09-15"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="b" x="0" y="2" width="17" height="4.6"/><rect class="b c" x="5" y="9.7" width="19" height="4.6"/><rect class="b" x="0" y="17.4" width="17" height="4.6"/></svg>SOM</a>
+    <ul>
+      <li><a href="/for-newsrooms.html">For newsrooms</a></li>
+      <li><a href="/demos.html">Demos</a></li>
+      <li><a href="/workflows.html">Workflows</a></li>
+      <li><a href="/concepts.html">Concepts</a></li>
+      <li><a href="/principles.html">Principles</a></li>
+      <li><a href="/faq.html" aria-current="page">FAQ</a></li>
+      <li><a href="/joining.html">Joining</a></li>
+      <li><a href="/#involved">Get involved</a></li>
+    </ul>
+    <a class="ver" href="/schema/1.0/">SOM 1.0</a>
+  </div>
+</nav>
+<main><div class="wrap">
+<span class="eyebrow">storyobjectmodel.com<b>frequently asked questions</b></span>
+<h1>Questions people ask.</h1>
+<p>The questions that come up when a newsroom, a vendor or an engineer first meets the model: what it is, what it is not, what joining involves, and what happens to the systems you already run.</p>
+<h2>Does anything act on its own?</h2>
+<p>No. Nothing reaches an audience because a machine decided it should: a person clears it, and if the words change after that, it has to be cleared again. What the tools do on their own is read the story and apply the rules your newsroom has written down. Those rules are Skills, and a Skill only declares what is true; the tool that owns the executor is the thing that acts. Where a rule cannot be evaluated, the output it guards stays held and a person decides.</p>
+
+<h2>Is this about replacing journalists?</h2>
+<p>It is about capturing judgement, not replacing it. The decisions that shape a story already exist. Today they live in a chat thread, a rebrief and somebody's head, and they are gone by the next shift. Writing them down puts the call on the record, attributed to the person who made it, which is what a byline has always been for. The human was not replaced. The human was promoted, from carrying the state to making the call.</p>
+
+<h2>What stops two systems writing conflicting versions of the same story?</h2>
+<p>One system in your building is the one that says this story exists, and it stays in charge of the order its updates arrive in. Everything else adds to that story rather than starting its own copy. It is never the agency: a wire arriving is not a story existing. Which of your systems plays that part is your own policy, and it can be as light as a pass-through that opens a story on a flash under a rule you wrote, but it has to be one of them, because two systems opening the same event leaves you with two stories and no clean way to join them back up. After that, every other system refers to the story by its identifier and contributes in its own message family, each one a closed object with an ordering the specification defines. Where two Skills disagree a hold from either holds, compliance fails closed, and cutting or reversioning an asset never lifts a hold.</p>
+
+<h2>Who runs the bus, and what happens at three in the morning when it breaks?</h2>
+<p>You do, like any other message infrastructure in the building. Nothing goes to air through the bus: it carries context, not media and not playout, so a tool that already has what it needs keeps working and reconciles when the bus returns. Because a story republishes in full rather than as a change note, a tool that comes back at nine on election night reads one object and knows everything that has happened to it. What the standard cannot do is stop you building a dependency. If a tool is set to hold an output until it can confirm a clearance, and that confirmation only arrives over the bus, an outage holds the output: correct behaviour, and still an outage. Which of your outputs behave that way is worth deciding deliberately rather than discovering at three in the morning.</p>
+
+<h2>Why not point a model at the systems we already have?</h2>
+<p>Asking a clever system a question gets you one answer, once, for you. A production needs every tool working from the same story at the same moment, and a hold that holds across all of them with a record of who decided what. That is not a retrieval problem and it does not become one with a bigger model. Models should read SOM rather than replace it.</p>
+
+<h2>Does media travel on the bus?</h2>
+<p>Never. The pictures stay where they are, and what moves is a note saying which shot, and which part of it, belongs to this story. At the TAMS junction that note is a Source and a timerange, and a MAM works the same way through its own locator. The note is written when a journalist decides the material belongs to the story, not when it lands.</p>
+
+<h2>What happens to the systems we already run?</h2>
+<p>Nothing gets thrown out. SOM is not a MAM, a rundown or a product, and it replaces nothing you run: your MOS lines keep working, with a bridge that makes them smarter, and what you have built with agents stays yours. One system is enough to start and nothing about how your product works has to be handed over. What joining actually involves is on the <a href="joining.html">joining page</a>.</p>
+
+<h2>How does the standard change, and who decides?</h2>
+<p>In public, one proposal at a time, and anyone can make one. Every change arrives as a pull request and the process is in <a href="https://github.com/storyobjectmodel/som/blob/main/GOVERNANCE.md">GOVERNANCE</a>. Adding a value is a minor version, retired values are marked and never removed, and what is not settled yet is listed in the open register rather than left for you to discover. The Accelerator ended in September. The working group did not.</p>
+
+<h2>Who owns it?</h2>
+<p>Nobody. The standard is open and unowned, and that is the whole point. Schemas, tools and skills are licensed Apache 2.0 and the specification prose CC BY 4.0. There is no fee to implement it or to take part in the working group, and nothing to sign.</p>
+
+<h2>What is Story Archaeology?</h2>
+<p>A method, and where the model came from. Take one real story after transmission and trace how its context actually moved, hop by hop, between people and systems. What comes back is a picture of where knowledge was created, where it was lost, and who was carrying it by hand. Newsrooms run sessions on their own stories.</p>
+
+<h2>Anything else</h2>
+<p>The <a href="https://github.com/storyobjectmodel/som/blob/main/README.md">repository README</a> is the best next read. Anything it does not answer, ask at <a href="mailto:hello@storyobjectmodel.com">hello@storyobjectmodel.com</a>.</p>
+<a class="btn" href="https://github.com/storyobjectmodel/som">read the specification</a>
+</div></main>
+<footer><div class="wrap">
+  <a href="/">Home</a>
+  <a href="for-newsrooms.html">For newsrooms</a>
+  <a href="https://github.com/storyobjectmodel/som">The specification</a>
+  <a href="/schema/1.0/">Schemas 1.0</a>
+  <a href="demos.html">Demos</a>
+  <a href="principles.html">Principles</a>
+  <a href="faq.html">FAQ</a>
+  <a href="joining.html">Joining</a>
+  <a href="where-it-goes.html">Where it goes</a>
+  <a href="workflows.html">Workflows</a>
+  <a href="concepts.html">Concepts</a>
+  <a href="mailto:hello@storyobjectmodel.com">hello@storyobjectmodel.com</a>
+</div></footer>
+</body>
+</html>

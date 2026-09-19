@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demos · Story Object Model</title>
+<meta name="description" content="Two breaking news scenarios on one story bus, with real production tools reading and writing the same story. The hurricane and the Prime Minister announcement.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='0' y='2' width='17' height='4.6' fill='%23111517'/%3E%3Crect x='5' y='9.7' width='19' height='4.6' fill='%230B7C86'/%3E%3Crect x='0' y='17.4' width='17' height='4.6' fill='%23111517'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Azeret+Mono:wght@400;500&display=swap">
+<style>
+:root{--paper:#F4F6F7;--fg:#111517;--fg-2:#2C333A;--fg-3:#5B6670;--rule:#DFE4E7;--card:#fff;--mark:#0B7C86;--mist:#ECEFF1}
+@media (prefers-color-scheme: dark){:root{--paper:#111517;--fg:#F4F6F7;--fg-2:#C3CBD1;--fg-3:#8E9BA5;--rule:#2C333A;--card:#1A1F24;--mark:#6FDCE2;--mist:#1A1F24}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--fg);font-family:"Archivo","Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.58;-webkit-font-smoothing:antialiased}
+nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:18px}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;font-size:.92rem;font-weight:500}
+nav ul a{text-decoration:none;color:var(--fg-3);white-space:nowrap}
+nav ul a:hover{color:var(--fg)}
+nav ul a[aria-current]{color:var(--fg);box-shadow:inset 0 -2px 0 var(--mark)}
+@media(max-width:820px){
+  nav .wrap{flex-wrap:wrap;height:auto;padding-top:12px;padding-bottom:0;row-gap:8px}
+  nav ul{order:3;flex-basis:100%;overflow-x:auto;gap:18px;padding:0 0 12px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  nav ul::-webkit-scrollbar{display:none}
+  nav ul a[aria-current]{box-shadow:inset 0 -2px 0 var(--mark)}
+}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:1.3rem;text-decoration:none;letter-spacing:-.03em;color:var(--fg)}
+.brand svg{width:24px;height:24px}
+.brand .b{fill:var(--fg)}.brand .b.c{fill:var(--mark)}
+nav .ver{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);text-decoration:none}
+main .wrap{padding:48px 20px 72px;display:grid;gap:22px}
+.eyebrow{font-family:"Azeret Mono",monospace;font-size:.76rem;color:var(--fg-3);display:block;border-left:2px solid var(--fg);padding-left:10px;line-height:1.4}
+.eyebrow b{display:block;font-weight:500;color:var(--fg)}
+h1{font-size:clamp(1.9rem,5.5vw,2.8rem);font-weight:700;letter-spacing:-.03em;line-height:1.08;margin:0}
+h2{font-size:1.3rem;font-weight:600;letter-spacing:-.01em;line-height:1.25;margin:18px 0 0}
+p{margin:0;color:var(--fg-2)}
+a{color:var(--mark)}
+.placeholder{border:1px dashed var(--fg-3);background:var(--mist);padding:18px;display:grid;gap:8px}
+.placeholder .cap{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
+.btn{display:inline-flex;align-items:center;padding:.7em 1.1em;font-family:"Azeret Mono",monospace;font-size:.78rem;font-weight:500;text-decoration:none;background:var(--fg);color:var(--paper);width:fit-content}
+footer{padding:32px 0 56px;border-top:1px solid var(--rule);font-size:.9rem;color:var(--fg-3)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 22px}
+footer a{color:var(--fg-2);text-decoration:none}
+.proofs{display:grid;border-top:1px solid var(--rule);margin-top:4px}
+.proof{display:grid;grid-template-columns:150px 1fr;gap:18px;padding:15px 0;border-bottom:1px solid var(--rule);align-items:start}
+.proof b{font-family:"Azeret Mono",monospace;font-size:.74rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--mark);padding-top:4px}
+.proof span{color:var(--fg-2)}
+.proof span i{font-style:normal;color:var(--fg)}
+@media (max-width:620px){.proof{grid-template-columns:1fr;gap:3px;padding:13px 0}.proof b{padding-top:0}}
+.demo{display:grid;gap:10px;margin-top:8px}
+.frame{aspect-ratio:16/9;max-width:100%;background:var(--mist);border:1px solid var(--rule);display:grid;place-items:center;color:var(--fg-3);font-family:"Azeret Mono",monospace;font-size:.78rem}
+.frame iframe{width:100%;height:100%;border:0}
+.vid{width:100%;max-width:100%;aspect-ratio:16/9;background:#111517;border:1px solid var(--rule);display:block}
+.demo .n{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
+.demo p{font-size:.95rem}
+.cast{font-family:"Azeret Mono",monospace;font-size:.74rem;color:var(--fg-3)}
+.cast-logos{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.cast-logos img{height:44px;width:auto;max-width:150px;object-fit:contain;background:#FFFFFF;border:1px solid var(--rule);padding:6px 12px;box-sizing:border-box}
+</style>
+<link rel="canonical" href="https://storyobjectmodel.com/demos.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Story Object Model">
+<meta property="og:title" content="Demos · Story Object Model">
+<meta property="og:description" content="Two breaking news scenarios on one story bus, with real production tools reading and writing the same story. The hurricane and the Prime Minister announcement.">
+<meta property="og:url" content="https://storyobjectmodel.com/demos.html">
+<meta property="og:image" content="https://storyobjectmodel.com/assets/social.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Demos · Story Object Model">
+<meta name="twitter:description" content="Two breaking news scenarios on one story bus, with real production tools reading and writing the same story. The hurricane and the Prime Minister announcement.">
+<meta name="twitter:image" content="https://storyobjectmodel.com/assets/social.png">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebPage",
+   "@id": "https://storyobjectmodel.com/demos.html#page",
+   "name": "Demos",
+   "headline": "Demos",
+   "description": "Two breaking news scenarios on one story bus, with real production tools reading and writing the same story. The hurricane and the Prime Minister announcement.",
+   "url": "https://storyobjectmodel.com/demos.html",
+   "isPartOf": {
+    "@id": "https://storyobjectmodel.com/#website"
+   },
+   "inLanguage": "en-GB",
+   "dateModified": "2026-09-15"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect class="b" x="0" y="2" width="17" height="4.6"/><rect class="b c" x="5" y="9.7" width="19" height="4.6"/><rect class="b" x="0" y="17.4" width="17" height="4.6"/></svg>SOM</a>
+    <ul>
+      <li><a href="/for-newsrooms.html">For newsrooms</a></li>
+      <li><a href="/demos.html" aria-current="page">Demos</a></li>
+      <li><a href="/workflows.html">Workflows</a></li>
+      <li><a href="/concepts.html">Concepts</a></li>
+      <li><a href="/principles.html">Principles</a></li>
+      <li><a href="/faq.html">FAQ</a></li>
+      <li><a href="/joining.html">Joining</a></li>
+      <li><a href="/#involved">Get involved</a></li>
+    </ul>
+    <a class="ver" href="/schema/1.0/">SOM 1.0</a>
+  </div>
+</nav>
+<main><div class="wrap">
+<span class="eyebrow">storyobjectmodel.com<b>demos</b></span>
+<h1>Two breaking news scenarios. One story bus.</h1>
+<p>SOM does not tell you what to build or how you and your technology partners implement AI. It enables; it does not define. So the consortium built two realistic newsroom scenarios with different stories and different vendors, all reading and writing the same story on one bus. Old tools and new. AI and not. Nothing in either scenario sends a command to anything.</p>
+
+<div class="demo">
+  <span class="n" id="demo-1">scenario 01</span>
+  <h2>The hurricane</h2>
+  <video class="vid" controls playsinline preload="metadata" poster="assets/demo-hurricane-poster.jpg" src="assets/demo-hurricane.mp4">Your browser cannot play this video. <a href="assets/demo-hurricane.mp4">Download it</a> instead.</video>
+  <p>A storm becomes a hurricane, with one report nobody can confirm. A real wire corpus and a weather data feed on the bus, transcription and media intelligence reading the story. Two clips arrive: one carries its credentials, one does not survive the gate, and the record is kept. The classification changes at source, a journalist confirms it, and everything that depended on the old version finds out in the same second. A single-source claim stays off the page while the page publishes: a system understood something well enough to do nothing. Then the briefing lands, the transcript confirms it, and the clearance becomes a record on the story that every tool can see.</p>
+  <span class="cast">AP · The Weather Company · Trint · Moments Lab · Cuez · Vizrt · HyperContent AI · Shure · Amazon Web Services</span>
+  <div class="cast-logos"><img src="assets/logos/AP.png" alt="AP" title="AP"><img src="assets/logos/The-Weather-Company.png" alt="The Weather Company" title="The Weather Company"><img src="assets/logos/Trint.png" alt="Trint" title="Trint"><img src="assets/logos/Moments-Lab.png" alt="Moments Lab" title="Moments Lab"><img src="assets/logos/Cuez.png" alt="Cuez" title="Cuez"><img src="assets/logos/Vizrt.png" alt="Vizrt" title="Vizrt"><img src="assets/logos/HyperContent-AI.png" alt="HyperContent AI" title="HyperContent AI"><img src="assets/logos/Shure.png" alt="Shure" title="Shure"><img src="assets/logos/AWS.png" alt="Amazon Web Services" title="Amazon Web Services"></div>
+</div>
+
+<div class="demo">
+  <span class="n" id="demo-2">scenario 02</span>
+  <h2>The Prime Minister announcement</h2>
+  <video class="vid" controls playsinline preload="metadata" poster="assets/demo-pm-poster.jpg" src="assets/demo-pm.mp4">Your browser cannot play this video. <a href="assets/demo-pm.mp4">Download it</a> instead.</video>
+  <p>A statement outside Number Ten, and nobody knows what he will say until he says it. The newsroom writes the story to the bus with the premise it expects and two sets of scripts, neither preferred. Tools reading the story draft and hold social posts, suggest a live unit, transcribe the feed and propose the claim the moment the words are spoken. Nothing changes until a journalist approves it. One approval settles three things, and then four things move: the clip is cut, the right scripts commit to air, the wrong ones are suppressed with the reason recorded, and the held posts release. Nobody was told. They were all reading the same story.</p>
+  <span class="cast">Reuters · Octopus · LiveU · Fonn Group (Mimir) · Trint · HyperContent AI · Amazon Web Services</span>
+  <div class="cast-logos"><img src="assets/logos/Reuters.png" alt="Reuters" title="Reuters"><img src="assets/logos/Octopus.png" alt="Octopus" title="Octopus"><img src="assets/logos/LiveU.png" alt="LiveU" title="LiveU"><img src="assets/logos/Fonn-Group.png" alt="Fonn Group" title="Fonn Group"><img src="assets/logos/Trint.png" alt="Trint" title="Trint"><img src="assets/logos/HyperContent-AI.png" alt="HyperContent AI" title="HyperContent AI"><img src="assets/logos/AWS.png" alt="Amazon Web Services" title="Amazon Web Services"></div>
+</div>
+
+<h2>What both prove</h2>
+<p>Five things, proved twice, with different stories and different vendors.</p>
+<div class="proofs">
+  <div class="proof"><b>Provenance</b><span><i>The evidence travels with the story.</i> Where a clip came from, who vouched for it and what was done to it arrive with it, rather than in somebody's memory of the afternoon.</span></div>
+  <div class="proof"><b>Accuracy</b><span><i>The premise changes once, and every dependent is flagged.</i> One correction at source, and nothing downstream is left quietly running on the old fact.</span></div>
+  <div class="proof"><b>Reach</b><span><i>Clear once, use everywhere.</i> A decision made for one output is available to all of them, and a rewrite reopens the gate rather than inheriting the approval.</span></div>
+  <div class="proof"><b>Compliance</b><span><i>A held figure reaches no output until it is cleared.</i> The record says who cleared it, when, and against which rule.</span></div>
+  <div class="proof"><b>Synchronisation</b><span><i>Nobody synchronised the tools.</i> No orchestrator, no integrations between them. They were all reading the same story.</span></div>
+</div>
+<a class="btn" href="https://github.com/storyobjectmodel/som">read the specification</a>
+</div></main>
+<footer><div class="wrap">
+  <a href="/">Home</a>
+  <a href="for-newsrooms.html">For newsrooms</a>
+  <a href="https://github.com/storyobjectmodel/som">The specification</a>
+  <a href="/schema/1.0/">Schemas 1.0</a>
+  <a href="demos.html">Demos</a>
+  <a href="principles.html">Principles</a>
+  <a href="faq.html">FAQ</a>
+  <a href="joining.html">Joining</a>
+  <a href="where-it-goes.html">Where it goes</a>
+  <a href="workflows.html">Workflows</a>
+  <a href="concepts.html">Concepts</a>
+  <a href="mailto:hello@storyobjectmodel.com">hello@storyobjectmodel.com</a>
+</div></footer>
+</body>
+</html>
